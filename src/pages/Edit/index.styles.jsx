@@ -1,24 +1,24 @@
 import styled from '@emotion/styled';
 
 const Container = styled.div`
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1.25rem;
+
+  width: 100%;
+  min-height: 100%;
+  padding: 0 3rem;
 `;
 
-const EditorHeader = styled.div`
+const BtnBox = styled.div`
+  min-width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  gap: 1rem;
+  justify-content: flex-end;
 `;
 
-const DiaryInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3rem;
-`;
-
-export { Container, EditorHeader, DiaryInfo };
+export { Container, BtnBox };
