@@ -17,10 +17,11 @@ const Editor = () => {
             <p>
               mood:
               <select>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
+                <option value="best">😀</option>
+                <option value="good">🙂</option>
+                <option value="medium">😐</option>
+                <option value="bad">🙁</option>
+                <option value="worst">😞</option>
               </select>
             </p>
           </S.DiaryInfo>
