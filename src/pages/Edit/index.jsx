@@ -15,7 +15,10 @@ const Editor = () => {
       {/* //해시태그 부분 */}
       <HashtagBox />
       {/* //작성 및 취소 버튼 */}
-      <S.BtnBox></S.BtnBox>
+      <S.BtnBox>
+        <button>작성</button>
+        <button>취소</button>
+      </S.BtnBox>
     </S.Container>
   );
 };

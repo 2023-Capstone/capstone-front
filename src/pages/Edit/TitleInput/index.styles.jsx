@@ -19,7 +19,8 @@ const DateBox = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  font-size: large;
+  gap: 1.25rem;
 `;
 
 export { Container, Input, DateBox };

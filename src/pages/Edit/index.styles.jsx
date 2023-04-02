@@ -11,8 +11,7 @@ const Container = styled.div`
 
   width: 100%;
   min-height: 100%;
-  padding: 0 6rem;
-  padding-top: 4rem;
+  padding: 4rem 6rem;
 `;
 
 const BtnBox = styled.div`
@@ -20,6 +19,21 @@ const BtnBox = styled.div`
   display: flex;
   gap: 1rem;
   justify-content: flex-end;
+
+  button {
+    padding: 0.75rem 2rem;
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 1.15rem;
+  }
+  button:first-child {
+    color: #ffffff;
+    background-color: ${({ theme: { colors } }) => colors.GREEN_500};
+  }
+  button:last-child {
+    color: ${({ theme: { colors } }) => colors.GREEN_500};
+    background-color: ${({ theme: { colors } }) => colors.GREEN_100};
+  }
 `;
 
 export { Container, BtnBox };
