@@ -7,11 +7,12 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1.25rem;
+  gap: 2rem;
 
   width: 100%;
   min-height: 100%;
-  padding: 0 3rem;
+  padding: 0 6rem;
+  padding-top: 4rem;
 `;
 
 const BtnBox = styled.div`

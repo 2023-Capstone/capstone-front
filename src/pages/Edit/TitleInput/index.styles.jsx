@@ -10,6 +10,7 @@ const Container = styled.div`
 const Input = styled.input`
   height: 2rem;
   flex-grow: 3;
+  background: ${({ theme: { colors } }) => colors.INPUT_BACKGROUND};
 `;
 
 const DateBox = styled.div`
