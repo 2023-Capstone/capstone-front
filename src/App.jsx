@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import Snackbar from '@/components/Snackbar';
 import { BROWSER_PATH } from '@/constants/path';
-import Editor from '@/pages/Editor';
+import Editor from '@/pages/Edit';
 import Landing from '@/pages/Landing';
 import Main from '@/pages/Main';
 import NotFound from '@/pages/NotFound';
