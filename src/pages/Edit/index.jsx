@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import EditorBox from './EditorBox';
 import HashtagBox from './HashtagBox';
@@ -9,8 +9,10 @@ import useSnackbar from '@/hooks/useSnackbar';
 
 const Editor = () => {
   const [hashtagList, setHashtagList] = useState([]);
-  const [newHashtag, setNewHashtag] = useState('');
+  const [date, setDate] = useState('');
+
   const { showSnackbar } = useSnackbar();
+  useEffect(() => setDate(new Date()), []);
   return (
     <S.Container>
       {/* //에디터 박스 윗부분 */}
@@ -21,8 +23,6 @@ const Editor = () => {
       <HashtagBox
         hashtagList={hashtagList}
         setHashtagList={setHashtagList}
-        newHashtag={newHashtag}
-        setNewHashtag={setNewHashtag}
         showSnackbar={showSnackbar}
       />
       {/* //작성 및 취소 버튼 */}

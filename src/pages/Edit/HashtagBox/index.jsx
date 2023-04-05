@@ -1,17 +1,12 @@
 import { useState } from 'react';
 
 import * as S from './index.styles';
-import useCheckBlack from '../../../hooks/useCheckBlank';
 
 import { CLIENT_MESSAGE } from '@/constants/message';
+import useCheckBlack from '@/hooks/useCheckBlank';
 
-const HashtagBox = ({
-  hashtagList,
-  setHashtagList,
-  newHashtag,
-  setNewHashtag,
-  showSnackbar,
-}) => {
+const HashtagBox = ({ hashtagList, setHashtagList, showSnackbar }) => {
+  const [newHashtag, setNewHashtag] = useState('');
   const { isBlank, isNull } = useCheckBlack();
   const onChangeHashtag = e => {
     setNewHashtag(e.target.value);
