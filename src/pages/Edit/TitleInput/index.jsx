@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 
 import * as S from './index.styles';
 
+import { weatherToIcon } from '@/utils/weatherToIcon';
+
 const TitleInput = ({ date, weather, mood, setMood }) => {
-  const [transDate, setTransDate] = useState('가져오는 중');
+  const [transDate, setTransDate] = useState('');
+  const [iconWeather, setIconWeather] = useState(null);
 
   useEffect(() => {
     if (date) {
@@ -24,7 +27,7 @@ const TitleInput = ({ date, weather, mood, setMood }) => {
 
   useEffect(() => {
     if (weather) {
-      weaterToIcon(weather);
+      setIconWeather(() => weatherToIcon(weather));
     }
   }, [weather]);
   return (
@@ -32,7 +35,7 @@ const TitleInput = ({ date, weather, mood, setMood }) => {
       <S.Input />
       <S.DateBox>
         <p>date: {transDate}</p>
-        <p>weather: {weather ? weather : '업데이트 중'}</p>
+        <p>weather: {weather ? iconWeather : '업데이트 중'}</p>
         <p>
           <label htmlFor="mood">mood: </label>
           <select name="mood" id="mood">
