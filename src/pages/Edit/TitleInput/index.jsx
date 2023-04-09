@@ -4,7 +4,7 @@ import * as S from './index.styles';
 
 import { weatherToIcon } from '@/utils/weatherToIcon';
 
-const TitleInput = ({ date, weather, mood, setMood }) => {
+const TitleInput = ({ title, setTitle, date, weather, mood, setMood }) => {
   const [transDate, setTransDate] = useState('');
   const [iconWeather, setIconWeather] = useState(null);
 
@@ -32,13 +32,13 @@ const TitleInput = ({ date, weather, mood, setMood }) => {
   }, [weather]);
   return (
     <S.Container>
-      <S.Input />
+      <S.Input value={title} onChange={setTitle} />
       <S.DateBox>
         <p>date: {transDate}</p>
         <p>weather: {weather ? iconWeather : '업데이트 중'}</p>
         <p>
           <label htmlFor="mood">mood: </label>
-          <select name="mood" id="mood">
+          <select name="mood" id="mood" value={mood} onChange={setMood}>
             <option value="best">😀</option>
             <option value="good">🙂</option>
             <option value="medium">😐</option>
