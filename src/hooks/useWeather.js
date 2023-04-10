@@ -1,36 +1,43 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
 import { getWeatherData } from '@/apis/request/weather';
+import { CLIENT_MESSAGE } from '@/constants/message';
 
 const useWeather = () => {
-  const weather = useRef('');
+  const [weather, setWeather] = useState('');
 
   const navigate = useNavigate();
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       successGetLocation,
-      failedGetLocation,
+      failGetLocation,
     );
   }, []);
 
   const successGetLocation = async position => {
-    const data = await getWeatherData({
-      lat: position.coords.latitude,
-      lon: position.coords.longitude,
-    });
-    weather.current = data;
+    try {
+      const data = await getWeatherData({
+        lat: position.coords.latitude,
+        lon: position.coords.longitude,
+      });
+      setWeather(data);
+    } catch (e) {
+      alert(CLIENT_MESSAGE.ERROR.FAIL_GET_WEATHER);
+      navigate(-1);
+    }
   };
-  const failedGetLocation = () => {
-    alert('위치 정보를 가져올 수 없습니다.');
+  const failGetLocation = () => {
+    alert(CLIENT_MESSAGE.ERROR.FAIL_GET_LOCATION);
     navigate(-1);
   };
   const getWeather = () => {
-    return weather.current;
+    return weather;
   };
+
   return { getWeather };
 };
 
-export { useWeather };
+export default useWeather;

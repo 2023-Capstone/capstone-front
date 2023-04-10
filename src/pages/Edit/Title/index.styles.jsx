@@ -21,6 +21,14 @@ const DateBox = styled.div`
   justify-content: center;
   font-size: large;
   gap: 1.25rem;
+
+  select {
+    border: 1px solid ${({ theme: { colors } }) => colors.GREEN_500};
+    border-radius: 8px;
+    &:focus {
+      outline: none;
+    }
+  }
 `;
 
 export { Container, Input, DateBox };

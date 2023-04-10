@@ -1,50 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
 import EditorBox from './EditorBox';
 import HashtagBox from './HashtagBox';
 import * as S from './index.styles';
-import TitleInput from './TitleInput';
+import Title from './Title';
 
-import useSnackbar from '@/hooks/useSnackbar';
-import { useWeather } from '@/hooks/useWeather';
+import useInput from '@/hooks/useInput';
+import useWeather from '@/hooks/useWeather';
 
-const Editor = () => {
+const Edit = () => {
+  const date = new Date();
   const [hashtagList, setHashtagList] = useState([]);
-  const [title, setTitle] = useState('');
-  const [date, setDate] = useState(null);
   const [weather, setWeather] = useState('');
-  const [mood, setMood] = useState('');
+  const [mood, onChangeMood] = useInput('');
+  const [title, onChangeTitle] = useInput('');
+  const [newHashtag, onChangeNewHashtag, resetNewHashtag] = useInput('');
 
   const navigate = useNavigate();
   const { getWeather } = useWeather();
+
   useEffect(() => {
     setWeather(() => getWeather());
   }, [getWeather]);
-  const { showSnackbar } = useSnackbar();
-  useEffect(() => {
-    setDate(() => new Date());
-  }, []);
 
-  const onChangeTitle = e => {
-    setTitle(() => e.target.value);
-  };
-  const onChangeMood = e => {
-    setMood(() => e.target.value);
-  };
+  const addHashtagItem = () => setHashtagList(prev => [...prev, newHashtag]);
 
-  const onClickCancelBtn = () => {
+  const removeHashtag = name =>
+    setHashtagList(hashtagList.filter(hash => hash !== name));
+
+  const goToPrevPage = () => {
     navigate('/');
   };
 
-  const onClickPostBtn = () => {
+  const postNewDiary = () => {
     // 등록 버튼 제작 필요
   };
+
   return (
     <S.Container>
-      {/* //에디터 박스 윗부분 */}
-      <TitleInput
+      <Title
         title={title}
         setTitle={onChangeTitle}
         date={date}
@@ -52,21 +48,21 @@ const Editor = () => {
         mood={mood}
         setMood={onChangeMood}
       />
-      {/* //에디터 박스 부분 */}
       <EditorBox />
-      {/* //해시태그 부분 */}
       <HashtagBox
+        newHashtag={newHashtag}
+        addHashtagItem={addHashtagItem}
+        removeHashtag={removeHashtag}
+        onChangeNewHashtag={onChangeNewHashtag}
+        resetNewHashtag={resetNewHashtag}
         hashtagList={hashtagList}
-        setHashtagList={setHashtagList}
-        showSnackbar={showSnackbar}
       />
-      {/* //작성 및 취소 버튼 */}
       <S.BtnBox>
-        <button onClick={onClickPostBtn}>작성</button>
-        <button onClick={onClickCancelBtn}>취소</button>
+        <button onClick={postNewDiary}>작성</button>
+        <button onClick={goToPrevPage}>취소</button>
       </S.BtnBox>
     </S.Container>
   );
 };
 
-export default Editor;
+export default Edit;

@@ -3,7 +3,7 @@ const BROWSER_PATH = {
   LANDING: '/landing',
   SIGNUP: '/signup',
   OAUTH: '/oauth',
-  EDITOR: '/edit',
+  EDIT: '/edit',
 };
 
 const API_PATH = {

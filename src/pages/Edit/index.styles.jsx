@@ -21,16 +21,16 @@ const BtnBox = styled.div`
   justify-content: flex-end;
 
   button {
-    padding: 0.75rem 2rem;
+    padding: 0.5rem 1.75rem;
     border-radius: 10px;
     font-weight: 800;
-    font-size: 1.15rem;
+    font-size: 0.9rem;
   }
-  button:first-child {
-    color: #ffffff;
+  button:first-of-type {
+    color: #fff;
     background-color: ${({ theme: { colors } }) => colors.GREEN_500};
   }
-  button:last-child {
+  button:last-of-type {
     color: ${({ theme: { colors } }) => colors.GREEN_500};
     background-color: ${({ theme: { colors } }) => colors.GREEN_100};
   }

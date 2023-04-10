@@ -10,7 +10,9 @@ import {
   MdOutlineThunderstorm,
   MdOutlineWbSunny,
 } from 'react-icons/md';
-import { TbMist, TbViewfinderOff } from 'react-icons/tb';
+import { TbMist } from 'react-icons/tb';
+import { ColorRing } from 'react-loader-spinner';
+
 const weatherToIcon = weather => {
   switch (weather) {
     case 'Clear':
@@ -34,8 +36,18 @@ const weatherToIcon = weather => {
     case 'Thunderstorm':
       return <MdOutlineThunderstorm />;
     default:
-      return <TbViewfinderOff />;
+      return (
+        <ColorRing
+          visible={true}
+          height="40"
+          width="40"
+          ariaLabel="blocks-loading"
+          wrapperStyle={{}}
+          wrapperClass="blocks-wrapper"
+          colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+        />
+      );
   }
 };
-
-export { weatherToIcon };
+const getDay = day => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].at(day);
+export { weatherToIcon, getDay };

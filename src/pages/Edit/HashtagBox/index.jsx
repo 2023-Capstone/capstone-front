@@ -1,40 +1,45 @@
-import { useState } from 'react';
-
 import * as S from './index.styles';
 
 import { CLIENT_MESSAGE } from '@/constants/message';
-import useCheckBlack from '@/hooks/useCheckBlank';
+import { RULE } from '@/constants/rule';
+import useSnackbar from '@/hooks/useSnackbar';
+import { isBlank, checkLength } from '@/utils/hashtag';
 
-const HashtagBox = ({ hashtagList, setHashtagList, showSnackbar }) => {
-  const [newHashtag, setNewHashtag] = useState('');
-  const { isBlank, isNull } = useCheckBlack();
-  const onChangeHashtag = e => {
-    setNewHashtag(e.target.value);
-  };
+const HashtagBox = ({
+  newHashtag,
+  addHashtagItem,
+  removeHashtag,
+  onChangeNewHashtag,
+  resetNewHashtag,
+  hashtagList,
+}) => {
+  const { showSnackbar } = useSnackbar();
   const addHashtag = ({ key }) => {
-    if (key === 'Enter') {
-      if (isBlank(newHashtag) || isNull(newHashtag)) {
-        showSnackbar(CLIENT_MESSAGE.ERROR.EMPTY_HASHTAG);
-        setNewHashtag('');
-        return;
-      }
-      if (hashtagList.length === 5) {
-        showSnackbar(CLIENT_MESSAGE.ERROR.FULL_HASHTAG_LIST);
-        setNewHashtag('');
-        return;
-      }
-      if (hashtagList.includes(newHashtag)) {
-        showSnackbar(CLIENT_MESSAGE.ERROR.REPUTATION_HASHTAG);
-        setNewHashtag('');
-        return;
-      }
-      setHashtagList(prev => [...prev, newHashtag]);
-      setNewHashtag('');
+    if (key !== 'Enter') return;
+
+    if (isBlank(newHashtag) || checkLength(newHashtag)) {
+      showSnackbar(CLIENT_MESSAGE.ERROR.EMPTY_HASHTAG);
+
+      return;
     }
+
+    if (hashtagList.length === RULE.HASHTAGLIST.MAX) {
+      showSnackbar(CLIENT_MESSAGE.ERROR.FULL_HASHTAG_LIST);
+      resetNewHashtag();
+
+      return;
+    }
+
+    if (hashtagList.includes(newHashtag)) {
+      showSnackbar(CLIENT_MESSAGE.ERROR.DUPLICATED_HASHTAG);
+
+      return;
+    }
+
+    addHashtagItem();
+    resetNewHashtag();
   };
-  const deleteHashTag = name => {
-    setHashtagList(prev => prev.filter(hash => hash !== name));
-  };
+
   return (
     <>
       <S.Container>
@@ -52,12 +57,12 @@ const HashtagBox = ({ hashtagList, setHashtagList, showSnackbar }) => {
             id="hashtag"
             placeholder="해시태그 박스"
             value={newHashtag}
-            onChange={onChangeHashtag}
+            onChange={onChangeNewHashtag}
             onKeyUp={addHashtag}
           />
         </S.InputBox>
-        {hashtagList.map((hashtag, index) => (
-          <S.Hashtag onClick={() => deleteHashTag(hashtag)} key={index}>
+        {hashtagList.map(hashtag => (
+          <S.Hashtag onClick={() => removeHashtag(hashtag)} key={hashtag}>
             #{hashtag}
           </S.Hashtag>
         ))}
