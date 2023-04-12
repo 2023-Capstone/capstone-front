@@ -27,7 +27,7 @@ const Edit = () => {
 
   const addHashtagItem = () => setHashtagList(prev => [...prev, newHashtag]);
 
-  const removeHashtag = name =>
+  const removeHashtag = name => () =>
     setHashtagList(hashtagList.filter(hash => hash !== name));
 
   const goToPrevPage = () => {

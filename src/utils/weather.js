@@ -39,8 +39,8 @@ const weatherToIcon = weather => {
       return (
         <ColorRing
           visible={true}
-          height="40"
-          width="40"
+          height="20"
+          width="20"
           ariaLabel="blocks-loading"
           wrapperStyle={{}}
           wrapperClass="blocks-wrapper"

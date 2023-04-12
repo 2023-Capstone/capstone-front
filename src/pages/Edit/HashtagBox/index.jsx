@@ -62,7 +62,7 @@ const HashtagBox = ({
           />
         </S.InputBox>
         {hashtagList.map(hashtag => (
-          <S.Hashtag onClick={() => removeHashtag(hashtag)} key={hashtag}>
+          <S.Hashtag onClick={removeHashtag(hashtag)} key={hashtag}>
             #{hashtag}
           </S.Hashtag>
         ))}

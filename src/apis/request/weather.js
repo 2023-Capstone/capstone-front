@@ -7,7 +7,6 @@ const getWeatherData = async location => {
 
     return weather[0].main;
   } catch (e) {
-    console.error(e);
     throw e;
   }
 };
