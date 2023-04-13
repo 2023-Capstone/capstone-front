@@ -21,9 +21,17 @@ const breakpoints = {
   xl: 1440,
 };
 
+const screenSizes = {
+  mobile: `(max-width: ${breakpoints.sm}px)`,
+  tablet: `(max-width: ${breakpoints.md}px)`,
+  laptop: `(max-width: ${breakpoints.lg}px)`,
+  desktop: `(max-width: ${breakpoints.xl}px)`,
+};
+
 const theme = {
   colors,
   breakpoints,
+  screenSizes,
 };
 
 export default theme;

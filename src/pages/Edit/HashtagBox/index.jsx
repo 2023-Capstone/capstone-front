@@ -44,28 +44,36 @@ const HashtagBox = ({
     <>
       <S.Container>
         <S.InputBox>
-          <label htmlFor="hashtag">
-            #
-            <S.GuideLine>
-              해시태그는 최대 5개까지 추가할 수 있어요 <br />
-              입력 후 엔터를 치면 자동으로 추가되고, <br />
-              이미 추가된 해시태그를 클릭하면 삭제돼요
-            </S.GuideLine>
-          </label>
-          <input
-            type="text"
-            id="hashtag"
-            placeholder="해시태그 박스"
-            value={newHashtag}
-            onChange={onChangeNewHashtag}
-            onKeyUp={addHashtag}
-          />
+          <S.Input>
+            <label htmlFor="hashtag">
+              #
+              <S.GuideLineDesktop>
+                해시태그는 최대 5개까지 추가할 수 있어요 <br />
+                입력 후 엔터를 치면 자동으로 추가되고, <br />
+                이미 추가된 해시태그를 클릭하면 삭제돼요
+              </S.GuideLineDesktop>
+            </label>
+            <input
+              type="text"
+              id="hashtag"
+              value={newHashtag}
+              onChange={onChangeNewHashtag}
+              onKeyUp={addHashtag}
+            />
+          </S.Input>
+          <S.GuideLineMobile>
+            해시태그는 최대 5개까지 추가할 수 있어요 <br />
+            입력 후 엔터를 치면 자동으로 추가되고, <br />
+            이미 추가된 해시태그를 클릭하면 삭제돼요
+          </S.GuideLineMobile>
         </S.InputBox>
-        {hashtagList.map(hashtag => (
-          <S.Hashtag onClick={removeHashtag(hashtag)} key={hashtag}>
-            #{hashtag}
-          </S.Hashtag>
-        ))}
+        <S.HashtagList>
+          {hashtagList.map(hashtag => (
+            <S.Hashtag onClick={removeHashtag(hashtag)} key={hashtag}>
+              #{hashtag}
+            </S.Hashtag>
+          ))}
+        </S.HashtagList>
       </S.Container>
     </>
   );

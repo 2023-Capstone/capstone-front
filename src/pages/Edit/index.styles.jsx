@@ -12,6 +12,11 @@ const Container = styled.div`
   width: 100%;
   min-height: 100%;
   padding: 4rem 6rem;
+
+  @media screen and (${({ theme: { screenSizes } }) => screenSizes.mobile}) {
+    padding: 3rem 1.75rem;
+    gap: 1rem;
+  }
 `;
 
 const BtnBox = styled.div`
@@ -33,6 +38,17 @@ const BtnBox = styled.div`
   button:last-of-type {
     color: ${({ theme: { colors } }) => colors.GREEN_500};
     background-color: ${({ theme: { colors } }) => colors.GREEN_100};
+  }
+
+  @media screen and (${({ theme: { screenSizes } }) => screenSizes.mobile}) {
+    justify-content: center;
+
+    button {
+      padding: 0.4rem 1.4rem;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      border-radius: 6px;
+    }
   }
 `;
 
