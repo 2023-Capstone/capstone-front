@@ -71,7 +71,6 @@ const Input = styled.label`
     border: none;
     border-radius: 10px;
     font-size: 1rem;
-    color: black;
   }
 
   @media screen and (max-width: ${({ theme: { breakpoints } }) =>
