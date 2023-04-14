@@ -4,14 +4,14 @@ import { CLIENT_MESSAGE } from '@/constants/message';
 import { RULE } from '@/constants/rule';
 import useInput from '@/hooks/useInput';
 import useSnackbar from '@/hooks/useSnackbar';
-import { isBlank, checkLength } from '@/utils/hashtag';
+import { isBlank } from '@/utils/hashtag';
 
 const HashtagBox = ({ addHashtagItem, removeHashtag, hashtagList }) => {
   const [newHashtag, onChangeNewHashtag, resetNewHashtag] = useInput('');
   const { showSnackbar } = useSnackbar();
   const addHashtag = ({ nativeEvent: { key, isComposing } }) => {
     if (key !== 'Enter' || isComposing) return;
-    if (isBlank(newHashtag) || checkLength(newHashtag)) {
+    if (isBlank(newHashtag)) {
       showSnackbar(CLIENT_MESSAGE.ERROR.EMPTY_HASHTAG);
       return;
     }

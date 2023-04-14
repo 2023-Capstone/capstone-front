@@ -27,7 +27,7 @@ const Edit = () => {
     setHashtagList(prev => [...prev, newHashtag]);
 
   const removeHashtag = name => () => {
-    if (!hashtagList.includes(name)) {
+    if (!hashtagList.findIndex(() => name) === -1) {
       showSnackbar(CLIENT_MESSAGE.ERROR.NOT_INCLUDE_HASHTAG);
       return;
     }
