@@ -26,12 +26,12 @@ const useWeather = () => {
       setWeather(data);
     } catch (e) {
       alert(CLIENT_MESSAGE.ERROR.FAIL_GET_WEATHER);
-      navigate(-1);
+      navigate('/');
     }
   };
   const failGetLocation = () => {
     alert(CLIENT_MESSAGE.ERROR.FAIL_GET_LOCATION);
-    navigate(-1);
+    navigate('/');
   };
 
   return { weather };

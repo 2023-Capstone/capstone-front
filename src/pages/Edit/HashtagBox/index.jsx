@@ -11,7 +11,6 @@ const HashtagBox = ({ addHashtagItem, removeHashtag, hashtagList }) => {
   const { showSnackbar } = useSnackbar();
   const addHashtag = ({ key }) => {
     if (key !== 'Enter') return;
-
     if (isBlank(newHashtag) || checkLength(newHashtag)) {
       showSnackbar(CLIENT_MESSAGE.ERROR.EMPTY_HASHTAG);
       return;
