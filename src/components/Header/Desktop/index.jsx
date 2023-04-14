@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import * as S from './index.styles';
 
 import { requestLogout } from '@/apis/request/auth';
@@ -14,6 +16,7 @@ import useUser from '@/hooks/useUser';
 import { getKakaoAuthUri } from '@/utils/kakao';
 
 const Desktop = () => {
+  const navigate = useNavigate();
   const { isLogin, logout } = useUser();
   const { showSnackbar } = useSnackbar();
   const handleError = useError();
@@ -31,6 +34,10 @@ const Desktop = () => {
       });
   };
 
+  const moveToEdit = () => {
+    navigate('/edit');
+  };
+
   return (
     <S.Container>
       <a href={BROWSER_PATH.BASE}>
@@ -40,7 +47,7 @@ const Desktop = () => {
       </a>
       {isLogin ? (
         <S.Wrapper>
-          <S.Button type="button">
+          <S.Button type="button" onClick={moveToEdit}>
             <img src={writeSVG} alt="일기 작성 버튼" />
           </S.Button>
           <S.Button type="button">
