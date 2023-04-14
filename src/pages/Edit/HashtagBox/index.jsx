@@ -9,8 +9,8 @@ import { isBlank, checkLength } from '@/utils/hashtag';
 const HashtagBox = ({ addHashtagItem, removeHashtag, hashtagList }) => {
   const [newHashtag, onChangeNewHashtag, resetNewHashtag] = useInput('');
   const { showSnackbar } = useSnackbar();
-  const addHashtag = ({ key }) => {
-    if (key !== 'Enter') return;
+  const addHashtag = ({ nativeEvent: { key, isComposing } }) => {
+    if (key !== 'Enter' || isComposing) return;
     if (isBlank(newHashtag) || checkLength(newHashtag)) {
       showSnackbar(CLIENT_MESSAGE.ERROR.EMPTY_HASHTAG);
       return;
@@ -47,7 +47,7 @@ const HashtagBox = ({ addHashtagItem, removeHashtag, hashtagList }) => {
             type="text"
             value={newHashtag}
             onChange={onChangeNewHashtag}
-            onKeyUp={addHashtag}
+            onKeyDown={addHashtag}
           />
         </S.Input>
         <S.GuideLineMobile>
