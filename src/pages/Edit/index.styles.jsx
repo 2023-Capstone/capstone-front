@@ -13,7 +13,8 @@ const Container = styled.div`
   min-height: 100%;
   padding: 4rem 6rem;
 
-  @media screen and (${({ theme: { screenSizes } }) => screenSizes.mobile}) {
+  @media screen and (max-width: ${({ theme: { breakpoints } }) =>
+      breakpoints.sm}px) {
     padding: 3rem 1.75rem;
     gap: 1rem;
   }
@@ -40,7 +41,8 @@ const BtnBox = styled.div`
     background-color: ${({ theme: { colors } }) => colors.GREEN_100};
   }
 
-  @media screen and (${({ theme: { screenSizes } }) => screenSizes.mobile}) {
+  @media screen and (max-width: ${({ theme: { breakpoints } }) =>
+      breakpoints.sm}px) {
     justify-content: center;
 
     button {

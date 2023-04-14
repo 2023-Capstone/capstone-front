@@ -1,29 +1,20 @@
-import { useEffect, useState } from 'react';
-
 import * as S from './index.styles';
 
-import { weatherToIcon, getDay } from '@/utils/weather';
+import { getDay } from '@/utils/date';
+import { weatherToIcon } from '@/utils/weather';
 
 const Title = ({ title, setTitle, date, weather, mood, setMood }) => {
-  const [transDate, setTransDate] = useState('');
-
-  useEffect(() => {
-    if (date) {
-      setTransDate(
-        `${date.getFullYear()}/${
-          date.getMonth() + 1
-        }/${date.getDate()} (${getDay()})`,
-      );
-    }
-  }, [date]);
-
   return (
     <S.Container>
       <S.Input value={title} onChange={setTitle} />
       <S.DateBox>
         <S.DateInfo>
           <span>date</span>
-          <span>{transDate}</span>
+          <span>
+            {`${date.getFullYear()}/${
+              date.getMonth() + 1
+            }/${date.getDate()} (${getDay()})`}
+          </span>
         </S.DateInfo>
         <S.DateInfo>
           <span>weather</span>
@@ -31,7 +22,7 @@ const Title = ({ title, setTitle, date, weather, mood, setMood }) => {
         </S.DateInfo>
         <S.DateInfo>
           <span>
-            <label htmlFor="mood">mood </label>
+            <label htmlFor="mood">mood</label>
           </span>
           <span>
             <select name="mood" id="mood" value={mood} onChange={setMood}>

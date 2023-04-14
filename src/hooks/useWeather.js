@@ -33,11 +33,8 @@ const useWeather = () => {
     alert(CLIENT_MESSAGE.ERROR.FAIL_GET_LOCATION);
     navigate(-1);
   };
-  const getWeather = () => {
-    return weather;
-  };
 
-  return { getWeather };
+  return { weather };
 };
 
 export default useWeather;

@@ -8,7 +8,8 @@ const Container = styled.div`
 
   min-width: 100%;
   min-height: 40rem;
-  @media screen and (${({ theme: { screenSizes } }) => screenSizes.mobile}) {
+  @media screen and (max-width: ${({ theme: { breakpoints } }) =>
+      breakpoints.sm}px) {
     min-height: 15rem;
   }
 `;

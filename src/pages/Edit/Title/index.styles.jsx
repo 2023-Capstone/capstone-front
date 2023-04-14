@@ -6,7 +6,8 @@ const Container = styled.div`
   align-items: flex-end;
   gap: 1.5rem;
   width: 100%;
-  @media screen and (${({ theme: { screenSizes } }) => screenSizes.mobile}) {
+  @media screen and (max-width: ${({ theme: { breakpoints } }) =>
+      breakpoints.sm}px) {
     flex-direction: column;
     align-items: center;
   }
@@ -14,25 +15,27 @@ const Container = styled.div`
 
 const Input = styled.input`
   height: 2rem;
-  flex-grow: 4;
+  width: 80%;
+  font-size: 1.25rem;
   background: ${({ theme: { colors } }) => colors.INPUT_BACKGROUND};
 
-  @media screen and (${({ theme: { screenSizes } }) => screenSizes.mobile}) {
+  @media screen and (max-width: ${({ theme: { breakpoints } }) =>
+      breakpoints.sm}px) {
     width: 100%;
     height: 1.25rem;
   }
 `;
 
 const DateBox = styled.div`
-  flex-grow: 1;
+  width: 20%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: large;
   gap: 1rem;
 
-  @media screen and (${({ theme: { screenSizes } }) => screenSizes.mobile}) {
+  @media screen and (max-width: ${({ theme: { breakpoints } }) =>
+      breakpoints.sm}px) {
     width: 80%;
     font-size: medium;
     gap: 0.735rem;
@@ -42,11 +45,11 @@ const DateBox = styled.div`
 const DateInfo = styled.div`
   display: flex;
   width: 100%;
-
+  gap: 1rem;
   span {
     display: block;
     &:first-of-type {
-      width: 35%;
+      flex-grow: 35%;
       text-align: center;
     }
     &:last-of-type {
@@ -63,7 +66,8 @@ const DateInfo = styled.div`
       outline: none;
     }
   }
-  @media screen and (${({ theme: { screenSizes } }) => screenSizes.mobile}) {
+  @media screen and (max-width: ${({ theme: { breakpoints } }) =>
+      breakpoints.sm}px) {
     width: 90%;
     gap: 2rem;
     span {

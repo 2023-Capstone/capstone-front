@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -7,28 +7,31 @@ import HashtagBox from './HashtagBox';
 import * as S from './index.styles';
 import Title from './Title';
 
+import { CLIENT_MESSAGE } from '@/constants/message';
 import useInput from '@/hooks/useInput';
+import useSnackbar from '@/hooks/useSnackbar';
 import useWeather from '@/hooks/useWeather';
 
 const Edit = () => {
   const date = new Date();
   const [hashtagList, setHashtagList] = useState([]);
-  const [weather, setWeather] = useState('');
   const [mood, onChangeMood] = useInput('');
   const [title, onChangeTitle] = useInput('');
-  const [newHashtag, onChangeNewHashtag, resetNewHashtag] = useInput('');
 
   const navigate = useNavigate();
-  const { getWeather } = useWeather();
+  const { weather } = useWeather();
+  const { showSnackbar } = useSnackbar();
 
-  useEffect(() => {
-    setWeather(() => getWeather());
-  }, [getWeather]);
+  const addHashtagItem = newHashtag =>
+    setHashtagList(prev => [...prev, newHashtag]);
 
-  const addHashtagItem = () => setHashtagList(prev => [...prev, newHashtag]);
-
-  const removeHashtag = name => () =>
+  const removeHashtag = name => () => {
+    if (!hashtagList.includes(name)) {
+      showSnackbar(CLIENT_MESSAGE.ERROR.NOT_INCLUDE_HASHTAG);
+      return;
+    }
     setHashtagList(hashtagList.filter(hash => hash !== name));
+  };
 
   const goToPrevPage = () => {
     navigate('/');
@@ -50,11 +53,8 @@ const Edit = () => {
       />
       <EditorBox />
       <HashtagBox
-        newHashtag={newHashtag}
         addHashtagItem={addHashtagItem}
         removeHashtag={removeHashtag}
-        onChangeNewHashtag={onChangeNewHashtag}
-        resetNewHashtag={resetNewHashtag}
         hashtagList={hashtagList}
       />
       <S.BtnBox>

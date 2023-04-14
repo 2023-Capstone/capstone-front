@@ -39,15 +39,14 @@ const weatherToIcon = weather => {
       return (
         <ColorRing
           visible={true}
-          height="20"
-          width="20"
+          height="1rem"
+          width="1rem"
           ariaLabel="blocks-loading"
-          wrapperStyle={{}}
           wrapperClass="blocks-wrapper"
           colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
         />
       );
   }
 };
-const getDay = day => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].at(day);
-export { weatherToIcon, getDay };
+
+export { weatherToIcon };

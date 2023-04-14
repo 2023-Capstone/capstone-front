@@ -3,7 +3,7 @@ const RULE = {
     MIN: 1,
     MAX: 20,
   },
-  HASHTAGLIST: {
+  HASHTAG_LIST: {
     MAX: 5,
   },
 };
