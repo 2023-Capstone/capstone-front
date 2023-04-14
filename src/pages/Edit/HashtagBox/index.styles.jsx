@@ -64,15 +64,13 @@ const Input = styled.label`
   position: relative;
   color: ${({ theme: { colors } }) => colors.GREEN_500};
   font-weight: 700;
-  width: 100%;
   p:hover ~ div {
     display: block;
   }
   input {
     border: none;
     border-radius: 10px;
-    font-size: 1.25rem;
-    width: 100%;
+    font-size: 1rem;
     color: black;
   }
 
