@@ -8,6 +8,7 @@ import * as S from './index.styles';
 import Title from './Title';
 
 import { CLIENT_MESSAGE } from '@/constants/message';
+import { BROWSER_PATH } from '@/constants/path';
 import useInput from '@/hooks/useInput';
 import useSnackbar from '@/hooks/useSnackbar';
 import useWeather from '@/hooks/useWeather';
@@ -34,7 +35,7 @@ const Edit = () => {
   };
 
   const goToPrevPage = () => {
-    navigate('/');
+    navigate(BROWSER_PATH.BASE);
   };
 
   const postNewDiary = () => {

@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import * as S from './index.styles';
 
@@ -13,7 +13,6 @@ import useUser from '@/hooks/useUser';
 import { getKakaoAuthUri } from '@/utils/kakao';
 
 const Slider = ({ isClosing, closeSlider }) => {
-  const navigate = useNavigate();
   const { isLogin, logout } = useUser();
   const { showSnackbar } = useSnackbar();
   const handleError = useError();
@@ -36,10 +35,6 @@ const Slider = ({ isClosing, closeSlider }) => {
       });
   };
 
-  const moveToEdit = () => {
-    navigate('/edit');
-  };
-
   return (
     <S.Dimmer onClick={closeSlider}>
       <S.Slider
@@ -59,9 +54,9 @@ const Slider = ({ isClosing, closeSlider }) => {
           {isLogin ? (
             <>
               <li>
-                <S.MenuButton type="button" onClick={moveToEdit}>
-                  일기 쓰기
-                </S.MenuButton>
+                <Link to={BROWSER_PATH.EDIT}>
+                  <S.MenuButton type="button">일기 쓰기</S.MenuButton>
+                </Link>
               </li>
               <li>
                 <S.MenuButton type="button">마이페이지</S.MenuButton>

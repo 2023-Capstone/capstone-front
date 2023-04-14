@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { getWeatherData } from '@/apis/request/weather';
 import { CLIENT_MESSAGE } from '@/constants/message';
+import { BROWSER_PATH } from '@/constants/path';
 
 const useWeather = () => {
   const [weather, setWeather] = useState('');
@@ -26,12 +27,12 @@ const useWeather = () => {
       setWeather(data);
     } catch (e) {
       alert(CLIENT_MESSAGE.ERROR.FAIL_GET_WEATHER);
-      navigate('/');
+      navigate(BROWSER_PATH.BASE);
     }
   };
   const failGetLocation = () => {
     alert(CLIENT_MESSAGE.ERROR.FAIL_GET_LOCATION);
-    navigate('/');
+    navigate(BROWSER_PATH.BASE);
   };
 
   return { weather };
