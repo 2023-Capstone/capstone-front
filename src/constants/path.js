@@ -4,6 +4,11 @@ const BROWSER_PATH = {
   SIGNUP: '/signup',
   OAUTH: '/oauth',
   EDIT: '/edit',
+  MYPAGE: {
+    MAIN: '/mypage',
+    PERSONAL: 'personal',
+    DIARY: 'diary',
+  },
 };
 
 const API_PATH = {

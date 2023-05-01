@@ -13,6 +13,9 @@ import OAuth from '@/pages/OAuth';
 import Signup from '@/pages/Signup';
 import GlobalStyle from '@/styles/global';
 import theme from '@/styles/theme';
+import Mypage from './pages/Mypage';
+import PersonalPage from './pages/Mypage/PersonalPage';
+import DiaryPage from './pages/Mypage/DiaryPage';
 
 if (process.env.NODE_ENV === 'development') {
   const { worker } = require('@/mocks/browser');
@@ -33,6 +36,16 @@ const App = () => {
               <Route path={BROWSER_PATH.SIGNUP} element={<Signup />} />
               <Route path={BROWSER_PATH.OAUTH} element={<OAuth />} />
               <Route path={BROWSER_PATH.EDIT} element={<Edit />} />
+              <Route path={BROWSER_PATH.MYPAGE.MAIN} element={<Mypage />}>
+                <Route
+                  path={BROWSER_PATH.MYPAGE.PERSONAL}
+                  element={<PersonalPage />}
+                ></Route>
+                <Route
+                  path={BROWSER_PATH.MYPAGE.DIARY}
+                  element={<DiaryPage />}
+                ></Route>
+              </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Layout>
