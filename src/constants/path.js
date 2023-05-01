@@ -6,8 +6,8 @@ const BROWSER_PATH = {
   EDIT: '/edit',
   MYPAGE: {
     MAIN: '/mypage',
-    PERSONAL: 'personal',
-    DIARY: 'diary',
+    MYINFO: 'myinfo',
+    DIARIESBYEMOTION: 'diariesbyemotion',
   },
 };
 

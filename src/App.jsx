@@ -14,8 +14,8 @@ import Signup from '@/pages/Signup';
 import GlobalStyle from '@/styles/global';
 import theme from '@/styles/theme';
 import Mypage from './pages/Mypage';
-import PersonalPage from './pages/Mypage/PersonalPage';
-import DiaryPage from './pages/Mypage/DiaryPage';
+import MyInfo from './pages/Mypage/MyInfo';
+import DiariesByEmotion from './pages/Mypage/DiariesByEmotion';
 
 if (process.env.NODE_ENV === 'development') {
   const { worker } = require('@/mocks/browser');
@@ -38,12 +38,12 @@ const App = () => {
               <Route path={BROWSER_PATH.EDIT} element={<Edit />} />
               <Route path={BROWSER_PATH.MYPAGE.MAIN} element={<Mypage />}>
                 <Route
-                  path={BROWSER_PATH.MYPAGE.PERSONAL}
-                  element={<PersonalPage />}
+                  path={BROWSER_PATH.MYPAGE.MYINFO}
+                  element={<MyInfo />}
                 ></Route>
                 <Route
-                  path={BROWSER_PATH.MYPAGE.DIARY}
-                  element={<DiaryPage />}
+                  path={BROWSER_PATH.MYPAGE.DIARIESBYEMOTION}
+                  element={<DiariesByEmotion />}
                 ></Route>
               </Route>
               <Route path="*" element={<NotFound />} />

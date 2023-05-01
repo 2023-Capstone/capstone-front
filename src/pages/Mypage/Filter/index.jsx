@@ -7,12 +7,14 @@ const Filter = ({ props }) => {
     <S.Container>
       <li>
         <S.Button>
-          <Link to={BROWSER_PATH.MYPAGE.PERSONAL}>개인 정보</Link>
+          <Link to={BROWSER_PATH.MYPAGE.MYINFO}>개인 정보</Link>
         </S.Button>
       </li>
       <li>
         <S.Button>
-          <Link to={BROWSER_PATH.MYPAGE.DIARY}>기분 별 일기 모아보기</Link>
+          <Link to={BROWSER_PATH.MYPAGE.DIARIESBYEMOTION}>
+            기분 별 일기 모아보기
+          </Link>
         </S.Button>
       </li>
     </S.Container>
