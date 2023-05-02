@@ -10,7 +10,7 @@ const Filter = ({ filters, filter, onFilterChange }) => {
           onClick={() => {
             onFilterChange(filters[0]);
           }}
-          selected={filter === filters[0]}
+          className={filter === filters[0] ? 'selected' : ''}
         >
           <Link to={BROWSER_PATH.MYPAGE.MYINFO}>개인 정보</Link>
         </S.Button>
@@ -20,7 +20,7 @@ const Filter = ({ filters, filter, onFilterChange }) => {
           onClick={() => {
             onFilterChange(filters[1]);
           }}
-          selected={filter === filters[1]}
+          className={filter === filters[1] ? 'selected' : ''}
         >
           <Link to={BROWSER_PATH.MYPAGE.DIARIESBYEMOTION}>
             기분 별 일기 모아보기

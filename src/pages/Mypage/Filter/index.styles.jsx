@@ -10,14 +10,15 @@ const Button = styled.button`
   padding: 0.5rem 1.5rem;
   color: ${({ theme: colors }) => colors.GREEN_900};
   font-size: 1.2rem;
-
   &:hover {
     background-color: ${({ theme: { colors } }) => colors.GREEN_50};
+    transition: 0.5s ease;
   }
-  /* 선택된 버튼의 css */
-  border-bottom: ${props => (props.selected ? '3px' : '0px')} solid
-    ${({ theme: { colors } }) => colors.GREEN_900};
-  margin-bottom: -2px;
+  &.selected {
+    border-bottom: 3px solid ${({ theme: { colors } }) => colors.GREEN_900};
+    margin-bottom: -2px;
+    transition: none;
+  }
 `;
 
 export { Container, Button };
