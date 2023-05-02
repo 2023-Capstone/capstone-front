@@ -12,9 +12,12 @@ const Button = styled.button`
   font-size: 1.2rem;
 
   &:hover {
-    border-bottom: 3px solid ${({ theme: { colors } }) => colors.GREEN_900};
-    margin-bottom: -3px;
+    background-color: ${({ theme: { colors } }) => colors.GREEN_50};
   }
+  /* 선택된 버튼의 css */
+  border-bottom: ${props => (props.selected ? '3px' : '0px')} solid
+    ${({ theme: { colors } }) => colors.GREEN_900};
+  margin-bottom: -2px;
 `;
 
 export { Container, Button };
