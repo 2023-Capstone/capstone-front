@@ -44,7 +44,6 @@ const Signup = () => {
       .then(({ accessToken, refreshToken }) => {
         showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_SIGNUP);
         login(accessToken, refreshToken);
-
         navigate(BROWSER_PATH.BASE);
       })
       .catch(error => {

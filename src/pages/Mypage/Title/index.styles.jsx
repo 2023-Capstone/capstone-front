@@ -7,7 +7,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Name = styled.p`
+const Name = styled.h1`
   color: ${({ theme: { colors } }) => colors.GREEN_900};
   font-size: 1.3rem;
   font-weight: bold;
