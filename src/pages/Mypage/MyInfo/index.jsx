@@ -5,6 +5,7 @@ import { RULE } from '@/constants/rule';
 import { CLIENT_MESSAGE } from '@/constants/message';
 import { requestEmailUpdate, requestNicknameUpdate } from '@/apis/request/auth';
 import * as S from './index.styles';
+import WithdrawlModal from './WithdrawlModal';
 
 const MyInfo = props => {
   const [email, changeEmail] = useInput('');
@@ -33,7 +34,6 @@ const MyInfo = props => {
 
       return;
     }
-
     requestEmailUpdate({ email }) //
       .then(({ newEmail }) => {
         showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_EMAILUPDATE);
@@ -43,6 +43,7 @@ const MyInfo = props => {
         alert(CLIENT_MESSAGE.ERROR.FAIL_EMAILUPDATE);
       });
   };
+
   const handleNicknameSubmit = e => {
     e.preventDefault();
 
@@ -60,10 +61,12 @@ const MyInfo = props => {
         alert(CLIENT_MESSAGE.ERROR.FAIL_NICKNAMEUPDATE);
       });
   };
+
   const handleWithdrawl = e => {
     e.preventDefault();
     alert('회원 탈퇴 기능은 개발 중입니다.');
   };
+
   return (
     <S.Container>
       <S.WrapperEdit>
@@ -79,9 +82,7 @@ const MyInfo = props => {
           onNicknameSubmit={handleNicknameSubmit}
         />
       </S.WrapperEdit>
-      <S.WrapperWithdrawl>
-        <button onClick={handleWithdrawl}>회원 탈퇴</button>
-      </S.WrapperWithdrawl>
+      <WithdrawlModal onWithdrawl={handleWithdrawl} />
     </S.Container>
   );
 };

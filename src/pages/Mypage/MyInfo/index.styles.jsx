@@ -18,25 +18,4 @@ const Title = styled.h1`
   margin-bottom: 3rem;
 `;
 
-const WrapperWithdrawl = styled.div`
-  width: 70%;
-  display: flex;
-  justify-content: end;
-  margin-top: 10rem;
-
-  & > button {
-    width: 6rem;
-    padding: 0.7rem 1rem;
-    border-radius: 5px;
-    background-color: ${({ theme: { colors } }) => colors.GREEN_50};
-    color: ${({ theme: { colors } }) => colors.RED_200};
-
-    transition: background-color 0.5s ease-in-out;
-    &:hover {
-      background-color: ${({ theme: { colors } }) => colors.RED_200};
-      color: ${({ theme: { colors } }) => colors.GREEN_50};
-    }
-  }
-`;
-
-export { Container, WrapperEdit, Title, WrapperWithdrawl };
+export { Container, WrapperEdit, Title };
