@@ -5,6 +5,8 @@ const CLIENT_MESSAGE = {
     SUCCESS_SIGNUP: '회원가입에 성공하였습니다. 자동 로그인합니다.',
     CONFIRM_LOGOUT: '로그아웃하시겠습니까?',
     SUCCESS_LOGOUT: '로그아웃했습니다.',
+    SUCCESS_EMAILUPATE: '이메일 수정에 성공하였습니다.',
+    SUCCESS_NICKNAMEUPDATE: '닉네임 수정에 성공하였습니다',
   },
   ERROR: {
     EMPTY_ACCESS_TOKEN: '로그인 정보가 유효하지 않습니다. 다시 로그인해주세요.',
@@ -14,6 +16,8 @@ const CLIENT_MESSAGE = {
     NOT_INCLUDE_HASHTAG: '해당 해시태그 값이 존재하지 않습니다.',
     FAIL_GET_LOCATION: '위치 정보를 가져올 수 없습니다.',
     FAIL_GET_WEATHER: '현재 날씨를 가져올 수 없습니다.',
+    FAIL_EMAILUPDATE: '이메일 수정에 실패하였습니다.',
+    FAIL_NICKNAMEUPDATE: '닉네임 수정에 실패하였습니다.',
   },
 };
 

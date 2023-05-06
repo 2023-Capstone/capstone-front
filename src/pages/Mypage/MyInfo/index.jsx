@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Inputs from './Inputs';
 import useInput from '@/hooks/useInput';
 import { RULE } from '@/constants/rule';
+import { CLIENT_MESSAGE } from '@/constants/message';
+import { requestEmailUpdate, requestNicknameUpdate } from '@/apis/request/auth';
 import * as S from './index.styles';
-import Title from '../Title';
+
 const MyInfo = props => {
   const [email, changeEmail] = useInput('');
   const [nickname, changeNickname] = useInput('');
@@ -22,13 +24,41 @@ const MyInfo = props => {
         nickname.length <= RULE.NICKNAME.MAX,
     );
   }, [nickname]);
+
   const handleEmailSubmit = e => {
     e.preventDefault();
-    console.log(email);
+
+    if (!isValidEmail) {
+      alert('입력값을 확인해주세요.');
+
+      return;
+    }
+
+    requestEmailUpdate({ email }) //
+      .then(({ newEmail }) => {
+        showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_EMAILUPDATE);
+        changeEmail(newEmail);
+      })
+      .catch(error => {
+        alert(CLIENT_MESSAGE.ERROR.FAIL_EMAILUPDATE);
+      });
   };
   const handleNicknameSubmit = e => {
     e.preventDefault();
-    console.log(nickname);
+
+    if (!isValidNickname) {
+      alert('입력값을 확인해주세요.');
+
+      return;
+    }
+    requestNicknameUpdate({ nickname }) //
+      .then(({ newNickname }) => {
+        showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_NICKNAMEUPDATE);
+        changeNickname(newNickname);
+      })
+      .catch(error => {
+        alert(CLIENT_MESSAGE.ERROR.FAIL_NICKNAMEUPDATE);
+      });
   };
   const handleWithdrawl = e => {
     e.preventDefault();

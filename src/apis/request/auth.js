@@ -19,9 +19,23 @@ const requestLogout = () => {
   return axiosWithRefreshToken.post(API_PATH.LOGOUT);
 };
 
+const requestEmailUpdate = userData => {
+  return axiosWithRefreshToken
+    .patch(API_PATH.EMAILUPDATE, userData)
+    .then(response => response.data);
+};
+
+const requestNicknameUpdate = userData => {
+  return axiosWithRefreshToken
+    .patch(API_PATH.NICKNAMEUPDATE, userData)
+    .then(response => response.data);
+};
+
 export {
   requestLogin,
   requestSignup,
   requestReissueAccessToken,
   requestLogout,
+  requestEmailUpdate,
+  requestNicknameUpdate,
 };
