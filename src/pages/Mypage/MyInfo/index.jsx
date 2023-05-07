@@ -5,8 +5,8 @@ import { RULE } from '@/constants/rule';
 import { CLIENT_MESSAGE } from '@/constants/message';
 import { requestEmailUpdate, requestNicknameUpdate } from '@/apis/request/auth';
 import * as S from './index.styles';
-import WithdrawlModal from './WithdrawlModal';
-import { requestWithdrawl } from '../../../apis/request/auth';
+import WithdrawalModal from './WithdrawalModal';
+import { requestWithdrawal } from '../../../apis/request/auth';
 import { useNavigate } from 'react-router-dom';
 import { BROWSER_PATH } from '../../../constants/path';
 import useError from '../../../hooks/useError';
@@ -68,10 +68,10 @@ const MyInfo = props => {
       });
   };
 
-  const handleWithdrawl = e => {
+  const handleWithdrawal = e => {
     e.preventDefault();
 
-    requestWithdrawl() //
+    requestWithdrawal() //
       .then(() => {
         showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_WITHDRAWL);
         navigate(BROWSER_PATH.BASE);
@@ -96,7 +96,7 @@ const MyInfo = props => {
           onNicknameSubmit={handleNicknameSubmit}
         />
       </S.WrapperEdit>
-      <WithdrawlModal onWithdrawl={handleWithdrawl} />
+      <WithdrawalModal onWithdrawal={handleWithdrawal} />
     </S.Container>
   );
 };

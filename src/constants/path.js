@@ -18,7 +18,7 @@ const API_PATH = {
   LOGOUT: '/auth/logout',
   EMAILUPDATE: '/auth/update/email',
   NICKNAMEUPDATE: '/auth/update/nickname',
-  WITHDRAWL: '/auth/withdrawal',
+  WITHDRAWAL: '/auth/withdrawal',
 };
 
 const KAKAO_REDIRECT_URI = `${window.location.origin}${BROWSER_PATH.OAUTH}`;
