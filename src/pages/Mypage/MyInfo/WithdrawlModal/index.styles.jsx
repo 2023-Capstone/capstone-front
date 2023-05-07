@@ -42,6 +42,7 @@ const ModalWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  animation: blowUp 0.1s;
 
   & > p:first-of-type {
     color: ${({ theme: { colors } }) => colors.INPUT_BACKGROUND};
@@ -78,6 +79,15 @@ const Buttons = styled.div`
     color: ${({ theme: { colors } }) => colors.GREEN_600};
     &:hover {
       filter: brightness(1.2);
+    }
+  }
+
+  @keyframes blowUp {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
     }
   }
 `;
