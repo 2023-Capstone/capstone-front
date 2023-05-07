@@ -6,12 +6,18 @@ import { CLIENT_MESSAGE } from '@/constants/message';
 import { requestEmailUpdate, requestNicknameUpdate } from '@/apis/request/auth';
 import * as S from './index.styles';
 import WithdrawlModal from './WithdrawlModal';
+import { requestWithdrawl } from '../../../apis/request/auth';
+import { useNavigate } from 'react-router-dom';
+import { BROWSER_PATH } from '../../../constants/path';
+import useError from '../../../hooks/useError';
 
 const MyInfo = props => {
   const [email, changeEmail] = useInput('');
   const [nickname, changeNickname] = useInput('');
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [isValidNickname, setIsValidNickname] = useState(false);
+  const handleError = useError();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsValidEmail(
@@ -31,16 +37,16 @@ const MyInfo = props => {
 
     if (!isValidEmail) {
       alert('입력값을 확인해주세요.');
-
       return;
     }
+
     requestEmailUpdate({ email }) //
       .then(({ newEmail }) => {
         showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_EMAILUPDATE);
         changeEmail(newEmail);
       })
       .catch(error => {
-        alert(CLIENT_MESSAGE.ERROR.FAIL_EMAILUPDATE);
+        alert(handleError(error.code));
       });
   };
 
@@ -49,22 +55,30 @@ const MyInfo = props => {
 
     if (!isValidNickname) {
       alert('입력값을 확인해주세요.');
-
       return;
     }
+
     requestNicknameUpdate({ nickname }) //
       .then(({ newNickname }) => {
         showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_NICKNAMEUPDATE);
         changeNickname(newNickname);
       })
       .catch(error => {
-        alert(CLIENT_MESSAGE.ERROR.FAIL_NICKNAMEUPDATE);
+        alert(handleError(error.code));
       });
   };
 
   const handleWithdrawl = e => {
     e.preventDefault();
-    alert('회원 탈퇴 기능은 개발 중입니다.');
+
+    requestWithdrawl() //
+      .then(() => {
+        showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_WITHDRAWL);
+        navigate(BROWSER_PATH.BASE);
+      })
+      .catch(error => {
+        alert(handleError(error.code));
+      });
   };
 
   return (

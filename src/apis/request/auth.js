@@ -31,6 +31,10 @@ const requestNicknameUpdate = userData => {
     .then(response => response.data);
 };
 
+const requestWithdrawl = () => {
+  return axiosWithRefreshToken.delete(API_PATH.WITHDRAWL);
+};
+
 export {
   requestLogin,
   requestSignup,
@@ -38,4 +42,5 @@ export {
   requestLogout,
   requestEmailUpdate,
   requestNicknameUpdate,
+  requestWithdrawl,
 };

@@ -7,6 +7,7 @@ const CLIENT_MESSAGE = {
     SUCCESS_LOGOUT: '로그아웃했습니다.',
     SUCCESS_EMAILUPATE: '이메일 수정에 성공하였습니다.',
     SUCCESS_NICKNAMEUPDATE: '닉네임 수정에 성공하였습니다',
+    SUCCESS_WITHDRAWL: '회원 탈퇴에 성공하였습니다.',
   },
   ERROR: {
     EMPTY_ACCESS_TOKEN: '로그인 정보가 유효하지 않습니다. 다시 로그인해주세요.',
