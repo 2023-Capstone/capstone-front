@@ -47,8 +47,8 @@ const Block = ({
 
   return (
     <S.Container draggable onKeyDown={handleBlock}>
-      <AiOutlinePlus onClick={onClickNewBlock} />
-      <MdDragIndicator />
+      <AiOutlinePlus className="add" onClick={onClickNewBlock} />
+      <MdDragIndicator className="drag" />
       <ContentEditable
         className="contentEditable"
         placeholder="내용을 입력해주세요"

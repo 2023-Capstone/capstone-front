@@ -5,7 +5,15 @@ const Container = styled.div`
   display: flex;
   gap: 0.25rem;
   font-size: 1.25rem;
-
+  .add {
+    cursor: pointer;
+  }
+  .drag {
+    cursor: grab;
+  }
+  .contentEditable {
+    cursor: text;
+  }
   .contentEditable:empty:before {
     content: attr(placeholder);
   }

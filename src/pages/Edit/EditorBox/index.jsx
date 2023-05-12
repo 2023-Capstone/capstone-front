@@ -39,27 +39,29 @@ const EditorBox = () => {
   };
 
   const editBlock = debounce(block => {
-    console.log('실행됨');
-    const newBlocks = [...blocks];
-    const index = blocks.findIndex(({ id }) => id === block.id);
-    if (index === -1) {
-      alert(CLIENT_MESSAGE.ERROR.FAIL_EDIT_BLOCK);
-      return blocks;
-    }
-    newBlocks.splice(index, 1, block);
-    console.log(newBlocks);
-    return newBlocks;
+    setBlocks(() => {
+      const newBlocks = [...blocks];
+      const index = blocks.findIndex(({ id }) => id === block.id);
+      if (index === -1) {
+        alert(CLIENT_MESSAGE.ERROR.FAIL_EDIT_BLOCK);
+        return blocks;
+      }
+      newBlocks.splice(index, 1, block);
+      return newBlocks;
+    });
   }, 500);
 
   const removeBlock = id => {
-    const newBlocks = [...blocks];
-    const index = blocks.findIndex(block => block.id === id);
-    if (index === -1) {
-      alert(CLIENT_MESSAGE.ERROR.FAIL_EDIT_BLOCK);
-      return blocks;
-    }
-    newBlocks.splice(index, 1);
-    return newBlocks;
+    setBlocks(() => {
+      const newBlocks = [...blocks];
+      const index = blocks.findIndex(block => block.id === id);
+      if (index === -1) {
+        alert(CLIENT_MESSAGE.ERROR.FAIL_EDIT_BLOCK);
+        return blocks;
+      }
+      newBlocks.splice(index, 1);
+      return newBlocks;
+    });
   };
 
   const changeCurrent = index => () => setCurrent(index);
