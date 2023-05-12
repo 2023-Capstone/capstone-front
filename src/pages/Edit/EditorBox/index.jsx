@@ -11,7 +11,9 @@ import { blocksAtom } from '@/store/blocks';
 
 const EditorBox = () => {
   const [current, setCurrent] = useState(0);
+  const [startIndex, setStartIndex] = useState(0);
   const [blocks, setBlocks] = useAtom(blocksAtom);
+
   const debounce = useDebounce();
   // const addBlock = useSetAtom(addBlockAtom);
   // const editBlock = useSetAtom(editBlockAtom);
@@ -65,6 +67,27 @@ const EditorBox = () => {
   };
 
   const changeCurrent = index => () => setCurrent(index);
+
+  const onDragStart = index => setStartIndex(index);
+
+  const onDrop = dropIndex => {
+    const dragItem = blocks[startIndex];
+    const list = [...blocks];
+    list.splice(startIndex, 1);
+    const newListData =
+      startIndex < dropIndex
+        ? [
+            ...list.slice(0, dropIndex - 1),
+            dragItem,
+            ...list.slice(dropIndex - 1, list.length),
+          ]
+        : [
+            ...list.slice(0, dropIndex),
+            dragItem,
+            ...list.slice(dropIndex, list.length),
+          ];
+    setBlocks(newListData);
+  };
   return (
     <S.Container>
       <S.EditELementBox>
@@ -96,8 +119,27 @@ const EditorBox = () => {
           addBlock={addBlock}
           removeBlock={removeBlock}
           editBlock={editBlock}
+          onDragStart={onDragStart}
+          onDropItem={onDrop}
         />
       ))}
+      <Block
+        block={{
+          type: 'text',
+          data: {
+            text: '',
+            font: null,
+            sort: null,
+          },
+        }}
+        index={blocks.length}
+        current={current}
+        changeCurrent={changeCurrent}
+        addBlock={addBlock}
+        removeBlock={removeBlock}
+        editBlock={editBlock}
+        onDragStart={onDragStart}
+      />
     </S.Container>
   );
 };

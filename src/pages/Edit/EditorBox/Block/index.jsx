@@ -14,9 +14,12 @@ const Block = ({
   current,
   changeCurrent,
   index,
+  onDragStart,
+  onDropItem,
 }) => {
   const [content, setContent] = useState('');
-  const focusRef = useRef();
+  const [dragOver, setDragOver] = useState(false);
+  const focusRef = useRef(null);
 
   // useEffect(() => {
   //   if (!focusRef && current !== index) return;
@@ -45,8 +48,38 @@ const Block = ({
     }
   };
 
+  const onDragStartBlock = () => {
+    onDragStart(index);
+  };
+
+  const onDragEnter = () => {
+    setDragOver(true);
+  };
+
+  const onDragLeave = () => {
+    setDragOver(false);
+  };
+
+  const onDragOver = e => {
+    e.preventDefault();
+  };
+
+  const onDrop = () => {
+    onDropItem(index);
+    setDragOver(false);
+  };
+
   return (
-    <S.Container draggable onKeyDown={handleBlock}>
+    <S.Container
+      dragOver={dragOver}
+      draggable
+      onDragStart={onDragStartBlock}
+      onDragOver={onDragOver}
+      onDragEnter={onDragEnter}
+      onDragLeave={onDragLeave}
+      onDrop={onDrop}
+      onKeyDown={handleBlock}
+    >
       <AiOutlinePlus className="add" onClick={onClickNewBlock} />
       <MdDragIndicator className="drag" />
       <ContentEditable
