@@ -6,36 +6,48 @@ import { MdDragIndicator } from 'react-icons/md';
 
 import * as S from './index.styles';
 
-const Block = ({ addBlock, removeBlock, updateBlock, current, index }) => {
+const Block = ({
+  block,
+  addBlock,
+  removeBlock,
+  editBlock,
+  current,
+  changeCurrent,
+  index,
+}) => {
   const [content, setContent] = useState('');
   const focusRef = useRef();
 
-  useEffect(() => {
-    if (!focusRef && current !== index) return;
-    focusRef.current.focus();
-  }, [current, index]);
+  // useEffect(() => {
+  //   if (!focusRef && current !== index) return;
+  //   focusRef.current.focus();
+  // }, [current, index]);
 
   const onChangeContent = e => {
     setContent(e.target.value);
+    editBlock({ ...block, data: { ...block.data, text: e.target.value } });
+  };
+
+  const onClickNewBlock = () => {
+    addBlock(block.id);
   };
 
   const handleBlock = e => {
     if (e.key !== 'Enter' && e.key !== 'Backspace') return;
     if (e.key === 'Enter') {
       e.preventDefault();
-      addBlock();
+      addBlock(block.id);
     }
     if (e.key === 'Backspace') {
       if (content.length > 0) return;
-      console.log('삭제');
       e.preventDefault();
-      removeBlock(index);
+      removeBlock(block.id);
     }
   };
 
   return (
     <S.Container draggable onKeyDown={handleBlock}>
-      <AiOutlinePlus onClick={addBlock} />
+      <AiOutlinePlus onClick={onClickNewBlock} />
       <MdDragIndicator />
       <ContentEditable
         className="contentEditable"
@@ -43,7 +55,6 @@ const Block = ({ addBlock, removeBlock, updateBlock, current, index }) => {
         html={content}
         onChange={onChangeContent}
         innerRef={focusRef}
-        onBlur={updateBlock(index, content)}
       />
     </S.Container>
   );

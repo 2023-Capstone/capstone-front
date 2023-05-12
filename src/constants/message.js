@@ -14,6 +14,9 @@ const CLIENT_MESSAGE = {
     NOT_INCLUDE_HASHTAG: '해당 해시태그 값이 존재하지 않습니다.',
     FAIL_GET_LOCATION: '위치 정보를 가져올 수 없습니다.',
     FAIL_GET_WEATHER: '현재 날씨를 가져올 수 없습니다.',
+    FAIL_DELETE_BLOCK: '삭제하려는 블록을 찾을 수 없습니다.',
+    FAIL_EDIT_BLOCK: '수정하려는 블록을 찾을 수 없습니다.',
+    FAIL_FIND_BLOCK: '블록을 찾을 수 없습니다.',
   },
 };
 

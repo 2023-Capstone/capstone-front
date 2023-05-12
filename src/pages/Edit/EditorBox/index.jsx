@@ -1,23 +1,68 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import { useAtom, useSetAtom } from 'jotai';
 
 import Block from './Block';
 import * as S from './index.styles';
 
-const EditorBox = ({ blocks, addBlock, updateBlock, removeBlock }) => {
-  const [current, setCurrent] = useState(0);
+import { CLIENT_MESSAGE } from '@/constants/message';
+import useDebounce from '@/hooks/useDebounce';
+import { blocksAtom } from '@/store/blocks';
 
-  const addNewTextBlock = () => {
-    setCurrent(current + 1);
-    addBlock({
-      type: 'text',
-      data: {
-        text: '',
-        font: null,
-        sort: null,
-      },
+const EditorBox = () => {
+  const [current, setCurrent] = useState(0);
+  const [blocks, setBlocks] = useAtom(blocksAtom);
+  const debounce = useDebounce();
+  // const addBlock = useSetAtom(addBlockAtom);
+  // const editBlock = useSetAtom(editBlockAtom);
+  // const removeBlock = useSetAtom(removeBlockAtom);
+
+  const addBlock = id => {
+    setBlocks(() => {
+      const newBlocks = [...blocks];
+      const index = blocks.findIndex(block => block.id === id);
+      if (index === -1) {
+        alert(CLIENT_MESSAGE.ERROR.FAIL_FIND_BLOCK);
+        return blocks;
+      }
+      newBlocks.splice(index + 1, 0, {
+        type: 'text',
+        data: {
+          text: '새로운 블럭',
+          font: null,
+          sort: null,
+        },
+        id: Date.now(),
+      });
+      return newBlocks;
     });
   };
 
+  const editBlock = debounce(block => {
+    console.log('실행됨');
+    const newBlocks = [...blocks];
+    const index = blocks.findIndex(({ id }) => id === block.id);
+    if (index === -1) {
+      alert(CLIENT_MESSAGE.ERROR.FAIL_EDIT_BLOCK);
+      return blocks;
+    }
+    newBlocks.splice(index, 1, block);
+    console.log(newBlocks);
+    return newBlocks;
+  }, 500);
+
+  const removeBlock = id => {
+    const newBlocks = [...blocks];
+    const index = blocks.findIndex(block => block.id === id);
+    if (index === -1) {
+      alert(CLIENT_MESSAGE.ERROR.FAIL_EDIT_BLOCK);
+      return blocks;
+    }
+    newBlocks.splice(index, 1);
+    return newBlocks;
+  };
+
+  const changeCurrent = index => () => setCurrent(index);
   return (
     <S.Container>
       <S.EditELementBox>
@@ -42,12 +87,13 @@ const EditorBox = ({ blocks, addBlock, updateBlock, removeBlock }) => {
       {blocks.map((block, index) => (
         <Block
           block={block}
-          key={`block-${index}`}
-          current={current}
           index={index}
-          addBlock={addNewTextBlock}
+          key={`block-${block.id}`}
+          current={current}
+          changeCurrent={changeCurrent}
+          addBlock={addBlock}
           removeBlock={removeBlock}
-          updateBlock={updateBlock}
+          editBlock={editBlock}
         />
       ))}
     </S.Container>
