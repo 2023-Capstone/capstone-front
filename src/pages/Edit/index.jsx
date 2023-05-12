@@ -15,6 +15,16 @@ import useWeather from '@/hooks/useWeather';
 
 const Edit = () => {
   const date = new Date();
+  const [blocks, setBlocks] = useState([
+    {
+      type: 'text',
+      data: {
+        text: '',
+        font: null,
+        sort: null,
+      },
+    },
+  ]);
   const [hashtagList, setHashtagList] = useState([]);
   const [mood, onChangeMood] = useInput('');
   const [title, onChangeTitle] = useInput('');
@@ -22,6 +32,19 @@ const Edit = () => {
   const navigate = useNavigate();
   const { weather } = useWeather();
   const { showSnackbar } = useSnackbar();
+
+  const addBlock = block => {
+    setBlocks([...blocks, block]);
+  };
+
+  const updateBlock = (id, content) => () => {
+    const newBlocks = [...blocks];
+    newBlocks[id].data.text = content;
+  };
+
+  const removeBlock = id => {
+    setBlocks(blocks.filter((_, index) => index !== id));
+  };
 
   const addHashtagItem = newHashtag =>
     setHashtagList(prev => [...prev, newHashtag]);
@@ -52,7 +75,12 @@ const Edit = () => {
         mood={mood}
         setMood={onChangeMood}
       />
-      <EditorBox />
+      <EditorBox
+        blocks={blocks}
+        addBlock={addBlock}
+        updateBlock={updateBlock}
+        removeBlock={removeBlock}
+      />
       <HashtagBox
         addHashtagItem={addHashtagItem}
         removeHashtag={removeHashtag}

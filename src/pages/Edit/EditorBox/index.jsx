@@ -1,6 +1,23 @@
+import { useState } from 'react';
+
+import Block from './Block';
 import * as S from './index.styles';
 
-const EditorBox = () => {
+const EditorBox = ({ blocks, addBlock, updateBlock, removeBlock }) => {
+  const [current, setCurrent] = useState(0);
+
+  const addNewTextBlock = () => {
+    setCurrent(current + 1);
+    addBlock({
+      type: 'text',
+      data: {
+        text: '',
+        font: null,
+        sort: null,
+      },
+    });
+  };
+
   return (
     <S.Container>
       <S.EditELementBox>
@@ -22,7 +39,17 @@ const EditorBox = () => {
         <p>줄간격</p>
         <p>이미지</p>
       </S.EditELementBox>
-      일단 보이기만 이렇게 해놨어용 이쪽은 기능 아예 안 넣었어요
+      {blocks.map((block, index) => (
+        <Block
+          block={block}
+          key={`block-${index}`}
+          current={current}
+          index={index}
+          addBlock={addNewTextBlock}
+          removeBlock={removeBlock}
+          updateBlock={updateBlock}
+        />
+      ))}
     </S.Container>
   );
 };
