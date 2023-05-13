@@ -5,7 +5,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-const WrapperEdit = styled.div`
+const Wrapper = styled.div`
   flex: 1 1 auto;
   width: 70%;
   margin-top: 5rem;
@@ -18,4 +18,4 @@ const Title = styled.h1`
   margin-bottom: 3rem;
 `;
 
-export { Container, WrapperEdit, Title };
+export { Container, Wrapper, Title };

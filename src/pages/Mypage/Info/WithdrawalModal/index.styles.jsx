@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { keyframes } from '@emotion/react';
 
 const Container = styled.div`
   width: 70%;
@@ -7,14 +8,14 @@ const Container = styled.div`
   margin-top: 10rem;
 `;
 
-const Mainbutton = styled.button`
+const MainButton = styled.button`
   width: 6rem;
   padding: 0.7rem 1rem;
   border-radius: 5px;
   background-color: ${({ theme: { colors } }) => colors.GREEN_50};
   color: ${({ theme: { colors } }) => colors.RED_200};
 
-  transition: background-color 0.5s ease-in-out;
+  transition: background-color, color 0.4s ease-in-out;
   &:hover {
     background-color: ${({ theme: { colors } }) => colors.RED_200};
     color: ${({ theme: { colors } }) => colors.GREEN_50};
@@ -22,15 +23,23 @@ const Mainbutton = styled.button`
 `;
 
 const ModalContainer = styled.section`
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
   background-color: ${({ theme: { colors } }) => colors.GREEN_900_OP_40};
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const blowUp = keyframes`
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
 `;
 
 const ModalWrapper = styled.div`
@@ -42,9 +51,9 @@ const ModalWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  animation: blowUp 0.1s;
+  animation: ${blowUp} 0.1s;
 
-  & > p:first-of-type {
+  & > p:nth-of-type(1) {
     color: ${({ theme: { colors } }) => colors.INPUT_BACKGROUND};
     font-weight: 800;
     font-size: 1.5rem;
@@ -56,40 +65,41 @@ const ModalWrapper = styled.div`
   }
 `;
 
-const Buttons = styled.div`
+const ButtonWrapper = styled.div`
   margin-top: 2rem;
 
   & button {
     padding: 0.8rem 2rem;
     border-radius: 5px;
-    font: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
     transition: all 0.5s ease-out;
   }
-  & > button:first-of-type {
-    background-color: ${({ theme: { colors } }) => colors.INPUT_BACKGROUND};
-    color: ${({ theme: { colors } }) => colors.GREEN_900};
-    margin-right: 4rem;
-    &:hover {
-      filter: brightness(0.8);
-    }
-  }
-  & > button:nth-of-type(2) {
-    background-color: ${({ theme: { colors } }) => colors.GREEN_800};
-    color: ${({ theme: { colors } }) => colors.GREEN_600};
-    &:hover {
-      filter: brightness(1.2);
-    }
-  }
-
-  @keyframes blowUp {
-    0% {
-      transform: scale(0);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
 `;
 
-export { Container, Mainbutton, ModalContainer, ModalWrapper, Buttons };
+const CancelButton = styled.button`
+  background-color: ${({ theme: { colors } }) => colors.INPUT_BACKGROUND};
+  color: ${({ theme: { colors } }) => colors.GREEN_900};
+
+  &:hover {
+    filter: brightness(0.8);
+  }
+`;
+const WithdrawButton = styled.button`
+  background-color: ${({ theme: { colors } }) => colors.GREEN_800};
+  color: ${({ theme: { colors } }) => colors.GREEN_600};
+  margin-right: 4rem;
+
+  &:hover {
+    filter: brightness(1.2);
+  }
+`;
+export {
+  Container,
+  MainButton,
+  ModalContainer,
+  ModalWrapper,
+  ButtonWrapper,
+  CancelButton,
+  WithdrawButton,
+};

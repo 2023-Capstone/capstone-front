@@ -29,7 +29,7 @@ const Input = styled.input`
   }
 `;
 
-const Button = styled.div`
+const ButtonWrapper = styled.div`
   grid-column: 4 / span 2;
   display: flex;
   justify-content: end;
@@ -49,4 +49,4 @@ const Description = styled.div`
   }
 `;
 
-export { Container, Form, Input, Description, Button };
+export { Container, Form, Input, Description, ButtonWrapper };

@@ -1,5 +1,6 @@
 import { axios, axiosWithRefreshToken } from '@/apis/axios';
 import { API_PATH } from '@/constants/path';
+import { axiosWithAccessToken } from '../axios';
 
 const requestLogin = code => {
   return axios.post(API_PATH.LOGIN, { code }).then(response => response.data);
@@ -19,20 +20,20 @@ const requestLogout = () => {
   return axiosWithRefreshToken.post(API_PATH.LOGOUT);
 };
 
-const requestEmailUpdate = userData => {
+const requestUpdateEmail = userData => {
   return axiosWithRefreshToken
-    .patch(API_PATH.EMAILUPDATE, userData)
+    .patch(API_PATH.UPDATE_EMAIL, userData)
     .then(response => response.data);
 };
 
-const requestNicknameUpdate = userData => {
-  return axiosWithRefreshToken
-    .patch(API_PATH.NICKNAMEUPDATE, userData)
+const requestUpdateNickname = userData => {
+  return axiosWithAccessToken
+    .patch(API_PATH.UPDATE_NICKNAME, userData)
     .then(response => response.data);
 };
 
 const requestWithdrawal = () => {
-  return axiosWithRefreshToken.delete(API_PATH.WITHDRAWAL);
+  return axiosWithAccessToken.delete(API_PATH.WITHDRAWAL);
 };
 
 export {
@@ -40,7 +41,7 @@ export {
   requestSignup,
   requestReissueAccessToken,
   requestLogout,
-  requestEmailUpdate,
-  requestNicknameUpdate,
+  requestUpdateEmail,
+  requestUpdateNickname,
   requestWithdrawal,
 };

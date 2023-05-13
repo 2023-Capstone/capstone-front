@@ -1,20 +1,26 @@
-import Title from './Title';
-import Filter from './Filter';
-import { Outlet, useNavigate } from 'react-router-dom';
+import Title from '@/pages/Mypage/Title';
+import Filter from '@/pages/Mypage/Filter';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { BROWSER_PATH } from '../../constants/path';
-const filters = ['MYINFO', 'DIARIESBYEMOTION'];
+import { BROWSER_PATH } from '@/constants/path';
+import Info from '@/pages/Mypage/Info';
+import Diary from '@/pages/Mypage/Diary';
 const Mypage = props => {
-  const [filter, setFilter] = useState(filters[0]);
+  const [filter, setFilter] = useState(BROWSER_PATH.MYPAGE.INFO);
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   useEffect(() => {
-    navigate(BROWSER_PATH.MYPAGE.MYINFO);
+    navigate(`?t=${BROWSER_PATH.MYPAGE.INFO}`);
   }, []);
+  const filterChange = boolean => {
+    setFilter(boolean);
+  };
   return (
     <>
-      <Title name={'마이페이지'} />
-      <Filter filters={filters} filter={filter} onFilterChange={setFilter} />
-      <Outlet />
+      <Title name="마이페이지" />
+      <Filter filter={filter} filterChange={filterChange} />
+      {searchParams.get('t') === BROWSER_PATH.MYPAGE.INFO && <Info />}
+      {searchParams.get('t') === BROWSER_PATH.MYPAGE.DIARY && <Diary />}
     </>
   );
 };

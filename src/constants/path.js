@@ -5,9 +5,9 @@ const BROWSER_PATH = {
   OAUTH: '/oauth',
   EDIT: '/edit',
   MYPAGE: {
-    MAIN: '/mypage',
-    MYINFO: 'myinfo',
-    DIARIESBYEMOTION: 'diariesbyemotion',
+    BASE: '/me',
+    INFO: 'info',
+    DIARY: 'diary',
   },
 };
 
@@ -16,8 +16,8 @@ const API_PATH = {
   SIGNUP: '/auth/signup',
   REISSUE: '/auth/reissue',
   LOGOUT: '/auth/logout',
-  EMAILUPDATE: '/auth/update/email',
-  NICKNAMEUPDATE: '/auth/update/nickname',
+  UPDATE_EMAIL: '/auth/update/email',
+  UPDATE_NICKNAME: '/auth/update/nickname',
   WITHDRAWAL: '/auth/withdrawal',
 };
 

@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import Inputs from './Inputs';
+import Inputs from '@/pages/Mypage/Info/Inputs';
 import useInput from '@/hooks/useInput';
 import { RULE } from '@/constants/rule';
 import { CLIENT_MESSAGE } from '@/constants/message';
-import { requestEmailUpdate, requestNicknameUpdate } from '@/apis/request/auth';
+import { requestUpdateEmail, requestUpdateNickname } from '@/apis/request/auth';
 import * as S from './index.styles';
 import WithdrawalModal from './WithdrawalModal';
-import { requestWithdrawal } from '../../../apis/request/auth';
+import { requestWithdrawal } from '@/apis/request/auth';
 import { useNavigate } from 'react-router-dom';
-import { BROWSER_PATH } from '../../../constants/path';
-import useError from '../../../hooks/useError';
+import { BROWSER_PATH } from '@/constants/path';
+import useError from '@/hooks/useError';
+import useUser from '@/hooks/useUser';
 
-const MyInfo = props => {
+const Info = props => {
   const [email, changeEmail] = useInput('');
   const [nickname, changeNickname] = useInput('');
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [isValidNickname, setIsValidNickname] = useState(false);
   const handleError = useError();
+  const { withdraw } = useUser();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,7 +34,7 @@ const MyInfo = props => {
     );
   }, [nickname]);
 
-  const handleEmailSubmit = e => {
+  const handleSubmitEmail = e => {
     e.preventDefault();
 
     if (!isValidEmail) {
@@ -40,17 +42,17 @@ const MyInfo = props => {
       return;
     }
 
-    requestEmailUpdate({ email }) //
-      .then(({ newEmail }) => {
-        showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_EMAILUPDATE);
-        changeEmail(newEmail);
+    requestUpdateEmail({ email })
+      .then(({ email }) => {
+        showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_UPDATE_EMAIL);
+        changeEmail(email);
       })
       .catch(error => {
         alert(handleError(error.code));
       });
   };
 
-  const handleNicknameSubmit = e => {
+  const handleSubmitNickname = e => {
     e.preventDefault();
 
     if (!isValidNickname) {
@@ -58,22 +60,23 @@ const MyInfo = props => {
       return;
     }
 
-    requestNicknameUpdate({ nickname }) //
-      .then(({ newNickname }) => {
-        showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_NICKNAMEUPDATE);
-        changeNickname(newNickname);
+    requestUpdateNickname({ nickname })
+      .then(({ nickname }) => {
+        showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_UPDATE_NICKNAME);
+        changeNickname(nickname);
       })
       .catch(error => {
         alert(handleError(error.code));
       });
   };
 
-  const handleWithdrawal = e => {
+  const handleWithdraw = e => {
     e.preventDefault();
 
-    requestWithdrawal() //
+    requestWithdrawal()
       .then(() => {
-        showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_WITHDRAWL);
+        withdraw();
+        showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_WITHDRAWAL);
         navigate(BROWSER_PATH.BASE);
       })
       .catch(error => {
@@ -83,7 +86,7 @@ const MyInfo = props => {
 
   return (
     <S.Container>
-      <S.WrapperEdit>
+      <S.Wrapper>
         <S.Title>프로필 수정</S.Title>
         <Inputs
           email={email}
@@ -92,13 +95,13 @@ const MyInfo = props => {
           nickname={nickname}
           changeNickname={changeNickname}
           isValidNickname={isValidNickname}
-          onEmailSubmit={handleEmailSubmit}
-          onNicknameSubmit={handleNicknameSubmit}
+          submitEmail={handleSubmitEmail}
+          submitNickname={handleSubmitNickname}
         />
-      </S.WrapperEdit>
-      <WithdrawalModal onWithdrawal={handleWithdrawal} />
+      </S.Wrapper>
+      <WithdrawalModal withdraw={handleWithdraw} />
     </S.Container>
   );
 };
 
-export default MyInfo;
+export default Info;

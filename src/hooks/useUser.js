@@ -24,7 +24,11 @@ const useUser = () => {
     setUser({ isLogin: false });
   };
 
-  return { isLogin, login, logout };
+  const withdraw = () => {
+    logout();
+  };
+
+  return { isLogin, login, logout, withdraw };
 };
 
 export default useUser;

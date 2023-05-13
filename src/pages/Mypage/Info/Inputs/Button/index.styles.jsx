@@ -7,7 +7,8 @@ const Button = styled.button`
   background-color: ${({ theme: { colors } }) => colors.GREEN_500};
   color: ${({ theme: { colors } }) => colors.GREEN_50};
   &:hover {
-    filter: brightness(1.1);
+    filter: brightness(1.2);
+    transition: all 0.5s ease-out;
   }
 `;
 

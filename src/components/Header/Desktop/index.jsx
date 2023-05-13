@@ -47,7 +47,7 @@ const Desktop = () => {
               <img src={writeSVG} alt="일기 작성 버튼" />
             </S.Button>
           </Link>
-          <Link to={BROWSER_PATH.MYPAGE.MAIN}>
+          <Link to={BROWSER_PATH.MYPAGE.BASE}>
             <S.Button type="button">
               <img src={userSVG} alt="사용자 버튼" />
             </S.Button>
