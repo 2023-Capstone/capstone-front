@@ -5,7 +5,7 @@ const CLIENT_MESSAGE = {
     SUCCESS_SIGNUP: '회원가입에 성공하였습니다. 자동 로그인합니다.',
     CONFIRM_LOGOUT: '로그아웃하시겠습니까?',
     SUCCESS_LOGOUT: '로그아웃했습니다.',
-    SUCCESS_UPATE_EMAIL: '이메일 수정에 성공하였습니다.',
+    SUCCESS_UPDATE_EMAIL: '이메일 수정에 성공하였습니다.',
     SUCCESS_UPDATE_NICKNAME: '닉네임 수정에 성공하였습니다',
     SUCCESS_WITHDRAWAL: '회원 탈퇴에 성공하였습니다.',
   },

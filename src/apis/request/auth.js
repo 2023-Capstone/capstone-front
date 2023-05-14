@@ -21,7 +21,7 @@ const requestLogout = () => {
 };
 
 const requestUpdateEmail = userData => {
-  return axiosWithRefreshToken
+  return axiosWithAccessToken
     .patch(API_PATH.UPDATE_EMAIL, userData)
     .then(response => response.data);
 };
@@ -33,7 +33,7 @@ const requestUpdateNickname = userData => {
 };
 
 const requestWithdrawal = () => {
-  return axiosWithAccessToken.delete(API_PATH.WITHDRAWAL);
+  return axiosWithRefreshToken.delete(API_PATH.WITHDRAWAL);
 };
 
 export {

@@ -11,14 +11,16 @@ import { useNavigate } from 'react-router-dom';
 import { BROWSER_PATH } from '@/constants/path';
 import useError from '@/hooks/useError';
 import useUser from '@/hooks/useUser';
+import useSnackbar from '@/hooks/useSnackbar';
 
 const Info = props => {
-  const [email, changeEmail] = useInput('');
-  const [nickname, changeNickname] = useInput('');
+  const [email, changeEmail, , replaceEmail] = useInput('');
+  const [nickname, changeNickname, , replaceNickname] = useInput('');
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [isValidNickname, setIsValidNickname] = useState(false);
   const handleError = useError();
   const { withdraw } = useUser();
+  const { showSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -45,7 +47,7 @@ const Info = props => {
     requestUpdateEmail({ email })
       .then(({ email }) => {
         showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_UPDATE_EMAIL);
-        changeEmail(email);
+        replaceEmail(email);
       })
       .catch(error => {
         alert(handleError(error.code));
@@ -63,7 +65,7 @@ const Info = props => {
     requestUpdateNickname({ nickname })
       .then(({ nickname }) => {
         showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_UPDATE_NICKNAME);
-        changeNickname(nickname);
+        replaceNickname(nickname);
       })
       .catch(error => {
         alert(handleError(error.code));
