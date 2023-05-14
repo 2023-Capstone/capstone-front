@@ -33,7 +33,7 @@ const requestUpdateNickname = userData => {
 };
 
 const requestWithdrawal = () => {
-  return axiosWithRefreshToken.delete(API_PATH.WITHDRAWAL);
+  return axiosWithAccessToken.delete(API_PATH.WITHDRAWAL);
 };
 
 export {
