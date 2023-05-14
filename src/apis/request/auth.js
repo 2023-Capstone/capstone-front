@@ -1,6 +1,9 @@
-import { axios, axiosWithRefreshToken } from '@/apis/axios';
+import {
+  axios,
+  axiosWithRefreshToken,
+  axiosWithAccessToken,
+} from '@/apis/axios';
 import { API_PATH } from '@/constants/path';
-import { axiosWithAccessToken } from '../axios';
 
 const requestLogin = code => {
   return axios.post(API_PATH.LOGIN, { code }).then(response => response.data);
