@@ -19,6 +19,7 @@ const CLIENT_MESSAGE = {
     FAIL_GET_WEATHER: '현재 날씨를 가져올 수 없습니다.',
     FAIL_UPDATE_EMAIL: '이메일 수정에 실패하였습니다.',
     FAIL_UPDATE_NICKNAME: '닉네임 수정에 실패하였습니다.',
+    INVAILD_INPUT: '입력값을 확인해주세요.',
   },
 };
 

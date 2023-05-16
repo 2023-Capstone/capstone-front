@@ -1,25 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import Inputs from '@/pages/Mypage/Info/Inputs';
+import { useEffect, useState } from 'react';
 import useInput from '@/hooks/useInput';
 import { RULE } from '@/constants/rule';
 import { CLIENT_MESSAGE } from '@/constants/message';
 import { requestUpdateEmail, requestUpdateNickname } from '@/apis/request/auth';
-import * as S from './index.styles';
-import WithdrawalModal from './WithdrawalModal';
 import { requestWithdrawal } from '@/apis/request/auth';
 import { useNavigate } from 'react-router-dom';
 import { BROWSER_PATH } from '@/constants/path';
 import useError from '@/hooks/useError';
 import useUser from '@/hooks/useUser';
 import useSnackbar from '@/hooks/useSnackbar';
+import Inputs from './Inputs';
+import WithdrawalModal from './WithdrawalModal';
+import * as S from './index.styles';
 
 const Info = props => {
-  const [email, changeEmail, , replaceEmail] = useInput('');
-  const [nickname, changeNickname, , replaceNickname] = useInput('');
+  const {
+    value: email,
+    onChangeValue: changeEmail,
+    dangerouslySetValue: dangerouslySetEmail,
+  } = useInput('');
+  const {
+    value: nickname,
+    onChangeValue: changeNickname,
+    dangerouslySetValue: dangerouslySetNickname,
+  } = useInput('');
+
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [isValidNickname, setIsValidNickname] = useState(false);
   const handleError = useError();
-  const { withdraw } = useUser();
+  const { logout } = useUser();
   const { showSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
@@ -40,14 +49,14 @@ const Info = props => {
     e.preventDefault();
 
     if (!isValidEmail) {
-      alert('입력값을 확인해주세요.');
+      alert(CLIENT_MESSAGE.ERROR.INVAILD_INPUT);
       return;
     }
 
     requestUpdateEmail({ email })
       .then(({ email }) => {
         showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_UPDATE_EMAIL);
-        replaceEmail(email);
+        dangerouslySetEmail(email);
       })
       .catch(error => {
         alert(handleError(error.code));
@@ -58,14 +67,14 @@ const Info = props => {
     e.preventDefault();
 
     if (!isValidNickname) {
-      alert('입력값을 확인해주세요.');
+      alert(CLIENT_MESSAGE.ERROR.INVAILD_INPUT);
       return;
     }
 
     requestUpdateNickname({ nickname })
       .then(({ nickname }) => {
         showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_UPDATE_NICKNAME);
-        replaceNickname(nickname);
+        dangerouslySetNickname(nickname);
       })
       .catch(error => {
         alert(handleError(error.code));
@@ -77,8 +86,9 @@ const Info = props => {
 
     requestWithdrawal()
       .then(() => {
-        withdraw();
+        logout();
         showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_WITHDRAWAL);
+
         navigate(BROWSER_PATH.BASE);
       })
       .catch(error => {

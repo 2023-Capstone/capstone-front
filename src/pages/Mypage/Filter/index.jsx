@@ -1,32 +1,35 @@
 import { Link } from 'react-router-dom';
 import * as S from './index.styles';
 import { BROWSER_PATH } from '@/constants/path';
-const Filter = ({ filter, filterChange }) => {
-  const changeFilterToInfo = () => {
-    filterChange(BROWSER_PATH.MYPAGE.INFO);
+
+const Filter = ({ filter, changeFilter }) => {
+  const { INFO, DIARY } = BROWSER_PATH.MYPAGE;
+
+  const changePageFilter = filter => () => {
+    changeFilter(filter);
   };
-  const changeFilterToDiary = () => {
-    filterChange(BROWSER_PATH.MYPAGE.DIARY);
-  };
+
   return (
     <S.Container>
       <li>
-        <S.Button
-          onClick={changeFilterToInfo}
-          className={filter === BROWSER_PATH.MYPAGE.INFO ? 'selected' : ''}
-        >
-          <Link to={`?t=${BROWSER_PATH.MYPAGE.INFO}`}>개인 정보</Link>
-        </S.Button>
+        <Link to={`?t=${INFO}`}>
+          <S.Button
+            onClick={changePageFilter(INFO)}
+            className={filter === INFO ? 'selected' : ''}
+          >
+            개인 정보
+          </S.Button>
+        </Link>
       </li>
       <li>
-        <S.Button
-          onClick={changeFilterToDiary}
-          className={filter === BROWSER_PATH.MYPAGE.DIARY ? 'selected' : ''}
-        >
-          <Link to={`?t=${BROWSER_PATH.MYPAGE.DIARY}`}>
+        <Link to={`?t=${DIARY}`}>
+          <S.Button
+            onClick={changePageFilter(DIARY)}
+            className={filter === DIARY ? 'selected' : ''}
+          >
             기분 별 일기 모아보기
-          </Link>
-        </S.Button>
+          </S.Button>
+        </Link>
       </li>
     </S.Container>
   );

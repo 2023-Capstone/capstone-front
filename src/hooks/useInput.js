@@ -11,11 +11,11 @@ const useInput = initValue => {
     setValue(initValue);
   };
 
-  const replaceValue = value => {
+  const dangerouslySetValue = value => {
     setValue(value);
   };
 
-  return [value, onChangeValue, resetValue, replaceValue];
+  return { value, onChangeValue, resetValue, dangerouslySetValue };
 };
 
 export default useInput;

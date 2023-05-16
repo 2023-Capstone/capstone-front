@@ -54,7 +54,7 @@ const authHandlers = [
     );
   }),
   rest.delete(`${baseURL}${API_PATH.WITHDRAWAL}`, (req, res, ctx) => {
-    return res(ctx.status(200));
+    return res(ctx.status(204));
   }),
 ];
 
