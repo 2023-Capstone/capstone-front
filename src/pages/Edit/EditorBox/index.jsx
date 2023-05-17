@@ -53,8 +53,8 @@ const EditorBox = () => {
     setBlocks(() => {
       const newBlocks = [...blocks];
       const index = blocks.findIndex(({ id }) => id === block.id);
+      console.log(index);
       newBlocks.splice(index, 1, block);
-
       return newBlocks;
     });
   };

@@ -6,20 +6,31 @@ const Container = styled.div`
   gap: 0.25rem;
   font-size: 1.25rem;
   border-top: ${({ dragOver }) => (dragOver ? '2px solid black' : 'none')};
-  .add {
-    cursor: pointer;
-  }
-  .drag {
-    cursor: grab;
-  }
   .contentEditable {
     height: fit-content;
+    width: 93%;
     cursor: text;
+    word-break: break-all;
     outline: 0px solid transparent;
   }
   .contentEditable:empty:before {
     content: attr(placeholder);
     opacity: 0.3;
   }
+
+  :hover .blockButton {
+    opacity: 1;
+  }
 `;
-export { Container };
+
+const BlockButton = styled.div`
+  opacity: 0;
+  transition: all 0.2s ease-in;
+  .add {
+    cursor: pointer;
+  }
+  .drag {
+    cursor: grab;
+  }
+`;
+export { Container, BlockButton };

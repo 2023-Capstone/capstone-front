@@ -29,6 +29,7 @@ const Blocks = styled.div`
   gap: 0.725rem;
   margin-left: 0.725rem;
   margin-top: 0.75rem;
+  margin-right: 1.25rem;
 `;
 
 export { Container, EditELementBox, Blocks };

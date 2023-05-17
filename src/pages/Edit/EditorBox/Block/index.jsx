@@ -19,23 +19,23 @@ const Block = ({
   onDragStart,
   onDropItem,
 }) => {
-  const [content, setContent] = useState('');
+  const content = useRef('');
   const [dragOver, setDragOver] = useState(false);
   const focusRef = useRef(null);
 
   useEffect(() => {
     if (!focusRef || current !== block.id) return;
     focusRef.current.focus();
+
     try {
       setEndContentEditable(focusRef.current);
     } catch (e) {
       console.error(`focusing error: ${e.message}`);
     }
-  }, [current, block, content]);
+  }, [current, block]);
 
   const onChangeContent = e => {
-    setContent(e.target.value);
-    editBlock({ ...block, data: { ...block.data, text: e.target.value } });
+    content.current = e.target.value;
   };
 
   const onClickNewBlock = () => {
@@ -43,16 +43,14 @@ const Block = ({
   };
 
   const controlBlock = e => {
-    if (e.key !== 'Backspace' && e.key !== 'Enter') return;
     switch (e.key) {
       case 'Enter':
         if (!e.shiftKey) return;
-        console.log('실행');
         e.preventDefault();
         addBlock(block.id);
         break;
       case 'Backspace':
-        if (content.length > 0) return;
+        if (content.current.length > 0 && content.current !== '<br>') return;
         e.preventDefault();
         removeBlock(block.id);
         break;
@@ -82,6 +80,11 @@ const Block = ({
     setDragOver(false);
   };
 
+  const saveContent = () => {
+    if (block.data.text === content.current) return;
+    editBlock({ ...block, data: { ...block.data, text: content.current } });
+  };
+
   return (
     <S.Container
       dragOver={dragOver}
@@ -93,15 +96,18 @@ const Block = ({
       onDrop={onDrop}
       onKeyDown={controlBlock}
     >
-      <AiOutlinePlus className="add" onClick={onClickNewBlock} />
-      <MdDragIndicator className="drag" />
+      <S.BlockButton className="blockButton">
+        <AiOutlinePlus className="add" onClick={onClickNewBlock} />
+        <MdDragIndicator className="drag" />
+      </S.BlockButton>
       <ContentEditable
         className="contentEditable"
         placeholder="내용을 입력해주세요"
-        html={block.data.text}
+        html={content.current}
         innerRef={focusRef}
         onChange={onChangeContent}
         onFocus={changeFocus(block.id)}
+        onBlur={saveContent}
       />
     </S.Container>
   );
