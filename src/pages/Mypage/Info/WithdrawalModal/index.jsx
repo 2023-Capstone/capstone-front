@@ -5,8 +5,8 @@ import Portal from '@/components/Portal';
 const WithdrawalModal = ({ withdraw }) => {
   const [isModal, setIsModal] = useState(false);
 
-  const handleModal = boolean => () => {
-    setIsModal(boolean);
+  const handleModal = isModal => () => {
+    setIsModal(isModal);
   };
 
   return (
@@ -19,8 +19,8 @@ const WithdrawalModal = ({ withdraw }) => {
               <p>정말로 회원 탈퇴 하시겠어요?</p>
               <p>탈퇴하시면, 다시 복구하실 수가 없어요!</p>
               <S.ButtonWrapper>
-                <S.WithdrawButton onClick={withdraw}>탈퇴하기</S.WithdrawButton>
-                <S.CancelButton onClick={handleModal(false)}>
+                <S.WithdrawButton type="button" onClick={withdraw}>탈퇴하기</S.WithdrawButton>
+                <S.CancelButton type="button" onClick={handleModal(false)}>
                   취소하기
                 </S.CancelButton>
               </S.ButtonWrapper>

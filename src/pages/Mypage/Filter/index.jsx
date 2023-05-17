@@ -14,6 +14,7 @@ const Filter = ({ filter, changeFilter }) => {
       <li>
         <Link to={`?t=${INFO}`}>
           <S.Button
+            type="button"
             onClick={changePageFilter(INFO)}
             className={filter === INFO ? 'selected' : ''}
           >
@@ -24,6 +25,7 @@ const Filter = ({ filter, changeFilter }) => {
       <li>
         <Link to={`?t=${DIARY}`}>
           <S.Button
+            type="button"
             onClick={changePageFilter(DIARY)}
             className={filter === DIARY ? 'selected' : ''}
           >

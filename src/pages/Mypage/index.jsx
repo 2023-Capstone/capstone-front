@@ -17,10 +17,6 @@ const Mypage = props => {
   }, []);
 
   useEffect(() => {
-    if (searchParams.get('t') === INFO) {
-      setFilter(INFO);
-      return;
-    }
     if (searchParams.get('t') === DIARY) {
       setFilter(DIARY);
       return;
