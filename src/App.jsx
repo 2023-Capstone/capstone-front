@@ -11,6 +11,7 @@ import Main from '@/pages/Main';
 import NotFound from '@/pages/NotFound';
 import OAuth from '@/pages/OAuth';
 import Signup from '@/pages/Signup';
+import Mypage from '@/pages/Mypage';
 import GlobalStyle from '@/styles/global';
 import theme from '@/styles/theme';
 
@@ -33,6 +34,10 @@ const App = () => {
               <Route path={BROWSER_PATH.SIGNUP} element={<Signup />} />
               <Route path={BROWSER_PATH.OAUTH} element={<OAuth />} />
               <Route path={BROWSER_PATH.EDIT} element={<Edit />} />
+<<<<<<< HEAD
+=======
+              <Route path={BROWSER_PATH.MYPAGE.BASE} element={<Mypage />} />
+>>>>>>> 412195e5a32154739595e528896021f7b2e6b5d2
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Layout>

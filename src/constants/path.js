@@ -4,6 +4,14 @@ const BROWSER_PATH = {
   SIGNUP: '/signup',
   OAUTH: '/oauth',
   EDIT: '/edit',
+<<<<<<< HEAD
+=======
+  MYPAGE: {
+    BASE: '/me',
+    INFO: 'info',
+    DIARY: 'diary',
+  },
+>>>>>>> 412195e5a32154739595e528896021f7b2e6b5d2
 };
 
 const API_PATH = {
@@ -11,6 +19,9 @@ const API_PATH = {
   SIGNUP: '/auth/signup',
   REISSUE: '/auth/reissue',
   LOGOUT: '/auth/logout',
+  UPDATE_EMAIL: '/auth/update/email',
+  UPDATE_NICKNAME: '/auth/update/nickname',
+  WITHDRAWAL: '/auth/withdrawal',
 };
 
 const KAKAO_REDIRECT_URI = `${window.location.origin}${BROWSER_PATH.OAUTH}`;
