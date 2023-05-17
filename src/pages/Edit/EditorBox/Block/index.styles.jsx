@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 
 const Container = styled.div`
-  margin: 0.725rem 0.75rem;
   display: flex;
+  width: 100%;
   gap: 0.25rem;
   font-size: 1.25rem;
   border-top: ${({ dragOver }) => (dragOver ? '2px solid black' : 'none')};
@@ -13,10 +13,13 @@ const Container = styled.div`
     cursor: grab;
   }
   .contentEditable {
+    height: fit-content;
     cursor: text;
+    outline: 0px solid transparent;
   }
   .contentEditable:empty:before {
     content: attr(placeholder);
+    opacity: 0.3;
   }
 `;
 export { Container };

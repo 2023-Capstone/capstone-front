@@ -6,14 +6,16 @@ import { MdDragIndicator } from 'react-icons/md';
 
 import * as S from './index.styles';
 
+import { setEndContentEditable } from '@/utils/contentEditable';
+
 const Block = ({
   block,
+  index,
   addBlock,
   removeBlock,
   editBlock,
   current,
-  changeCurrent,
-  index,
+  changeFocus,
   onDragStart,
   onDropItem,
 }) => {
@@ -21,10 +23,15 @@ const Block = ({
   const [dragOver, setDragOver] = useState(false);
   const focusRef = useRef(null);
 
-  // useEffect(() => {
-  //   if (!focusRef && current !== index) return;
-  //   focusRef.current.focus();
-  // }, [current, index]);
+  useEffect(() => {
+    if (!focusRef || current !== block.id) return;
+    focusRef.current.focus();
+    try {
+      setEndContentEditable(focusRef.current);
+    } catch (e) {
+      console.error(`focusing error: ${e.message}`);
+    }
+  }, [current, block, content]);
 
   const onChangeContent = e => {
     setContent(e.target.value);
@@ -35,16 +42,22 @@ const Block = ({
     addBlock(block.id);
   };
 
-  const handleBlock = e => {
-    if (e.key !== 'Enter' && e.key !== 'Backspace') return;
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      addBlock(block.id);
-    }
-    if (e.key === 'Backspace') {
-      if (content.length > 0) return;
-      e.preventDefault();
-      removeBlock(block.id);
+  const controlBlock = e => {
+    if (e.key !== 'Backspace' && e.key !== 'Enter') return;
+    switch (e.key) {
+      case 'Enter':
+        if (!e.shiftKey) return;
+        console.log('실행');
+        e.preventDefault();
+        addBlock(block.id);
+        break;
+      case 'Backspace':
+        if (content.length > 0) return;
+        e.preventDefault();
+        removeBlock(block.id);
+        break;
+      default:
+        return;
     }
   };
 
@@ -78,16 +91,17 @@ const Block = ({
       onDragEnter={onDragEnter}
       onDragLeave={onDragLeave}
       onDrop={onDrop}
-      onKeyDown={handleBlock}
+      onKeyDown={controlBlock}
     >
       <AiOutlinePlus className="add" onClick={onClickNewBlock} />
       <MdDragIndicator className="drag" />
       <ContentEditable
         className="contentEditable"
         placeholder="내용을 입력해주세요"
-        html={content}
-        onChange={onChangeContent}
+        html={block.data.text}
         innerRef={focusRef}
+        onChange={onChangeContent}
+        onFocus={changeFocus(block.id)}
       />
     </S.Container>
   );
