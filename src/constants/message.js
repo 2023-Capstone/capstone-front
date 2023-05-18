@@ -17,15 +17,9 @@ const CLIENT_MESSAGE = {
     NOT_INCLUDE_HASHTAG: '해당 해시태그 값이 존재하지 않습니다.',
     FAIL_GET_LOCATION: '위치 정보를 가져올 수 없습니다.',
     FAIL_GET_WEATHER: '현재 날씨를 가져올 수 없습니다.',
-<<<<<<< HEAD
-    FAIL_DELETE_BLOCK: '삭제하려는 블록을 찾을 수 없습니다.',
-    FAIL_EDIT_BLOCK: '수정하려는 블록을 찾을 수 없습니다.',
-    FAIL_FIND_BLOCK: '블록을 찾을 수 없습니다.',
-=======
     FAIL_UPDATE_EMAIL: '이메일 수정에 실패하였습니다.',
     FAIL_UPDATE_NICKNAME: '닉네임 수정에 실패하였습니다.',
     INVAILD_INPUT: '입력값을 확인해주세요.',
->>>>>>> 412195e5a32154739595e528896021f7b2e6b5d2
   },
 };
 

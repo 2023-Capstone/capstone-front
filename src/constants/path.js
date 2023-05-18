@@ -4,14 +4,11 @@ const BROWSER_PATH = {
   SIGNUP: '/signup',
   OAUTH: '/oauth',
   EDIT: '/edit',
-<<<<<<< HEAD
-=======
   MYPAGE: {
     BASE: '/me',
     INFO: 'info',
     DIARY: 'diary',
   },
->>>>>>> 412195e5a32154739595e528896021f7b2e6b5d2
 };
 
 const API_PATH = {

@@ -47,17 +47,11 @@ const Desktop = () => {
               <img src={writeSVG} alt="일기 작성 버튼" />
             </S.Button>
           </Link>
-<<<<<<< HEAD
-          <S.Button type="button">
-            <img src={userSVG} alt="사용자 버튼" />
-          </S.Button>
-=======
           <Link to={BROWSER_PATH.MYPAGE.BASE}>
             <S.Button type="button">
               <img src={userSVG} alt="사용자 버튼" />
             </S.Button>
           </Link>
->>>>>>> 412195e5a32154739595e528896021f7b2e6b5d2
           <S.Button type="button" onClick={confirmLogout}>
             <img src={logoutSVG} alt="로그아웃 버튼" />
           </S.Button>
