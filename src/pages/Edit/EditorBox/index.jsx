@@ -25,15 +25,19 @@ const EditorBox = () => {
   const controlBlock = action => id => {
     switch (action) {
       case 'add':
+        console.log('추가 실행');
         setBlocks(() => {
           const newBlocks = [...blocks];
           const index = blocks.findIndex(block => block.id === id);
           newBlocks.splice(index + 1, 0, { ...initBlock, id: Date.now() });
           setCurrent(newBlocks[index + 1].id);
+
           return newBlocks;
         });
         break;
+
       case 'remove':
+        console.log('삭제 실행');
         setBlocks(() => {
           if (blocks.length === 1) return blocks;
           const newBlocks = [...blocks];
@@ -41,19 +45,22 @@ const EditorBox = () => {
           newBlocks.splice(index, 1);
           if (index === newBlocks.length) setCurrent(newBlocks[index - 1].id);
           else setCurrent(newBlocks[index].id);
+
           return newBlocks;
         });
         break;
+
       default:
       // DO NOTHING
     }
   };
 
   const editBlock = block => {
+    console.log('편집 실행');
     setBlocks(() => {
       const newBlocks = [...blocks];
       const index = blocks.findIndex(({ id }) => id === block.id);
-      console.log(index);
+      if (index === -1) return newBlocks;
       newBlocks.splice(index, 1, block);
       return newBlocks;
     });

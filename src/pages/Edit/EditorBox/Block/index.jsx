@@ -6,6 +6,7 @@ import { MdDragIndicator } from 'react-icons/md';
 
 import * as S from './index.styles';
 
+import useDebounce from '@/hooks/useDebounce';
 import { setEndContentEditable } from '@/utils/contentEditable';
 
 const Block = ({
@@ -19,10 +20,10 @@ const Block = ({
   onDragStart,
   onDropItem,
 }) => {
-  const content = useRef('');
   const [dragOver, setDragOver] = useState(false);
+  const content = useRef('');
   const focusRef = useRef(null);
-
+  const debounce = useDebounce();
   useEffect(() => {
     if (!focusRef || current !== block.id) return;
     focusRef.current.focus();
@@ -34,8 +35,13 @@ const Block = ({
     }
   }, [current, block]);
 
+  const editDebounce = debounce(() => {
+    editBlock({ ...block, data: { ...block.data, text: content.current } });
+  }, 100);
+
   const onChangeContent = e => {
     content.current = e.target.value;
+    editDebounce();
   };
 
   const onClickNewBlock = () => {
@@ -80,11 +86,6 @@ const Block = ({
     setDragOver(false);
   };
 
-  const saveContent = () => {
-    if (block.data.text === content.current) return;
-    editBlock({ ...block, data: { ...block.data, text: content.current } });
-  };
-
   return (
     <S.Container
       dragOver={dragOver}
@@ -98,16 +99,16 @@ const Block = ({
     >
       <S.BlockButton className="blockButton">
         <AiOutlinePlus className="add" onClick={onClickNewBlock} />
-        <MdDragIndicator className="drag" />
+        <MdDragIndicator className="drag" onClick={changeFocus(block.id)} />
       </S.BlockButton>
       <ContentEditable
         className="contentEditable"
-        placeholder="내용을 입력해주세요"
+        placeholder="새로운 블럭은 Shift+Enter를 눌러주세요"
         html={content.current}
         innerRef={focusRef}
         onChange={onChangeContent}
         onFocus={changeFocus(block.id)}
-        onBlur={saveContent}
+        // onBlur={saveContent}
       />
     </S.Container>
   );

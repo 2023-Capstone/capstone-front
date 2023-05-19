@@ -1,4 +1,20 @@
+import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
+
+const showBtn = keyframes`
+  0%{
+    opacity: 0;
+  }
+  30%{
+    opacity: 1;
+  }
+  60%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+`;
 
 const Container = styled.div`
   display: flex;
@@ -24,6 +40,7 @@ const Container = styled.div`
 `;
 
 const BlockButton = styled.div`
+  animation: ${showBtn} 2s;
   opacity: 0;
   transition: all 0.2s ease-in;
   .add {
