@@ -24,10 +24,10 @@ const Block = ({
   const content = useRef('');
   const focusRef = useRef(null);
   const debounce = useDebounce();
+
   useEffect(() => {
     if (!focusRef || current !== block.id) return;
     focusRef.current.focus();
-
     try {
       setEndContentEditable(focusRef.current);
     } catch (e) {
@@ -55,11 +55,13 @@ const Block = ({
         e.preventDefault();
         addBlock(block.id);
         break;
+
       case 'Backspace':
         if (content.current.length > 0 && content.current !== '<br>') return;
         e.preventDefault();
         removeBlock(block.id);
         break;
+
       default:
         return;
     }
@@ -108,7 +110,6 @@ const Block = ({
         innerRef={focusRef}
         onChange={onChangeContent}
         onFocus={changeFocus(block.id)}
-        // onBlur={saveContent}
       />
     </S.Container>
   );

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useAtom } from 'jotai';
 
@@ -37,7 +37,6 @@ const EditorBox = () => {
         break;
 
       case 'remove':
-        console.log('삭제 실행');
         setBlocks(() => {
           if (blocks.length === 1) return blocks;
           const newBlocks = [...blocks];
@@ -56,12 +55,13 @@ const EditorBox = () => {
   };
 
   const editBlock = block => {
-    console.log('편집 실행');
     setBlocks(() => {
       const newBlocks = [...blocks];
       const index = blocks.findIndex(({ id }) => id === block.id);
+
       if (index === -1) return newBlocks;
       newBlocks.splice(index, 1, block);
+
       return newBlocks;
     });
   };
