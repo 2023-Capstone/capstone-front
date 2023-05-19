@@ -25,7 +25,6 @@ const EditorBox = () => {
   const controlBlock = action => id => {
     switch (action) {
       case 'add':
-        console.log('추가 실행');
         setBlocks(() => {
           const newBlocks = [...blocks];
           const index = blocks.findIndex(block => block.id === id);
@@ -68,7 +67,7 @@ const EditorBox = () => {
 
   const changeCurrent = id => () => setCurrent(id);
 
-  const onDragStart = index => setStartIndex(index);
+  const onDragStart = index => () => setStartIndex(index);
 
   const onDrop = dropIndex => {
     const dragItem = blocks[startIndex];

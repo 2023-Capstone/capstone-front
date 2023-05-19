@@ -67,36 +67,35 @@ const Block = ({
     }
   };
 
-  const onDragStartBlock = () => {
-    onDragStart(index);
-  };
-
-  const onDragEnter = () => {
-    setDragOver(true);
-  };
-
-  const onDragLeave = () => {
-    setDragOver(false);
-  };
-
-  const onDragOver = e => {
-    e.preventDefault();
-  };
-
-  const onDrop = () => {
-    onDropItem(index);
-    setDragOver(false);
+  const controlDrag = action => e => {
+    switch (action) {
+      case 'enter':
+        setDragOver(true);
+        break;
+      case 'leave':
+        setDragOver(false);
+        break;
+      case 'over':
+        e.preventDefault();
+        break;
+      case 'drop':
+        onDropItem(index);
+        setDragOver(false);
+        break;
+      default:
+      //none
+    }
   };
 
   return (
     <S.Container
       dragOver={dragOver}
       draggable
-      onDragStart={onDragStartBlock}
-      onDragOver={onDragOver}
-      onDragEnter={onDragEnter}
-      onDragLeave={onDragLeave}
-      onDrop={onDrop}
+      onDragStart={onDragStart(index)}
+      onDragOver={controlDrag('over')}
+      onDragEnter={controlDrag('enter')}
+      onDragLeave={controlDrag('leave')}
+      onDrop={controlDrag('drop')}
       onKeyDown={controlBlock}
     >
       <S.BlockButton className="blockButton">

@@ -21,7 +21,8 @@ const Container = styled.div`
   width: 100%;
   gap: 0.25rem;
   font-size: 1.25rem;
-  border-top: ${({ dragOver }) => (dragOver ? '2px solid black' : 'none')};
+  border-top: 2px solid ${({ dragOver }) => (dragOver ? 'black' : '#FFF')};
+
   .contentEditable {
     height: fit-content;
     width: 93%;
@@ -29,6 +30,7 @@ const Container = styled.div`
     word-break: break-all;
     outline: 0px solid transparent;
   }
+
   .contentEditable:empty:before {
     content: attr(placeholder);
     opacity: 0.3;
@@ -43,9 +45,11 @@ const BlockButton = styled.div`
   animation: ${showBtn} 2s;
   opacity: 0;
   transition: all 0.2s ease-in;
+
   .add {
     cursor: pointer;
   }
+
   .drag {
     cursor: grab;
   }
