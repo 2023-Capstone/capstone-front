@@ -5,17 +5,8 @@ import { useAtom } from 'jotai';
 import Block from './Block';
 import * as S from './index.styles';
 
+import { INITIAL_BLOCK } from '@/constants/block';
 import { blocksAtom } from '@/store/blocks';
-
-const initBlock = {
-  type: 'text',
-  data: {
-    text: '',
-    font: null,
-    sort: null,
-  },
-  id: 0,
-};
 
 const EditorBox = () => {
   const [current, setCurrent] = useState(0);
@@ -28,7 +19,7 @@ const EditorBox = () => {
         setBlocks(() => {
           const newBlocks = [...blocks];
           const index = blocks.findIndex(block => block.id === id);
-          newBlocks.splice(index + 1, 0, { ...initBlock, id: Date.now() });
+          newBlocks.splice(index + 1, 0, { ...INITIAL_BLOCK, id: Date.now() });
           setCurrent(newBlocks[index + 1].id);
 
           return newBlocks;

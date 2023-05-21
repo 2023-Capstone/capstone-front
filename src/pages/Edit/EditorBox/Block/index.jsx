@@ -30,9 +30,7 @@ const Block = ({
     focusRef.current.focus();
     try {
       setEndContentEditable(focusRef.current);
-    } catch (e) {
-      console.error(`focusing error: ${e.message}`);
-    }
+    } catch (e) {}
   }, [current, block]);
 
   const editDebounce = debounce(() => {
@@ -98,12 +96,12 @@ const Block = ({
       onDrop={controlDrag('drop')}
       onKeyDown={controlBlock}
     >
-      <S.BlockButton className="blockButton">
+      <S.BlockButtonWrap className="block-button">
         <AiOutlinePlus className="add" onClick={onClickNewBlock} />
         <MdDragIndicator className="drag" onClick={changeFocus(block.id)} />
-      </S.BlockButton>
+      </S.BlockButtonWrap>
       <ContentEditable
-        className="contentEditable"
+        className="content-editable"
         placeholder="새로운 블럭은 Shift+Enter를 눌러주세요"
         html={content.current}
         innerRef={focusRef}

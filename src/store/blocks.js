@@ -1,15 +1,7 @@
 import { atom } from 'jotai';
 
-//기본 블록인데 이거는 어디에다가 두면 좋을지?
-const initialBlock = {
-  type: 'text',
-  data: {
-    text: '',
-    font: null,
-    sort: null,
-  },
-};
+import { INITIAL_BLOCK } from '@/constants/block';
 
-const blocksAtom = atom([{ ...initialBlock, id: Date.now() }]);
+const blocksAtom = atom([{ ...INITIAL_BLOCK, id: Date.now() }]);
 
 export { blocksAtom };
