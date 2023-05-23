@@ -1,17 +1,17 @@
 import List from './List';
 import Pagination from './Pagination';
 
-const Posts = ({ list, pageNumber, currentPage, changeCurrentPage }) => {
+const Post = ({ list, pageNumber, currentPage, changeCurrentPage }) => {
   return (
     <>
+      <h1>현재 페이지:{currentPage + 1}</h1>
       <List list={list} />
       <Pagination
         pageNumber={pageNumber}
-        currentPage={currentPage}
         changeCurrentPage={changeCurrentPage}
       />
     </>
   );
 };
 
-export default Posts;
+export default Post;
