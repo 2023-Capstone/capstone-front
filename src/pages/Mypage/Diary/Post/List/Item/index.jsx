@@ -1,15 +1,12 @@
-const Item = ({ item }) => {
+const Item = ({ item, isThumbnail }) => {
   return (
     <li>
       <h1>{item.title}</h1>
-      {/* <div
-        style={{
-          width: '150px',
-          height: '200px',
-          backgroundColor: 'yellowGreen',
-        }}
-      ></div> */}
       <span>{item.createAt}</span>
+      <div className={isThumbnail ? 'show' : ''}>
+        <img src="@" alt="썸네일" />
+        이미지 보여줌:{isThumbnail ? 'show' : ''}
+      </div>
     </li>
   );
 };

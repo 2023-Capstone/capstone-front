@@ -14,6 +14,7 @@ const Diary = props => {
   const [list, setList] = useState([]);
   const [diaryNumber, setDairyNumber] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
+  const [isThumbnail, setIsThumbnail] = useState(false);
   const handleError = useError();
 
   useEffect(() => {
@@ -51,14 +52,24 @@ const Diary = props => {
   const changeCurrentPage = page => {
     setCurrentPage(page);
   };
+
+  const onThumbnail = isThumbnail => {
+    setIsThumbnail(isThumbnail);
+  };
+
   return (
     <>
-      <EmotionFilter filter={filter} changeFilter={changeFilter} />
+      <EmotionFilter
+        filter={filter}
+        changeFilter={changeFilter}
+        onThumbnail={onThumbnail}
+      />
       <Post
         list={list}
         pageNumber={Math.ceil(diaryNumber[filter] / LIMIT)}
         currentPage={currentPage}
         changeCurrentPage={changeCurrentPage}
+        isThumbnail={isThumbnail}
       />
     </>
   );
