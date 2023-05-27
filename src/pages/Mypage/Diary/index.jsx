@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import FilterDiary from './FilterDiary';
 import {
   requestDiaryByEmotion,
@@ -10,13 +10,13 @@ import * as S from './index.styles';
 
 const LIMIT = 10;
 
-const Diary = props => {
+const Diary = ({ toTop }) => {
   const [filter, setFilter] = useState('best');
   const [list, setList] = useState([]);
   const [diaryNumber, setDairyNumber] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
   const [isThumbnail, setIsThumbnail] = useState(false);
-
+  const midRef = useRef();
   const handleError = useError();
 
   useEffect(() => {
@@ -51,6 +51,10 @@ const Diary = props => {
     setCurrentPage(0);
   }, [filter]);
 
+  useEffect(() => {
+    toTop();
+  }, [currentPage]);
+
   const changeFilter = filter => {
     setFilter(filter);
   };
@@ -64,7 +68,7 @@ const Diary = props => {
   };
 
   return (
-    <S.Container>
+    <S.Container ref={midRef}>
       <FilterDiary
         filter={filter}
         changeFilter={changeFilter}

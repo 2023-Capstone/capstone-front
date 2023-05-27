@@ -1,5 +1,5 @@
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { BROWSER_PATH } from '@/constants/path';
 import Title from './Title';
 import Filter from './Filter';
@@ -11,6 +11,7 @@ const Mypage = props => {
   const [searchParams] = useSearchParams();
   const [filter, setFilter] = useState(searchParams.get('t'));
   const { INFO, DIARY } = BROWSER_PATH.MYPAGE;
+  const topRef = useRef();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,11 +30,18 @@ const Mypage = props => {
     setFilter(filter);
   };
 
+  const toTop = () => {
+    topRef.current.scrollIntoView();
+  };
+
   return (
     <S.Container>
+      <div ref={topRef}></div>
       <Title name="마이페이지" />
       <Filter filter={filter} changeFilter={changeFilter} />
-      <S.Wrapper>{filter === INFO ? <Info /> : <Diary />}</S.Wrapper>
+      <S.Wrapper>
+        {filter === INFO ? <Info /> : <Diary toTop={toTop} />}
+      </S.Wrapper>
     </S.Container>
   );
 };
