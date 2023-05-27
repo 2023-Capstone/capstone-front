@@ -19,8 +19,8 @@ const API_PATH = {
   UPDATE_EMAIL: '/auth/update/email',
   UPDATE_NICKNAME: '/auth/update/nickname',
   WITHDRAWAL: '/auth/withdrawal',
-  DIARY_BY_EMOTION: '/api/dairy/emotion',
-  DIARY_NUM_BY_EMOTION: '/api/dairy/emotion/num',
+  DIARY_BY_EMOTION: '/dairy/emotion',
+  DIARY_NUM_BY_EMOTION: '/dairy/emotion/num',
 };
 
 const KAKAO_REDIRECT_URI = `${window.location.origin}${BROWSER_PATH.OAUTH}`;
