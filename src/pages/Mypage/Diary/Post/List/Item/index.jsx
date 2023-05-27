@@ -2,23 +2,23 @@ import * as S from './index.style';
 
 const Item = ({ item, isThumbnail }) => {
   return (
-    <>
+    <S.Container>
       {!isThumbnail && (
-        <S.ContainerList>
+        <S.WrapperList>
           <S.Title>{item.title}</S.Title>
           <S.Date>{item.createAt}</S.Date>
-        </S.ContainerList>
+        </S.WrapperList>
       )}
       {isThumbnail && (
-        <S.ContainerGrid>
+        <S.WrapperGrid>
           <S.WrapperImg className={isThumbnail ? 'show' : ''}>
-            <img src="@" alt="썸네일" />
+            <img src={item.thumbnail} alt="썸네일" />
           </S.WrapperImg>
-          <S.Title>{item.title}</S.Title>
+          <S.Title grid={true}>{item.title}</S.Title>
           <S.Date>{item.createAt}</S.Date>
-        </S.ContainerGrid>
+        </S.WrapperGrid>
       )}
-    </>
+    </S.Container>
   );
 };
 

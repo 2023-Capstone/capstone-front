@@ -76,13 +76,15 @@ const Diary = ({ toTop }) => {
         isThumbnail={isThumbnail}
         changeCurrentPage={changeCurrentPage}
       />
-      <Post
-        list={list}
-        totalPage={Math.ceil(diaryNumber[filter] / LIMIT)}
-        currentPage={currentPage}
-        changeCurrentPage={changeCurrentPage}
-        isThumbnail={isThumbnail}
-      />
+      <S.Wrapper>
+        <Post
+          list={list}
+          totalPage={Math.ceil(diaryNumber[filter] / LIMIT)}
+          currentPage={currentPage}
+          changeCurrentPage={changeCurrentPage}
+          isThumbnail={isThumbnail}
+        />
+      </S.Wrapper>
     </S.Container>
   );
 };
