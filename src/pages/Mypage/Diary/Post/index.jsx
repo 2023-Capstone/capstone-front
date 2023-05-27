@@ -1,5 +1,6 @@
 import List from './List';
 import Pagination from './Pagination';
+import * as S from './index.style';
 
 const Post = ({
   list,
@@ -9,16 +10,16 @@ const Post = ({
   isThumbnail,
 }) => {
   return (
-    <>
-      <h1>현재 페이지:{currentPage + 1}</h1>
+    <S.Container>
       <List list={list} isThumbnail={isThumbnail} />
       {totalPage && (
         <Pagination
           totalPage={totalPage}
           changeCurrentPage={changeCurrentPage}
+          currentPage={currentPage}
         />
       )}
-    </>
+    </S.Container>
   );
 };
 

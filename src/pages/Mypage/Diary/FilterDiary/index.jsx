@@ -2,9 +2,19 @@ import { IoGrid } from 'react-icons/io5';
 import { FaList } from 'react-icons/fa';
 import * as S from './index.styles';
 
-const EmotionFilter = ({ filter, changeFilter, isThumbnail, onThumbnail }) => {
-  const changeDiaryFilter = filter => () => {
-    changeFilter(filter);
+const FilterDiary = ({
+  filter,
+  changeFilter,
+  isThumbnail,
+  onThumbnail,
+  changeCurrentPage,
+}) => {
+  const changeEmotionFilter = newfilter => () => {
+    if (newfilter === filter) {
+      changeCurrentPage(0);
+      return;
+    }
+    changeFilter(newfilter);
   };
 
   const showThumbnail = isThumbnail => () => {
@@ -17,35 +27,35 @@ const EmotionFilter = ({ filter, changeFilter, isThumbnail, onThumbnail }) => {
         <button
           type="button"
           className={filter === 'best' ? 'selected' : ''}
-          onClick={changeDiaryFilter('best')}
+          onClick={changeEmotionFilter('best')}
         >
           최상😁
         </button>
         <button
           type="button"
           className={filter === 'good' ? 'selected' : ''}
-          onClick={changeDiaryFilter('good')}
+          onClick={changeEmotionFilter('good')}
         >
           상😊
         </button>
         <button
           type="button"
           className={filter === 'normal' ? 'selected' : ''}
-          onClick={changeDiaryFilter('normal')}
+          onClick={changeEmotionFilter('normal')}
         >
           중🙂
         </button>
         <button
           type="button"
           className={filter === 'bad' ? 'selected' : ''}
-          onClick={changeDiaryFilter('bad')}
+          onClick={changeEmotionFilter('bad')}
         >
           하😑
         </button>
         <button
           type="button"
           className={filter === 'worst' ? 'selected' : ''}
-          onClick={changeDiaryFilter('worst')}
+          onClick={changeEmotionFilter('worst')}
         >
           최하😩
         </button>
@@ -70,4 +80,4 @@ const EmotionFilter = ({ filter, changeFilter, isThumbnail, onThumbnail }) => {
   );
 };
 
-export default EmotionFilter;
+export default FilterDiary;

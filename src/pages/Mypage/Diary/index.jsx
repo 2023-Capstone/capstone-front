@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import EmotionFilter from './EmotionFilter';
+import FilterDiary from './FilterDiary';
 import {
   requestDiaryByEmotion,
   requestDiaryNumByEmotion,
@@ -47,6 +47,10 @@ const Diary = props => {
       });
   }, [filter, currentPage]);
 
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [filter]);
+
   const changeFilter = filter => {
     setFilter(filter);
   };
@@ -61,11 +65,12 @@ const Diary = props => {
 
   return (
     <S.Container>
-      <EmotionFilter
+      <FilterDiary
         filter={filter}
         changeFilter={changeFilter}
         onThumbnail={onThumbnail}
         isThumbnail={isThumbnail}
+        changeCurrentPage={changeCurrentPage}
       />
       <Post
         list={list}

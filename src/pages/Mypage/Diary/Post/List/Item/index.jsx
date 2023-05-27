@@ -1,13 +1,24 @@
+import * as S from './index.style';
+
 const Item = ({ item, isThumbnail }) => {
   return (
-    <li>
-      <h1>{item.title}</h1>
-      <span>{item.createAt}</span>
-      <div className={isThumbnail ? 'show' : ''}>
-        <img src="@" alt="썸네일" />
-        이미지 보여줌:{isThumbnail ? 'show' : ''}
-      </div>
-    </li>
+    <>
+      {!isThumbnail && (
+        <S.ContainerList>
+          <S.Title>{item.title}</S.Title>
+          <S.Date>{item.createAt}</S.Date>
+        </S.ContainerList>
+      )}
+      {isThumbnail && (
+        <S.ContainerGrid>
+          <S.WrapperImg className={isThumbnail ? 'show' : ''}>
+            <img src="@" alt="썸네일" />
+          </S.WrapperImg>
+          <S.Title>{item.title}</S.Title>
+          <S.Date>{item.createAt}</S.Date>
+        </S.ContainerGrid>
+      )}
+    </>
   );
 };
 

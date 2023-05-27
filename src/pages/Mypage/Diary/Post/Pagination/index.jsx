@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
+import * as S from './index.styles';
 
 const LIMIT = 10;
 
-const Pagination = ({ totalPage, changeCurrentPage }) => {
+const Pagination = ({ totalPage, changeCurrentPage, currentPage }) => {
   const [totalButtonIndex, setTotalButtonIndex] = useState(
-    Math.ceil(totalPage / LIMIT),
+    Math.ceil(totalPage / LIMIT) - 1,
   );
-  const [currentButtonIndex, setCurrentButtonIndex] = useState(1);
+  const [currentButtonIndex, setCurrentButtonIndex] = useState(0);
 
   useEffect(() => {
-    setTotalButtonIndex(Math.ceil(totalPage / LIMIT));
-    setCurrentButtonIndex(1);
+    setTotalButtonIndex(Math.ceil(totalPage / LIMIT) - 1);
+    setCurrentButtonIndex(0);
   }, [totalPage]);
 
   const changePage = nextPage => () => {
@@ -18,19 +19,21 @@ const Pagination = ({ totalPage, changeCurrentPage }) => {
   };
 
   const handlePrev = () => {
-    if (currentButtonIndex <= 1) return;
+    if (currentButtonIndex <= 0) return;
     setCurrentButtonIndex(currentButtonIndex - 1);
+    changeCurrentPage(10 * (currentButtonIndex - 1));
   };
 
   const handleNext = () => {
     if (currentButtonIndex >= totalButtonIndex) return;
     setCurrentButtonIndex(currentButtonIndex + 1);
+    changeCurrentPage(10 * (currentButtonIndex + 1));
   };
 
   return (
-    <ul>
+    <S.Container>
       <li>
-        <button onClick={handlePrev}>&lt;</button>
+        <S.Button onClick={handlePrev}>&lt;</S.Button>
       </li>
       {Array(
         getButtonNumberPerPage(totalButtonIndex, currentButtonIndex, totalPage),
@@ -38,17 +41,24 @@ const Pagination = ({ totalPage, changeCurrentPage }) => {
         .fill()
         .map((_, idx) => (
           <li key={idx}>
-            <button onClick={changePage(idx + 10 * (currentButtonIndex - 1))}>
-              {idx + 1 + 10 * (currentButtonIndex - 1)}
-            </button>
+            <S.Button
+              className={
+                currentPage === getBtnIdx(idx, currentButtonIndex)
+                  ? 'selected'
+                  : ''
+              }
+              onClick={changePage(getBtnIdx(idx, currentButtonIndex))}
+            >
+              {getBtnIdx(idx, currentButtonIndex) + 1}
+            </S.Button>
           </li>
         ))}
       <li>
-        <button type="button" onClick={handleNext}>
+        <S.Button type="button" onClick={handleNext}>
           &gt;
-        </button>
+        </S.Button>
       </li>
-    </ul>
+    </S.Container>
   );
 };
 
@@ -60,6 +70,10 @@ const getButtonNumberPerPage = (
   if (totalButtonIndex <= 1) return totalPage;
   if (currentButtonIndex < totalButtonIndex) return LIMIT;
   return totalPage % LIMIT;
+};
+
+const getBtnIdx = (idx, currentButtonIndex) => {
+  return idx + 10 * currentButtonIndex;
 };
 
 export default Pagination;
