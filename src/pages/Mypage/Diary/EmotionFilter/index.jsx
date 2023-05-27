@@ -1,7 +1,8 @@
 import { IoGrid } from 'react-icons/io5';
 import { FaList } from 'react-icons/fa';
+import * as S from './index.styles';
 
-const EmotionFilter = ({ filter, changeFilter, onThumbnail }) => {
+const EmotionFilter = ({ filter, changeFilter, isThumbnail, onThumbnail }) => {
   const changeDiaryFilter = filter => () => {
     changeFilter(filter);
   };
@@ -9,34 +10,63 @@ const EmotionFilter = ({ filter, changeFilter, onThumbnail }) => {
   const showThumbnail = isThumbnail => () => {
     onThumbnail(isThumbnail);
   };
+
   return (
-    <>
-      <div>
-        <button type="button" onClick={changeDiaryFilter('best')}>
+    <S.Container>
+      <S.WrapperEmotion>
+        <button
+          type="button"
+          className={filter === 'best' ? 'selected' : ''}
+          onClick={changeDiaryFilter('best')}
+        >
           최상😁
         </button>
-        <button type="button" onClick={changeDiaryFilter('good')}>
+        <button
+          type="button"
+          className={filter === 'good' ? 'selected' : ''}
+          onClick={changeDiaryFilter('good')}
+        >
           상😊
         </button>
-        <button type="button" onClick={changeDiaryFilter('normal')}>
+        <button
+          type="button"
+          className={filter === 'normal' ? 'selected' : ''}
+          onClick={changeDiaryFilter('normal')}
+        >
           중🙂
         </button>
-        <button type="button" onClick={changeDiaryFilter('bad')}>
+        <button
+          type="button"
+          className={filter === 'bad' ? 'selected' : ''}
+          onClick={changeDiaryFilter('bad')}
+        >
           하😑
         </button>
-        <button type="button" onClick={changeDiaryFilter('worst')}>
+        <button
+          type="button"
+          className={filter === 'worst' ? 'selected' : ''}
+          onClick={changeDiaryFilter('worst')}
+        >
           최하😩
         </button>
-      </div>
-      <div>
-        <button type="button" onClick={showThumbnail(true)}>
+      </S.WrapperEmotion>
+      <S.WrapperDisplay>
+        <button
+          type="button"
+          className={isThumbnail ? 'selected' : ''}
+          onClick={showThumbnail(true)}
+        >
           <IoGrid />
         </button>
-        <button type="button" onClick={showThumbnail(false)}>
+        <button
+          type="button"
+          className={isThumbnail ? '' : 'selected'}
+          onClick={showThumbnail(false)}
+        >
           <FaList />
         </button>
-      </div>
-    </>
+      </S.WrapperDisplay>
+    </S.Container>
   );
 };
 

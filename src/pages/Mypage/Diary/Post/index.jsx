@@ -3,7 +3,7 @@ import Pagination from './Pagination';
 
 const Post = ({
   list,
-  pageNumber,
+  totalPage,
   currentPage,
   changeCurrentPage,
   isThumbnail,
@@ -12,10 +12,12 @@ const Post = ({
     <>
       <h1>현재 페이지:{currentPage + 1}</h1>
       <List list={list} isThumbnail={isThumbnail} />
-      <Pagination
-        pageNumber={pageNumber}
-        changeCurrentPage={changeCurrentPage}
-      />
+      {totalPage && (
+        <Pagination
+          totalPage={totalPage}
+          changeCurrentPage={changeCurrentPage}
+        />
+      )}
     </>
   );
 };

@@ -5,6 +5,7 @@ import Title from './Title';
 import Filter from './Filter';
 import Info from './Info';
 import Diary from './Diary';
+import * as S from './index.styles';
 
 const Mypage = props => {
   const [searchParams] = useSearchParams();
@@ -29,11 +30,11 @@ const Mypage = props => {
   };
 
   return (
-    <>
+    <S.Container>
       <Title name="마이페이지" />
       <Filter filter={filter} changeFilter={changeFilter} />
-      {filter === INFO ? <Info /> : <Diary />}
-    </>
+      <S.Wrapper>{filter === INFO ? <Info /> : <Diary />}</S.Wrapper>
+    </S.Container>
   );
 };
 

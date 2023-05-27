@@ -6,6 +6,7 @@ import {
 } from '@/apis/request/diary';
 import useError from '@/hooks/useError';
 import Post from './Post';
+import * as S from './index.styles';
 
 const LIMIT = 10;
 
@@ -15,6 +16,7 @@ const Diary = props => {
   const [diaryNumber, setDairyNumber] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
   const [isThumbnail, setIsThumbnail] = useState(false);
+
   const handleError = useError();
 
   useEffect(() => {
@@ -58,20 +60,21 @@ const Diary = props => {
   };
 
   return (
-    <>
+    <S.Container>
       <EmotionFilter
         filter={filter}
         changeFilter={changeFilter}
         onThumbnail={onThumbnail}
+        isThumbnail={isThumbnail}
       />
       <Post
         list={list}
-        pageNumber={Math.ceil(diaryNumber[filter] / LIMIT)}
+        totalPage={Math.ceil(diaryNumber[filter] / LIMIT)}
         currentPage={currentPage}
         changeCurrentPage={changeCurrentPage}
         isThumbnail={isThumbnail}
       />
-    </>
+    </S.Container>
   );
 };
 
