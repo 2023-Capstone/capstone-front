@@ -8,7 +8,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 const Wrapper = styled.div`
   flex: 1;
 `;
+
 export { Container, Wrapper };
