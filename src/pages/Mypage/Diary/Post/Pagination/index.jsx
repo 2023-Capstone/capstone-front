@@ -69,7 +69,8 @@ const getButtonCountPerPage = (
   currentButtonIndex,
   totalPage,
 ) => {
-  if (totalButtonIndex <= 1) return totalPage;
+  console.log(totalButtonIndex, currentButtonIndex, totalPage);
+  if (totalButtonIndex < 1) return totalPage;
   if (currentButtonIndex < totalButtonIndex) return LIMIT;
   return totalPage % LIMIT === 0 ? LIMIT : totalPage % LIMIT;
 };

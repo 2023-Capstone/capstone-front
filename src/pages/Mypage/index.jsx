@@ -15,7 +15,7 @@ const Mypage = props => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate(`?t=${DIARY}`);
+    navigate(`?t=${INFO}`);
   }, []);
 
   useEffect(() => {
