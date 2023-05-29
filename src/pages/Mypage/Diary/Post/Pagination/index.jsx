@@ -5,7 +5,7 @@ const LIMIT = 10;
 
 const Pagination = ({ totalPage, changeCurrentPage, currentPage }) => {
   const [totalButtonIndex, setTotalButtonIndex] = useState(
-    Math.ceil(totalPage / LIMIT) - 1,
+    Math.floor(totalPage / LIMIT),
   );
   const [currentButtonIndex, setCurrentButtonIndex] = useState(0);
 
