@@ -3,12 +3,7 @@ import * as S from './index.styles';
 
 const LIMIT = 10;
 
-const Pagination = ({
-  totalPage,
-  diaryCount,
-  changeCurrentPage,
-  currentPage,
-}) => {
+const Pagination = ({ totalPage, changeCurrentPage, currentPage }) => {
   const [totalButtonIndex, setTotalButtonIndex] = useState(
     Math.ceil(totalPage / LIMIT) - 1,
   );
@@ -25,12 +20,14 @@ const Pagination = ({
 
   const handlePrev = () => {
     if (currentButtonIndex <= 0) return;
+
     setCurrentButtonIndex(currentButtonIndex - 1);
     changeCurrentPage(10 * (currentButtonIndex - 1));
   };
 
   const handleNext = () => {
     if (currentButtonIndex >= totalButtonIndex) return;
+
     setCurrentButtonIndex(currentButtonIndex + 1);
     changeCurrentPage(10 * (currentButtonIndex + 1));
   };
@@ -38,15 +35,10 @@ const Pagination = ({
   return (
     <S.Container>
       <li>
-        <S.Button onClick={handlePrev}>&lt;</S.Button>
+        <S.Button onClick={handlePrev}>&lt;&lt;</S.Button>
       </li>
       {Array(
-        getButtonCountPerPage(
-          totalButtonIndex,
-          currentButtonIndex,
-          totalPage,
-          diaryCount,
-        ),
+        getButtonCountPerPage(totalButtonIndex, currentButtonIndex, totalPage),
       )
         .fill()
         .map((_, idx) => (
@@ -65,7 +57,7 @@ const Pagination = ({
         ))}
       <li>
         <S.Button type="button" onClick={handleNext}>
-          &gt;
+          &gt;&gt;
         </S.Button>
       </li>
     </S.Container>
@@ -76,12 +68,10 @@ const getButtonCountPerPage = (
   totalButtonIndex,
   currentButtonIndex,
   totalPage,
-  diaryCount,
 ) => {
-  console.log(totalButtonIndex, currentButtonIndex, totalPage);
   if (totalButtonIndex <= 1) return totalPage;
   if (currentButtonIndex < totalButtonIndex) return LIMIT;
-  return totalPage % LIMIT > 0 ? totalPage % LIMIT : 10;
+  return totalPage % LIMIT === 0 ? LIMIT : totalPage % LIMIT;
 };
 
 const getBtnIdx = (idx, currentButtonIndex) => {

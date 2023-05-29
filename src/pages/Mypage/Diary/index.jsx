@@ -80,7 +80,6 @@ const Diary = ({ toTop }) => {
         <Post
           list={list}
           totalPage={Math.ceil(totalDiaryCount[filter] / LIMIT)}
-          diaryCount={totalDiaryCount[filter]}
           currentPage={currentPage}
           changeCurrentPage={changeCurrentPage}
           isThumbnail={isThumbnail}
