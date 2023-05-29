@@ -11,6 +11,14 @@ const diaryCount = {
   worst: 5,
 };
 
+const diaryLastCount = {
+  best: 9,
+  good: 10,
+  normal: 9,
+  bad: 10,
+  worst: 5,
+};
+
 const diaryHandlers = [
   rest.get(
     `${baseURL}${API_PATH.DIARY_BY_EMOTION}?mood=mood&page=page&size=10`,
@@ -20,7 +28,11 @@ const diaryHandlers = [
       return res(
         ctx.status(200),
         ctx.json(
-          Array(10)
+          Array(
+            Math.ceil(diaryCount[mood] / 10) !== Number(page) + 1
+              ? 10
+              : diaryLastCount[mood],
+          )
             .fill()
             .map((_, idx) => ({
               id: idx,

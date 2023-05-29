@@ -5,6 +5,7 @@ import * as S from './index.style';
 const Post = ({
   list,
   totalPage,
+  diaryCount,
   currentPage,
   changeCurrentPage,
   isThumbnail,
@@ -15,6 +16,7 @@ const Post = ({
       {totalPage && (
         <Pagination
           totalPage={totalPage}
+          diaryCount={diaryCount}
           changeCurrentPage={changeCurrentPage}
           currentPage={currentPage}
         />

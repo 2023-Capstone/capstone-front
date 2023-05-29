@@ -3,7 +3,12 @@ import * as S from './index.styles';
 
 const LIMIT = 10;
 
-const Pagination = ({ totalPage, changeCurrentPage, currentPage }) => {
+const Pagination = ({
+  totalPage,
+  diaryCount,
+  changeCurrentPage,
+  currentPage,
+}) => {
   const [totalButtonIndex, setTotalButtonIndex] = useState(
     Math.ceil(totalPage / LIMIT) - 1,
   );
@@ -36,7 +41,12 @@ const Pagination = ({ totalPage, changeCurrentPage, currentPage }) => {
         <S.Button onClick={handlePrev}>&lt;</S.Button>
       </li>
       {Array(
-        getButtonNumberPerPage(totalButtonIndex, currentButtonIndex, totalPage),
+        getButtonCountPerPage(
+          totalButtonIndex,
+          currentButtonIndex,
+          totalPage,
+          diaryCount,
+        ),
       )
         .fill()
         .map((_, idx) => (
@@ -62,14 +72,16 @@ const Pagination = ({ totalPage, changeCurrentPage, currentPage }) => {
   );
 };
 
-const getButtonNumberPerPage = (
+const getButtonCountPerPage = (
   totalButtonIndex,
   currentButtonIndex,
   totalPage,
+  diaryCount,
 ) => {
+  console.log(totalButtonIndex, currentButtonIndex, totalPage);
   if (totalButtonIndex <= 1) return totalPage;
   if (currentButtonIndex < totalButtonIndex) return LIMIT;
-  return totalPage % LIMIT;
+  return totalPage % LIMIT > 0 ? totalPage % LIMIT : 10;
 };
 
 const getBtnIdx = (idx, currentButtonIndex) => {

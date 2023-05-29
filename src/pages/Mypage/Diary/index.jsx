@@ -14,7 +14,7 @@ const LIMIT = 10;
 const Diary = ({ toTop }) => {
   const [filter, setFilter] = useState(EMOTION.BEST);
   const [list, setList] = useState([]);
-  const [diaryNumber, setDairyNumber] = useState({});
+  const [totalDiaryCount, setTotalDiaryCount] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
   const [isThumbnail, setIsThumbnail] = useState(false);
   const handleError = useError();
@@ -30,7 +30,7 @@ const Diary = ({ toTop }) => {
 
     requestDiaryNumByEmotion()
       .then(data => {
-        setDairyNumber(data);
+        setTotalDiaryCount(data);
       })
       .catch(error => {
         alert(handleError(error.code));
@@ -79,7 +79,8 @@ const Diary = ({ toTop }) => {
       <S.Wrapper>
         <Post
           list={list}
-          totalPage={Math.ceil(diaryNumber[filter] / LIMIT)}
+          totalPage={Math.ceil(totalDiaryCount[filter] / LIMIT)}
+          diaryCount={totalDiaryCount[filter]}
           currentPage={currentPage}
           changeCurrentPage={changeCurrentPage}
           isThumbnail={isThumbnail}
