@@ -7,7 +7,7 @@ const Container = styled.li`
     background-color: ${({ theme: { colors } }) => colors.INPUT_BACKGROUND};
     border: 1px solid ${({ theme: { colors } }) => colors.GREEN_500};
     border-radius: 5px;
-    padding: 1rem;
+    padding: 0.5rem;
 
     display: flex;
     align-items: center;
@@ -50,6 +50,7 @@ const Title = styled.h1`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding: 0.5rem;
 
   ${props => {
     if (props.grid) return `margin-bottom: 0.3rem`;
