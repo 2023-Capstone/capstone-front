@@ -21,6 +21,7 @@ const API_PATH = {
   WITHDRAWAL: '/auth/withdrawal',
   DIARY_BY_EMOTION: '/dairy/emotion',
   DIARY_NUM_BY_EMOTION: '/dairy/emotion/num',
+  IMAGE: '/upload',
 };
 
 const KAKAO_REDIRECT_URI = `${window.location.origin}${BROWSER_PATH.OAUTH}`;

@@ -1,28 +1,53 @@
-import * as S from './index.styles';
+import { useState } from 'react';
 
-const EditorBox = () => {
+import { useAtom } from 'jotai';
+
+import Block from './Block';
+import * as S from './index.styles';
+import Navigator from './Navigator';
+
+import { blocksAtom } from '@/store/blocks';
+
+const EditorBox = ({ font, changeFont }) => {
+  const [dragStartIdx, setDragStartIdx] = useState(0);
+
+  const [blocks, setBlocks] = useAtom(blocksAtom);
+
+  const dragStart = idx => () => {
+    setDragStartIdx(idx);
+  };
+
+  const onDrop = dropIdx => {
+    const dragItem = blocks[dragStartIdx];
+    const list = [...blocks];
+    list.splice(dragStartIdx, 1);
+
+    const targetIdx = dragStartIdx < dropIdx ? dropIdx - 1 : dropIdx;
+    const newListData =
+      dropIdx >= blocks.length - 1
+        ? [...list, dragItem]
+        : [
+            ...list.slice(0, targetIdx),
+            dragItem,
+            ...list.slice(targetIdx, list.length),
+          ];
+    setBlocks(newListData);
+  };
+
   return (
     <S.Container>
-      <S.EditELementBox>
-        <p>Sans-serif</p>
-        <p>H</p>
-        <p>
-          <b>B</b>
-        </p>
-        <p>
-          <i>I</i>
-        </p>
-        <p>
-          <ins>U</ins>
-        </p>
-        <p>
-          <strike>S</strike>
-        </p>
-        <p>{'< >'}</p>
-        <p>줄간격</p>
-        <p>이미지</p>
-      </S.EditELementBox>
-      일단 보이기만 이렇게 해놨어용 이쪽은 기능 아예 안 넣었어요
+      <Navigator changeFont={changeFont} />
+      <S.Blocks className={font}>
+        {blocks.map((block, index) => (
+          <Block
+            block={block}
+            index={index}
+            dragStart={dragStart}
+            onDropItem={onDrop}
+            key={`block-${block.id}`}
+          />
+        ))}
+      </S.Blocks>
     </S.Container>
   );
 };

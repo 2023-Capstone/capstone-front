@@ -1,6 +1,10 @@
-import { axiosWithAccessToken } from '@/apis/axios';
-
+import { axios, axiosWithAccessToken } from '@/apis/axios';
 import { API_PATH } from '@/constants/path';
+
+const requestUploadImg = formData => {
+  return axios.post(API_PATH.IMAGE, formData);
+};
+
 const requestDiaryByEmotion = params => {
   return axiosWithAccessToken
     .get(
@@ -15,4 +19,4 @@ const requestDiaryNumByEmotion = () => {
     .then(response => response.data);
 };
 
-export { requestDiaryByEmotion, requestDiaryNumByEmotion };
+export { requestUploadImg, requestDiaryByEmotion, requestDiaryNumByEmotion };
