@@ -7,8 +7,16 @@ const diaryCount = {
   best: 299,
   good: 30,
   normal: 19,
-  bad: 100,
+  bad: 102,
   worst: 5,
+};
+
+const diaryLastCount = {
+  best: diaryCount['best'] % 10 === 0 ? 10 : diaryCount['best'] % 10,
+  good: diaryCount['good'] % 10 === 0 ? 10 : diaryCount['good'] % 10,
+  normal: diaryCount['normal'] % 10 === 0 ? 10 : diaryCount['normal'] % 10,
+  bad: diaryCount['bad'] % 10 === 0 ? 10 : diaryCount['bad'] % 10,
+  worst: diaryCount['worst'] % 10 === 0 ? 10 : diaryCount['worst'] % 10,
 };
 
 const diaryHandlers = [
@@ -20,7 +28,11 @@ const diaryHandlers = [
       return res(
         ctx.status(200),
         ctx.json(
-          Array(10)
+          Array(
+            Math.ceil(diaryCount[mood] / 10) !== Number(page) + 1
+              ? 10
+              : diaryLastCount[mood],
+          )
             .fill()
             .map((_, idx) => ({
               id: idx,

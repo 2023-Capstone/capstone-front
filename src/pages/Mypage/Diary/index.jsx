@@ -1,26 +1,26 @@
 import { useEffect, useRef, useState } from 'react';
-import FilterDiary from './FilterDiary';
 import {
   requestDiaryByEmotion,
   requestDiaryNumByEmotion,
 } from '@/apis/request/diary';
+import { EMOTION } from '@/constants/diary';
 import useError from '@/hooks/useError';
+import FilterDiary from './FilterDiary';
 import Post from './Post';
 import * as S from './index.styles';
 
 const LIMIT = 10;
 
 const Diary = ({ toTop }) => {
-  const [filter, setFilter] = useState('best');
+  const [filter, setFilter] = useState(EMOTION.BEST);
   const [list, setList] = useState([]);
-  const [diaryNumber, setDairyNumber] = useState({});
+  const [totalDiaryCount, setTotalDiaryCount] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
   const [isThumbnail, setIsThumbnail] = useState(false);
-  const midRef = useRef();
   const handleError = useError();
 
   useEffect(() => {
-    requestDiaryByEmotion({ mood: 'best', page: 0, size: LIMIT })
+    requestDiaryByEmotion({ mood: EMOTION.BEST, page: 0, size: LIMIT })
       .then(data => {
         setList(data);
       })
@@ -30,7 +30,7 @@ const Diary = ({ toTop }) => {
 
     requestDiaryNumByEmotion()
       .then(data => {
-        setDairyNumber(data);
+        setTotalDiaryCount(data);
       })
       .catch(error => {
         alert(handleError(error.code));
@@ -68,7 +68,7 @@ const Diary = ({ toTop }) => {
   };
 
   return (
-    <S.Container ref={midRef}>
+    <S.Container>
       <FilterDiary
         filter={filter}
         changeFilter={changeFilter}
@@ -79,7 +79,7 @@ const Diary = ({ toTop }) => {
       <S.Wrapper>
         <Post
           list={list}
-          totalPage={Math.ceil(diaryNumber[filter] / LIMIT)}
+          totalPage={Math.ceil(totalDiaryCount[filter] / LIMIT)}
           currentPage={currentPage}
           changeCurrentPage={changeCurrentPage}
           isThumbnail={isThumbnail}
