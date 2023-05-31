@@ -13,10 +13,8 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 const LIMIT = 10;
 
 const Diary = ({ toTop }) => {
-  const [filter, setFilter] = useState(EMOTION.BEST);
   const [list, setList] = useState([]);
   const [totalDiaryCount, setTotalDiaryCount] = useState({});
-  const [currentPage, setCurrentPage] = useState(0);
   const [isThumbnail, setIsThumbnail] = useState(false);
   const handleError = useError();
   const navigate = useNavigate();
@@ -29,6 +27,7 @@ const Diary = ({ toTop }) => {
       page: 0,
       size: LIMIT,
     });
+
     requestDiaryNumByEmotion()
       .then(data => {
         setTotalDiaryCount(data);
@@ -39,8 +38,6 @@ const Diary = ({ toTop }) => {
   }, []);
 
   useEffect(() => {
-    if (!searchParams.get('mood')) return;
-
     requestDiaryByEmotion({
       mood: searchParams.get('mood'),
       page: searchParams.get('page'),
@@ -55,29 +52,19 @@ const Diary = ({ toTop }) => {
   }, [searchParams.get('mood'), searchParams.get('page')]);
 
   useEffect(() => {
+    if (!searchParams.get('mood')) return;
+
     setSearchParams({
       t: 'diary',
-      mood: filter,
-      page: currentPage,
+      mood: searchParams.get('mood'),
+      page: 0,
       size: LIMIT,
     });
-  }, [filter, currentPage]);
-
-  useEffect(() => {
-    setCurrentPage(0);
   }, [searchParams.get('mood')]);
 
   useEffect(() => {
     toTop();
   }, [searchParams.get('page')]);
-
-  const changeFilter = filter => {
-    setFilter(filter);
-  };
-
-  const changeCurrentPage = page => {
-    setCurrentPage(page);
-  };
 
   const onThumbnail = isThumbnail => {
     setIsThumbnail(isThumbnail);
@@ -86,18 +73,16 @@ const Diary = ({ toTop }) => {
   return (
     <S.Container>
       <FilterDiary
-        filter={filter}
-        changeFilter={changeFilter}
         onThumbnail={onThumbnail}
         isThumbnail={isThumbnail}
-        changeCurrentPage={changeCurrentPage}
+        LIMIT={LIMIT}
       />
       <S.Wrapper>
         <Post
           list={list}
-          totalPage={Math.ceil(totalDiaryCount[filter] / LIMIT)}
-          currentPage={currentPage}
-          changeCurrentPage={changeCurrentPage}
+          totalPage={Math.ceil(
+            totalDiaryCount[searchParams.get('mood')] / LIMIT,
+          )}
           isThumbnail={isThumbnail}
         />
       </S.Wrapper>

@@ -2,21 +2,10 @@ import { IoGrid } from 'react-icons/io5';
 import { FaList } from 'react-icons/fa';
 import * as S from './index.styles';
 import { EMOTION } from '@/constants/diary';
+import { Link, useSearchParams } from 'react-router-dom';
 
-const FilterDiary = ({
-  filter,
-  changeFilter,
-  isThumbnail,
-  onThumbnail,
-  changeCurrentPage,
-}) => {
-  const changeEmotionFilter = newfilter => () => {
-    if (newfilter === filter) {
-      changeCurrentPage(0);
-      return;
-    }
-    changeFilter(newfilter);
-  };
+const FilterDiary = ({ isThumbnail, onThumbnail, LIMIT }) => {
+  const [searchParams] = useSearchParams();
 
   const showThumbnail = isThumbnail => () => {
     onThumbnail(isThumbnail);
@@ -25,41 +14,76 @@ const FilterDiary = ({
   return (
     <S.Container>
       <S.WrapperEmotion>
-        <button
-          type="button"
-          className={filter === EMOTION.BEST ? 'selected' : ''}
-          onClick={changeEmotionFilter(EMOTION.BEST)}
+        <Link
+          to={`?t=diary&mood=${EMOTION.BEST}&page=${searchParams.get(
+            'page',
+          )}&size=${LIMIT}`}
         >
-          최상😁
-        </button>
-        <button
-          type="button"
-          className={filter === EMOTION.GOOD ? 'selected' : ''}
-          onClick={changeEmotionFilter(EMOTION.GOOD)}
+          <button
+            type="button"
+            className={
+              searchParams.get('mood') === EMOTION.BEST ? 'selected' : ''
+            }
+          >
+            최상😁
+          </button>
+        </Link>
+        <Link
+          to={`?t=diary&mood=${EMOTION.GOOD}&page=${searchParams.get(
+            'page',
+          )}&size=${LIMIT}`}
         >
-          상😊
-        </button>
-        <button
-          type="button"
-          className={filter === EMOTION.NORMAL ? 'selected' : ''}
-          onClick={changeEmotionFilter(EMOTION.NORMAL)}
+          <button
+            type="button"
+            className={
+              searchParams.get('mood') === EMOTION.GOOD ? 'selected' : ''
+            }
+          >
+            상😊
+          </button>
+        </Link>
+        <Link
+          to={`?t=diary&mood=${EMOTION.NORMAL}&page=${searchParams.get(
+            'page',
+          )}&size=${LIMIT}`}
         >
-          중🙂
-        </button>
-        <button
-          type="button"
-          className={filter === EMOTION.BAD ? 'selected' : ''}
-          onClick={changeEmotionFilter(EMOTION.BAD)}
+          <button
+            type="button"
+            className={
+              searchParams.get('mood') === EMOTION.NORMAL ? 'selected' : ''
+            }
+          >
+            중🙂
+          </button>
+        </Link>
+        <Link
+          to={`?t=diary&mood=${EMOTION.BAD}&page=${searchParams.get(
+            'page',
+          )}&size=${LIMIT}`}
         >
-          하😑
-        </button>
-        <button
-          type="button"
-          className={filter === EMOTION.WORST ? 'selected' : ''}
-          onClick={changeEmotionFilter(EMOTION.WORST)}
+          <button
+            type="button"
+            className={
+              searchParams.get('mood') === EMOTION.BAD ? 'selected' : ''
+            }
+          >
+            하😑
+          </button>
+        </Link>
+        <Link
+          to={`?t=diary&mood=${EMOTION.WORST}&page=${searchParams.get(
+            'page',
+          )}&size=${LIMIT}`}
         >
-          최하😩
-        </button>
+          <button
+            type="button"
+            className={
+              searchParams.get('mood') === EMOTION.WORST ? 'selected' : ''
+            }
+          >
+            최하😩
+          </button>
+        </Link>
       </S.WrapperEmotion>
       <S.WrapperDisplay>
         <button

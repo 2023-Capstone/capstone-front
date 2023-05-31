@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import * as S from './index.styles';
+import { Link, useSearchParams } from 'react-router-dom';
 
 const LIMIT = 10;
 
-const Pagination = ({ totalPage, changeCurrentPage, currentPage }) => {
+const Pagination = ({ totalPage }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [totalButtonIndex, setTotalButtonIndex] = useState(
     Math.floor(totalPage / LIMIT),
   );
@@ -14,22 +17,36 @@ const Pagination = ({ totalPage, changeCurrentPage, currentPage }) => {
     setCurrentButtonIndex(0);
   }, [totalPage]);
 
-  const changePage = nextPage => () => {
-    changeCurrentPage(nextPage);
-  };
+  useEffect(() => {
+    setCurrentButtonIndex(Math.floor(Number(searchParams.get('page')) / LIMIT));
+  }, [searchParams.get('page')]);
 
   const handlePrev = () => {
     if (currentButtonIndex <= 0) return;
 
-    setCurrentButtonIndex(currentButtonIndex - 1);
-    changeCurrentPage(10 * (currentButtonIndex - 1));
+    const prevIdx = currentButtonIndex - 1;
+
+    setCurrentButtonIndex(prevIdx);
+    setSearchParams({
+      t: 'diary',
+      mood: searchParams.get('mood'),
+      page: 10 * prevIdx,
+      size: LIMIT,
+    });
   };
 
   const handleNext = () => {
     if (currentButtonIndex >= totalButtonIndex) return;
 
-    setCurrentButtonIndex(currentButtonIndex + 1);
-    changeCurrentPage(10 * (currentButtonIndex + 1));
+    const nextIdx = currentButtonIndex + 1;
+
+    setCurrentButtonIndex(nextIdx);
+    setSearchParams({
+      t: 'diary',
+      mood: searchParams.get('mood'),
+      page: 10 * nextIdx,
+      size: LIMIT,
+    });
   };
 
   return (
@@ -43,16 +60,23 @@ const Pagination = ({ totalPage, changeCurrentPage, currentPage }) => {
         .fill()
         .map((_, idx) => (
           <li key={idx}>
-            <S.Button
-              className={
-                currentPage === getBtnIdx(idx, currentButtonIndex)
-                  ? 'selected'
-                  : ''
-              }
-              onClick={changePage(getBtnIdx(idx, currentButtonIndex))}
+            <Link
+              to={`?t=diary&mood=${searchParams.get('mood')}&page=${getBtnIdx(
+                idx,
+                currentButtonIndex,
+              )}&size=${LIMIT}`}
             >
-              {getBtnIdx(idx, currentButtonIndex) + 1}
-            </S.Button>
+              <S.Button
+                className={
+                  Number(searchParams.get('page')) ===
+                  getBtnIdx(idx, currentButtonIndex)
+                    ? 'selected'
+                    : ''
+                }
+              >
+                {getBtnIdx(idx, currentButtonIndex) + 1}
+              </S.Button>
+            </Link>
           </li>
         ))}
       <li>
