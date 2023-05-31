@@ -11,7 +11,7 @@ const Item = ({ item, isThumbnail }) => {
       )}
       {isThumbnail && (
         <S.WrapperGrid>
-          <S.WrapperImg className={isThumbnail ? 'show' : ''}>
+          <S.WrapperImg>
             <img src={item.thumbnail} alt="썸네일" />
           </S.WrapperImg>
           <S.Title grid={true}>{item.title}</S.Title>
