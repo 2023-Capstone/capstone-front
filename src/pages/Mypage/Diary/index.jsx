@@ -18,6 +18,7 @@ const Diary = ({ toTop }) => {
   const [mood, setMood] = useState(EMOTION.BEST);
   const [page, setPage] = useState(0);
   const [isThumbnail, setIsThumbnail] = useState(false);
+
   const handleError = useError();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -87,7 +88,6 @@ const Diary = ({ toTop }) => {
         LinkTo={LinkTo}
         onThumbnail={onThumbnail}
         isThumbnail={isThumbnail}
-        LIMIT={LIMIT}
         mood={mood}
         page={page}
       />

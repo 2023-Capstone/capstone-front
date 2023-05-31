@@ -1,16 +1,9 @@
+import { EMOTION } from '@/constants/diary';
 import { IoGrid } from 'react-icons/io5';
 import { FaList } from 'react-icons/fa';
 import * as S from './index.styles';
-import { EMOTION } from '@/constants/diary';
 
-const FilterDiary = ({
-  LinkTo,
-  isThumbnail,
-  onThumbnail,
-  LIMIT,
-  mood,
-  page,
-}) => {
+const FilterDiary = ({ LinkTo, isThumbnail, onThumbnail, mood, page }) => {
   const showThumbnail = isThumbnail => () => {
     onThumbnail(isThumbnail);
   };
