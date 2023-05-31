@@ -8,7 +8,7 @@ import useError from '@/hooks/useError';
 import FilterDiary from './FilterDiary';
 import Post from './Post';
 import * as S from './index.styles';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const LIMIT = 10;
 
@@ -19,9 +19,16 @@ const Diary = ({ toTop }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [isThumbnail, setIsThumbnail] = useState(false);
   const handleError = useError();
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
+    setSearchParams({
+      t: 'diary',
+      mood: EMOTION.BEST,
+      page: 0,
+      size: LIMIT,
+    });
     requestDiaryNumByEmotion()
       .then(data => {
         setTotalDiaryCount(data);
@@ -32,39 +39,36 @@ const Diary = ({ toTop }) => {
   }, []);
 
   useEffect(() => {
-    setSearchParams({
-      t: 'diary',
-      mood: filter,
-      page: currentPage,
+    if (!searchParams.get('mood')) return;
+
+    requestDiaryByEmotion({
+      mood: searchParams.get('mood'),
+      page: searchParams.get('page'),
       size: LIMIT,
-    });
-    requestDiaryByEmotion()
+    })
       .then(data => {
         setList(data);
       })
       .catch(error => {
         alert(handleError(error.code));
       });
+  }, [searchParams.get('mood'), searchParams.get('page')]);
+
+  useEffect(() => {
+    setSearchParams({
+      t: 'diary',
+      mood: filter,
+      page: currentPage,
+      size: LIMIT,
+    });
   }, [filter, currentPage]);
 
   useEffect(() => {
     setCurrentPage(0);
-  }, [filter]);
-
-  useEffect(() => {
-    toTop();
-  }, [currentPage]);
-
-  useEffect(() => {
-    if (!searchParams.get('mood')) return;
-
-    setFilter(searchParams.get('mood'));
   }, [searchParams.get('mood')]);
 
   useEffect(() => {
-    if (!searchParams.get('page')) return;
-
-    setCurrentPage(searchParams.get('page'));
+    toTop();
   }, [searchParams.get('page')]);
 
   const changeFilter = filter => {

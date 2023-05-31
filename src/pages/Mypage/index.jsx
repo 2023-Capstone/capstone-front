@@ -26,10 +26,6 @@ const Mypage = props => {
     setFilter(INFO);
   }, [searchParams.get('t')]);
 
-  const changeFilter = filter => {
-    setFilter(filter);
-  };
-
   const toTop = () => {
     topRef.current.scrollIntoView();
   };
@@ -38,7 +34,7 @@ const Mypage = props => {
     <S.Container>
       <div ref={topRef}></div>
       <Title name="마이페이지" />
-      <Filter filter={filter} changeFilter={changeFilter} />
+      <Filter filter={filter} />
       <S.Wrapper>
         {filter === INFO ? <Info /> : <Diary toTop={toTop} />}
       </S.Wrapper>
