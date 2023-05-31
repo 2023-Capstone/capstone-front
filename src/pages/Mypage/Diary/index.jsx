@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   requestDiaryByEmotion,
   requestDiaryNumByEmotion,
@@ -8,25 +8,21 @@ import useError from '@/hooks/useError';
 import FilterDiary from './FilterDiary';
 import Post from './Post';
 import * as S from './index.styles';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 const LIMIT = 10;
 
 const Diary = ({ toTop }) => {
   const [list, setList] = useState([]);
   const [totalDiaryCount, setTotalDiaryCount] = useState({});
+  const [mood, setMood] = useState(EMOTION.BEST);
+  const [page, setPage] = useState(0);
   const [isThumbnail, setIsThumbnail] = useState(false);
   const handleError = useError();
-  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    setSearchParams({
-      t: 'diary',
-      mood: EMOTION.BEST,
-      page: 0,
-      size: LIMIT,
-    });
+    setParams(EMOTION.BEST, 0);
 
     requestDiaryNumByEmotion()
       .then(data => {
@@ -54,36 +50,56 @@ const Diary = ({ toTop }) => {
   useEffect(() => {
     if (!searchParams.get('mood')) return;
 
-    setSearchParams({
-      t: 'diary',
-      mood: searchParams.get('mood'),
-      page: 0,
-      size: LIMIT,
-    });
+    setMood(searchParams.get('mood'));
+    setParams(searchParams.get('mood'), 0);
   }, [searchParams.get('mood')]);
 
   useEffect(() => {
     toTop();
+
+    setPage(searchParams.get('page'));
   }, [searchParams.get('page')]);
 
   const onThumbnail = isThumbnail => {
     setIsThumbnail(isThumbnail);
   };
 
+  const setParams = (mood, page) => {
+    setSearchParams({
+      t: 'diary',
+      mood,
+      page,
+      size: LIMIT,
+    });
+  };
+
+  const LinkTo = ({ children, mood, page }) => {
+    return (
+      <Link to={`?t=diary&mood=${mood}&page=${page}&size=${LIMIT}`}>
+        {children}
+      </Link>
+    );
+  };
+
   return (
     <S.Container>
       <FilterDiary
+        LinkTo={LinkTo}
         onThumbnail={onThumbnail}
         isThumbnail={isThumbnail}
         LIMIT={LIMIT}
+        mood={mood}
+        page={page}
       />
       <S.Wrapper>
         <Post
           list={list}
-          totalPage={Math.ceil(
-            totalDiaryCount[searchParams.get('mood')] / LIMIT,
-          )}
+          totalPage={Math.ceil(totalDiaryCount[mood] / LIMIT)}
           isThumbnail={isThumbnail}
+          mood={mood}
+          page={page}
+          setParams={setParams}
+          LinkTo={LinkTo}
         />
       </S.Wrapper>
     </S.Container>

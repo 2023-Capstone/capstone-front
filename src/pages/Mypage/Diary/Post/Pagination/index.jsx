@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
 import * as S from './index.styles';
-import { Link, useSearchParams } from 'react-router-dom';
 
 const LIMIT = 10;
 
-const Pagination = ({ totalPage }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-
+const Pagination = ({ totalPage, mood, page, setParams, LinkTo }) => {
   const [totalButtonIndex, setTotalButtonIndex] = useState(
-    Math.floor(totalPage / LIMIT),
+    Math.ceil(totalPage / LIMIT) - 1,
   );
   const [currentButtonIndex, setCurrentButtonIndex] = useState(0);
 
@@ -18,8 +15,8 @@ const Pagination = ({ totalPage }) => {
   }, [totalPage]);
 
   useEffect(() => {
-    setCurrentButtonIndex(Math.floor(Number(searchParams.get('page')) / LIMIT));
-  }, [searchParams.get('page')]);
+    setCurrentButtonIndex(Math.floor(Number(page) / LIMIT));
+  }, [page]);
 
   const handlePrev = () => {
     if (currentButtonIndex <= 0) return;
@@ -27,12 +24,7 @@ const Pagination = ({ totalPage }) => {
     const prevIdx = currentButtonIndex - 1;
 
     setCurrentButtonIndex(prevIdx);
-    setSearchParams({
-      t: 'diary',
-      mood: searchParams.get('mood'),
-      page: 10 * prevIdx,
-      size: LIMIT,
-    });
+    setParams(mood, 10 * prevIdx);
   };
 
   const handleNext = () => {
@@ -41,16 +33,12 @@ const Pagination = ({ totalPage }) => {
     const nextIdx = currentButtonIndex + 1;
 
     setCurrentButtonIndex(nextIdx);
-    setSearchParams({
-      t: 'diary',
-      mood: searchParams.get('mood'),
-      page: 10 * nextIdx,
-      size: LIMIT,
-    });
+    setParams(mood, 10 * nextIdx);
   };
 
   return (
     <S.Container>
+      {console.log(mood, page)}
       <li>
         <S.Button onClick={handlePrev}>&lt;&lt;</S.Button>
       </li>
@@ -60,23 +48,17 @@ const Pagination = ({ totalPage }) => {
         .fill()
         .map((_, idx) => (
           <li key={idx}>
-            <Link
-              to={`?t=diary&mood=${searchParams.get('mood')}&page=${getBtnIdx(
-                idx,
-                currentButtonIndex,
-              )}&size=${LIMIT}`}
-            >
+            <LinkTo mood={mood} page={getBtnIdx(idx, currentButtonIndex)}>
               <S.Button
                 className={
-                  Number(searchParams.get('page')) ===
-                  getBtnIdx(idx, currentButtonIndex)
+                  Number(page) === getBtnIdx(idx, currentButtonIndex)
                     ? 'selected'
                     : ''
                 }
               >
                 {getBtnIdx(idx, currentButtonIndex) + 1}
               </S.Button>
-            </Link>
+            </LinkTo>
           </li>
         ))}
       <li>
