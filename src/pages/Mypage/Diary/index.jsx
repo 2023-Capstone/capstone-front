@@ -3,7 +3,7 @@ import {
   requestDiaryByEmotion,
   requestDiaryNumByEmotion,
 } from '@/apis/request/diary';
-import { EMOTION } from '@/constants/diary';
+import { MOOD } from '@/constants/diary';
 import useError from '@/hooks/useError';
 import FilterDiary from './FilterDiary';
 import Post from './Post';
@@ -15,7 +15,7 @@ const LIMIT = 10;
 const Diary = ({ toTop }) => {
   const [list, setList] = useState([]);
   const [totalDiaryCount, setTotalDiaryCount] = useState({});
-  const [mood, setMood] = useState(EMOTION.BEST);
+  const [mood, setMood] = useState(MOOD.BEST);
   const [page, setPage] = useState(0);
   const [isThumbnail, setIsThumbnail] = useState(false);
 
@@ -23,7 +23,7 @@ const Diary = ({ toTop }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    setParams(EMOTION.BEST, 0);
+    setParams(MOOD.BEST, 0);
 
     requestDiaryNumByEmotion()
       .then(data => {

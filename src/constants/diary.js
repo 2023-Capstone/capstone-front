@@ -1,4 +1,4 @@
-const EMOTION = {
+const MOOD = {
   BEST: 'best',
   GOOD: 'good',
   NORMAL: 'normal',
@@ -6,4 +6,4 @@ const EMOTION = {
   WORST: 'worst',
 };
 
-export { EMOTION };
+export { MOOD };
