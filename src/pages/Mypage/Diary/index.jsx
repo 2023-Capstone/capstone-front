@@ -8,6 +8,7 @@ import useError from '@/hooks/useError';
 import FilterDiary from './FilterDiary';
 import Post from './Post';
 import * as S from './index.styles';
+import { useSearchParams } from 'react-router-dom';
 
 const LIMIT = 10;
 
@@ -18,16 +19,9 @@ const Diary = ({ toTop }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [isThumbnail, setIsThumbnail] = useState(false);
   const handleError = useError();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    requestDiaryByEmotion({ mood: EMOTION.BEST, page: 0, size: LIMIT })
-      .then(data => {
-        setList(data);
-      })
-      .catch(error => {
-        alert(handleError(error.code));
-      });
-
     requestDiaryNumByEmotion()
       .then(data => {
         setTotalDiaryCount(data);
@@ -38,7 +32,13 @@ const Diary = ({ toTop }) => {
   }, []);
 
   useEffect(() => {
-    requestDiaryByEmotion({ mood: filter, page: currentPage, size: LIMIT })
+    setSearchParams({
+      t: 'diary',
+      mood: filter,
+      page: currentPage,
+      size: LIMIT,
+    });
+    requestDiaryByEmotion()
       .then(data => {
         setList(data);
       })
@@ -54,6 +54,18 @@ const Diary = ({ toTop }) => {
   useEffect(() => {
     toTop();
   }, [currentPage]);
+
+  useEffect(() => {
+    if (!searchParams.get('mood')) return;
+
+    setFilter(searchParams.get('mood'));
+  }, [searchParams.get('mood')]);
+
+  useEffect(() => {
+    if (!searchParams.get('page')) return;
+
+    setCurrentPage(searchParams.get('page'));
+  }, [searchParams.get('page')]);
 
   const changeFilter = filter => {
     setFilter(filter);
