@@ -5,11 +5,11 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   overflow-y: auto;
-  ::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     background-color: ${({ theme: { colors } }) => colors.GREEN_50};
     width: 0.5rem;
   }
-  ::-webkit-scrollbar-thumb {
+  &::-webkit-scrollbar-thumb {
     background-color: ${({ theme: { colors } }) => colors.GREEN_300};
   }
 `;

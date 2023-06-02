@@ -3,13 +3,12 @@ import * as S from './index.style';
 const Item = ({ item, isThumbnail }) => {
   return (
     <S.Container>
-      {!isThumbnail && (
+      {!isThumbnail ? (
         <S.WrapperList>
           <S.Title>{item.title}</S.Title>
           <S.Date>{item.createAt}</S.Date>
         </S.WrapperList>
-      )}
-      {isThumbnail && (
+      ) : (
         <S.WrapperGrid>
           <S.WrapperImg>
             <img src={item.thumbnail} alt="썸네일" />

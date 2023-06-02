@@ -5,18 +5,18 @@ const requestUploadImg = formData => {
   return axios.post(API_PATH.IMAGE, formData);
 };
 
-const requestDiaryByEmotion = params => {
+const requestDiaryByMood = params => {
   return axiosWithAccessToken
     .get(
-      `${API_PATH.DIARY_BY_EMOTION}?mood=${params.mood}&page=${params.page}&size=${params.size}`,
+      `${API_PATH.DIARY_BY_MOOD}?mood=${params.mood}&page=${params.page}&size=${params.size}`,
     )
     .then(response => response.data);
 };
 
-const requestDiaryNumByEmotion = () => {
+const requestDiaryNumByMood = () => {
   return axiosWithAccessToken
-    .get(`${API_PATH.DIARY_NUM_BY_EMOTION}`)
+    .get(`${API_PATH.DIARY_NUM_BY_MOOD}`)
     .then(response => response.data);
 };
 
-export { requestUploadImg, requestDiaryByEmotion, requestDiaryNumByEmotion };
+export { requestUploadImg, requestDiaryByMood, requestDiaryNumByMood };

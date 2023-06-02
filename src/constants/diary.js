@@ -6,4 +6,9 @@ const MOOD = {
   WORST: 'worst',
 };
 
-export { MOOD };
+const LIMIT = {
+  PAGE: 10,
+  BUTTON: 10,
+};
+
+export { MOOD, LIMIT };

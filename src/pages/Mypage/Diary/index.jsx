@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react';
 import {
-  requestDiaryByEmotion,
-  requestDiaryNumByEmotion,
+  requestDiaryByMood,
+  requestDiaryNumByMood,
 } from '@/apis/request/diary';
 import { MOOD } from '@/constants/diary';
 import useError from '@/hooks/useError';
 import FilterDiary from './FilterDiary';
 import Post from './Post';
 import * as S from './index.styles';
-import { Link, useSearchParams } from 'react-router-dom';
-
-const LIMIT = 10;
+import { useSearchParams } from 'react-router-dom';
+import { LIMIT } from '@/constants/diary';
 
 const Diary = ({ toTop }) => {
   const [list, setList] = useState([]);
@@ -23,45 +22,57 @@ const Diary = ({ toTop }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    setParams(MOOD.BEST, 0);
-
-    requestDiaryNumByEmotion()
+    requestDiaryNumByMood()
       .then(data => {
         setTotalDiaryCount(data);
       })
       .catch(error => {
         alert(handleError(error.code));
       });
-  }, []);
 
-  useEffect(() => {
-    requestDiaryByEmotion({
-      mood: searchParams.get('mood'),
-      page: searchParams.get('page'),
-      size: LIMIT,
-    })
-      .then(data => {
-        setList(data);
-      })
-      .catch(error => {
-        alert(handleError(error.code));
-      });
-  }, [searchParams.get('mood'), searchParams.get('page')]);
+    if (!searchParams.get('mood') || !searchParams.get('page')) {
+      setParams(MOOD.BEST, 0);
+      return;
+    }
+  }, []);
 
   useEffect(() => {
     if (!searchParams.get('mood')) return;
 
-    setMood(searchParams.get('mood'));
-    setParams(searchParams.get('mood'), 0);
+    requestDiaryByMood({
+      mood: searchParams.get('mood'),
+      page: 0,
+      size: LIMIT.PAGE,
+    })
+      .then(data => {
+        setList(data);
+        setMood(searchParams.get('mood'));
+        setPage(0);
+      })
+      .catch(error => {
+        alert(handleError(error.code));
+      });
   }, [searchParams.get('mood')]);
 
   useEffect(() => {
-    toTop();
+    if (!searchParams.get('page')) return;
 
-    setPage(searchParams.get('page'));
+    requestDiaryByMood({
+      mood: searchParams.get('mood'),
+      page: searchParams.get('page'),
+      size: LIMIT.PAGE,
+    })
+      .then(data => {
+        setList(data);
+        toTop();
+        setPage(searchParams.get('page'));
+      })
+      .catch(error => {
+        alert(handleError(error.code));
+      });
   }, [searchParams.get('page')]);
 
-  const onThumbnail = isThumbnail => {
+  const handleThumbnail = isThumbnail => {
     setIsThumbnail(isThumbnail);
   };
 
@@ -70,23 +81,14 @@ const Diary = ({ toTop }) => {
       t: 'diary',
       mood,
       page,
-      size: LIMIT,
+      size: LIMIT.PAGE,
     });
-  };
-
-  const LinkTo = ({ children, mood, page }) => {
-    return (
-      <Link to={`?t=diary&mood=${mood}&page=${page}&size=${LIMIT}`}>
-        {children}
-      </Link>
-    );
   };
 
   return (
     <S.Container>
       <FilterDiary
-        LinkTo={LinkTo}
-        onThumbnail={onThumbnail}
+        handleThumbnail={handleThumbnail}
         isThumbnail={isThumbnail}
         mood={mood}
         page={page}
@@ -94,12 +96,11 @@ const Diary = ({ toTop }) => {
       <S.Wrapper>
         <Post
           list={list}
-          totalPage={Math.ceil(totalDiaryCount[mood] / LIMIT)}
+          totalPage={Math.ceil(totalDiaryCount[mood] / LIMIT.PAGE)}
           isThumbnail={isThumbnail}
           mood={mood}
           page={page}
           setParams={setParams}
-          LinkTo={LinkTo}
         />
       </S.Wrapper>
     </S.Container>

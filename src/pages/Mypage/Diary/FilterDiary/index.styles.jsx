@@ -6,21 +6,18 @@ const Container = styled.div`
   align-items: center;
   border-bottom: 1px solid ${({ theme: { colors } }) => colors.GREEN_200};
 `;
+const Button = styled.button`
+  background-color: transparent;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 1rem 5rem;
 
-const WrapperEmotion = styled.div`
-  & button {
-    background-color: transparent;
-    font-size: 1.1rem;
-    font-weight: 500;
-    padding: 1rem 5rem;
-  }
-
-  & button:hover {
+  &:hover {
     background-color: ${({ theme: { colors } }) => colors.INPUT_BACKGROUND};
     transition: background-color 0.5s ease;
   }
 
-  & button.selected {
+  &.selected {
     border-bottom: 3px solid ${({ theme: { colors } }) => colors.RED_500};
     margin-bottom: -1px;
   }
@@ -49,4 +46,4 @@ const WrapperDisplay = styled.div`
     border-right: none;
   }
 `;
-export { Container, WrapperEmotion, WrapperDisplay };
+export { Container, WrapperDisplay, Button };

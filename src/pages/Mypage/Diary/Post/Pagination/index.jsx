@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
 import * as S from './index.styles';
+import LinkTo from '@/pages/Mypage/Diary/LinkTo';
+import { LIMIT } from '@/constants/diary';
 
-const LIMIT = 10;
-
-const Pagination = ({ totalPage, mood, page, setParams, LinkTo }) => {
+const Pagination = ({ totalPage, mood, page, setParams }) => {
   const [totalButtonIndex, setTotalButtonIndex] = useState(
-    Math.ceil(totalPage / LIMIT) - 1,
+    Math.ceil(totalPage / LIMIT.BUTTON) - 1,
   );
   const [currentButtonIndex, setCurrentButtonIndex] = useState(0);
 
   useEffect(() => {
-    setTotalButtonIndex(Math.ceil(totalPage / LIMIT) - 1);
+    setTotalButtonIndex(Math.ceil(totalPage / LIMIT.BUTTON) - 1);
     setCurrentButtonIndex(0);
   }, [totalPage]);
 
   useEffect(() => {
-    setCurrentButtonIndex(Math.floor(Number(page) / LIMIT));
+    setCurrentButtonIndex(Math.floor(Number(page) / LIMIT.BUTTON));
   }, [page]);
 
   const handlePrev = () => {
@@ -38,7 +38,6 @@ const Pagination = ({ totalPage, mood, page, setParams, LinkTo }) => {
 
   return (
     <S.Container>
-      {console.log(mood, page)}
       <li>
         <S.Button onClick={handlePrev}>&lt;&lt;</S.Button>
       </li>
@@ -76,8 +75,10 @@ const getButtonCountPerPage = (
   totalPage,
 ) => {
   if (totalButtonIndex < 1) return totalPage;
-  if (currentButtonIndex < totalButtonIndex) return LIMIT;
-  return totalPage % LIMIT === 0 ? LIMIT : totalPage % LIMIT;
+  if (currentButtonIndex < totalButtonIndex) return LIMIT.BUTTON;
+  return totalPage % LIMIT.BUTTON === 0
+    ? LIMIT.BUTTON
+    : totalPage % LIMIT.BUTTON;
 };
 
 const getBtnIdx = (idx, currentButtonIndex) => {
