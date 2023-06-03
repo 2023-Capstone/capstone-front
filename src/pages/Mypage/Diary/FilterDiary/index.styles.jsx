@@ -6,6 +6,7 @@ const Container = styled.div`
   align-items: center;
   border-bottom: 1px solid ${({ theme: { colors } }) => colors.GREEN_200};
 `;
+
 const Button = styled.button`
   background-color: transparent;
   font-size: 1.1rem;
@@ -26,7 +27,7 @@ const Button = styled.button`
 const WrapperDisplay = styled.div`
   display: flex;
 
-  & button {
+  button {
     border: 3px solid ${({ theme: { colors } }) => colors.GREEN_500};
     background-color: ${({ theme: { colors } }) => colors.INPUT_BACKGROUND};
     color: ${({ theme: { colors } }) => colors.GREEN_500};
@@ -37,12 +38,12 @@ const WrapperDisplay = styled.div`
     align-items: center;
   }
 
-  & button.selected {
+  button.selected {
     background-color: ${({ theme: { colors } }) => colors.GREEN_500};
     color: ${({ theme: { colors } }) => colors.INPUT_BACKGROUND};
   }
 
-  & button:first-of-type {
+  button:first-of-type {
     border-right: none;
   }
 `;

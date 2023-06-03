@@ -30,6 +30,7 @@ const diaryHandlers = [
       ctx.set('location', images[Math.floor(Math.random() * images.length)]),
     );
   }),
+
   rest.get(`${baseURL}${API_PATH.DIARY_BY_MOOD}`, (req, res, ctx) => {
     const mood = req.url.searchParams.get('mood');
     const page = req.url.searchParams.get('page');

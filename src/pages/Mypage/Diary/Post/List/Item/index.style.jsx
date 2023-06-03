@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 const Container = styled.li`
   list-style: none;
 
-  & > * {
+  > * {
     background-color: ${({ theme: { colors } }) => colors.INPUT_BACKGROUND};
     border: 1px solid ${({ theme: { colors } }) => colors.GREEN_500};
     border-radius: 5px;
@@ -12,7 +12,7 @@ const Container = styled.li`
     align-items: center;
   }
 
-  & > *:hover {
+  > *:hover {
     cursor: pointer;
   }
 `;
@@ -37,7 +37,7 @@ const WrapperImg = styled.div`
   border-radius: 5px;
   overflow: hidden;
 
-  & > img {
+  img {
     width: 100%;
     height: 100%;
     object-fit: cover;
