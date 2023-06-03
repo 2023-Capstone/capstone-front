@@ -21,6 +21,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@tanstack/react-query-devtools": "^4.29.12",
     "axios": "^1.2.3",
     "emotion-reset": "^3.0.1",
     "jotai": "^1.13.1",

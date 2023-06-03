@@ -10,67 +10,76 @@ import Post from './Post';
 import * as S from './index.styles';
 import { useSearchParams } from 'react-router-dom';
 import { LIMIT } from '@/constants/diary';
+import { useQuery } from 'react-query';
+import useDidMountEffect from '@/hooks/useDidMount';
 
 const Diary = ({ toTop }) => {
   const [list, setList] = useState([]);
   const [totalDiaryCount, setTotalDiaryCount] = useState({});
-  const [mood, setMood] = useState(MOOD.BEST);
-  const [page, setPage] = useState(0);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [mood, setMood] = useState(
+    searchParams.get('mood') ? searchParams.get('mood') : MOOD.BEST,
+  );
+  const [page, setPage] = useState(
+    searchParams.get('page') ? searchParams.get('page') : 0,
+  );
   const [isThumbnail, setIsThumbnail] = useState(false);
 
   const handleError = useError();
-  const [searchParams, setSearchParams] = useSearchParams();
+
+  const diaryCountQuery = useQuery(
+    ['diaryCount'],
+    () => requestDiaryNumByMood(),
+    {
+      staleTime: 1000 * 60 * 5,
+    },
+  );
+
+  const listQuery = useQuery(
+    ['list', mood, page],
+    () => {
+      return requestDiaryByMood({
+        mood: mood,
+        page: page,
+        size: LIMIT.PAGE,
+      });
+    },
+    {
+      staleTime: 1000 * 60,
+    },
+  );
 
   useEffect(() => {
-    requestDiaryNumByMood()
-      .then(data => {
-        setTotalDiaryCount(data);
-      })
-      .catch(error => {
-        alert(handleError(error.code));
-      });
+    if (diaryCountQuery.isError) handleError(diaryCountQuery.error);
+  }, [diaryCountQuery.isError]);
 
-    if (!searchParams.get('mood') || !searchParams.get('page')) {
-      setParams(MOOD.BEST, 0);
-      return;
-    }
+  useEffect(() => {
+    if (listQuery.isError) handleError(listQuery.error);
+  }, [listQuery.isError]);
+
+  useEffect(() => {
+    if (!searchParams.get('mood') || !searchParams.get('mood'))
+      setParams(mood, page);
+
+    setTotalDiaryCount(diaryCountQuery.data);
+    setList(listQuery.data);
   }, []);
 
-  useEffect(() => {
-    if (!searchParams.get('mood')) return;
+  useDidMountEffect(() => {
+    setMood(searchParams.get('mood'));
+    setPage(0);
 
-    requestDiaryByMood({
-      mood: searchParams.get('mood'),
-      page: 0,
-      size: LIMIT.PAGE,
-    })
-      .then(data => {
-        setList(data);
-        setMood(searchParams.get('mood'));
-        setPage(0);
-      })
-      .catch(error => {
-        alert(handleError(error.code));
-      });
+    setParams(searchParams.get('mood'), 0);
   }, [searchParams.get('mood')]);
 
-  useEffect(() => {
-    if (!searchParams.get('page')) return;
-
-    requestDiaryByMood({
-      mood: searchParams.get('mood'),
-      page: searchParams.get('page'),
-      size: LIMIT.PAGE,
-    })
-      .then(data => {
-        setList(data);
-        toTop();
-        setPage(searchParams.get('page'));
-      })
-      .catch(error => {
-        alert(handleError(error.code));
-      });
+  useDidMountEffect(() => {
+    setPage(Number(searchParams.get('page')));
+    toTop();
   }, [searchParams.get('page')]);
+
+  useDidMountEffect(() => {
+    setList(listQuery.data);
+  }, [mood, page]);
 
   const handleThumbnail = isThumbnail => {
     setIsThumbnail(isThumbnail);
