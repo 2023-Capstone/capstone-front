@@ -58,7 +58,9 @@ const Diary = ({ toTop }) => {
   }, [listQuery.isError]);
 
   useEffect(() => {
-    if (!searchParams.get('mood') || !searchParams.get('mood'))
+    if (searchParams.get('t') !== 'diary') return;
+
+    if (!searchParams.get('mood') || !searchParams.get('page'))
       setParams(mood, page);
 
     setTotalDiaryCount(diaryCountQuery.data);
@@ -66,18 +68,23 @@ const Diary = ({ toTop }) => {
   }, []);
 
   useDidMountEffect(() => {
+    if (searchParams.get('t') !== 'diary') return;
+
     setMood(searchParams.get('mood'));
     setPage(0);
-
     setParams(searchParams.get('mood'), 0);
   }, [searchParams.get('mood')]);
 
   useDidMountEffect(() => {
+    if (searchParams.get('t') !== 'diary') return;
+
     setPage(Number(searchParams.get('page')));
     toTop();
   }, [searchParams.get('page')]);
 
   useDidMountEffect(() => {
+    if (searchParams.get('t') !== 'diary') return;
+
     setList(listQuery.data);
   }, [mood, page]);
 
