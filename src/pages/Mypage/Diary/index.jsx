@@ -10,6 +10,7 @@ import Post from './Post';
 import * as S from './index.styles';
 import { useSearchParams } from 'react-router-dom';
 import { LIMIT } from '@/constants/diary';
+import { BROWSER_PATH } from '@/constants/path';
 import { useQuery } from 'react-query';
 import useDidMountEffect from '@/hooks/useDidMount';
 
@@ -58,7 +59,7 @@ const Diary = ({ toTop }) => {
   }, [listQuery.isError]);
 
   useEffect(() => {
-    if (searchParams.get('t') !== 'diary') return;
+    if (searchParams.get('t') !== BROWSER_PATH.MYPAGE.DIARY) return;
 
     if (!searchParams.get('mood') || !searchParams.get('page'))
       setParams(mood, page);
@@ -68,7 +69,7 @@ const Diary = ({ toTop }) => {
   }, []);
 
   useDidMountEffect(() => {
-    if (searchParams.get('t') !== 'diary') return;
+    if (searchParams.get('t') !== BROWSER_PATH.MYPAGE.DIARY) return;
 
     setMood(searchParams.get('mood'));
     setPage(0);
@@ -76,14 +77,14 @@ const Diary = ({ toTop }) => {
   }, [searchParams.get('mood')]);
 
   useDidMountEffect(() => {
-    if (searchParams.get('t') !== 'diary') return;
+    if (searchParams.get('t') !== BROWSER_PATH.MYPAGE.DIARY) return;
 
     setPage(Number(searchParams.get('page')));
     toTop();
   }, [searchParams.get('page')]);
 
   useDidMountEffect(() => {
-    if (searchParams.get('t') !== 'diary') return;
+    if (searchParams.get('t') !== BROWSER_PATH.MYPAGE.DIARY) return;
 
     setList(listQuery.data);
   }, [mood, page]);
@@ -94,7 +95,7 @@ const Diary = ({ toTop }) => {
 
   const setParams = (mood, page) => {
     setSearchParams({
-      t: 'diary',
+      t: BROWSER_PATH.MYPAGE.DIARY,
       mood,
       page,
       size: LIMIT.PAGE,
