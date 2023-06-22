@@ -5,7 +5,11 @@ const Container = styled.div`
   width: 70%;
   display: flex;
   justify-content: end;
-  margin-top: 10rem;
+  margin-bottom: 2rem;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    width: 90%;
+  }
 `;
 
 const MainButton = styled.button`

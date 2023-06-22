@@ -1,14 +1,21 @@
 import styled from '@emotion/styled';
 
 const Container = styled.div`
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
 `;
 const Wrapper = styled.div`
   flex: 1 1 auto;
   width: 70%;
   margin-top: 5rem;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    width: 90%;
+    margin-top: 3rem;
+  }
 `;
 
 const Title = styled.h1`
