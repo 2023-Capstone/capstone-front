@@ -36,6 +36,10 @@ const Button = styled.button`
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
     font-size: 0.8rem;
     padding: 0.2rem;
+
+    &:hover {
+      background-color: transparent;
+    }
   }
 `;
 export { Container, Button };
