@@ -27,5 +27,15 @@ const Button = styled.button`
   &.selected {
     font-weight: bold;
   }
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.md}px) {
+    font-size: 0.9rem;
+    padding: 0.3rem;
+  }
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    font-size: 0.8rem;
+    padding: 0.2rem;
+  }
 `;
 export { Container, Button };

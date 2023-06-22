@@ -12,6 +12,7 @@ const Container = styled.div`
   &::-webkit-scrollbar-thumb {
     background-color: ${({ theme: { colors } }) => colors.GREEN_300};
   }
+  overflow-x: hidden;
 `;
 const Wrapper = styled.div`
   flex: 1 1 auto;

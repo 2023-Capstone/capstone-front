@@ -56,10 +56,18 @@ const Title = styled.h1`
   ${props => {
     if (props.grid) return `margin-bottom: 0.3rem; padding: 0;`;
   }}
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    font-size: 1rem;
+  }
 `;
 
 const Date = styled.span`
   color: ${({ theme: { colors } }) => colors.GREEN_300};
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    font-size: 0.8rem;
+  }
 `;
 
 export { Container, WrapperList, WrapperGrid, Title, Date, WrapperImg };

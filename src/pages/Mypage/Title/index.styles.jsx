@@ -5,6 +5,11 @@ const Container = styled.div`
   padding: 1.3rem 0;
   display: flex;
   align-items: center;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    padding: 1rem 0;
+    justify-content: center;
+  }
 `;
 
 const Name = styled.h1`
@@ -12,6 +17,11 @@ const Name = styled.h1`
   font-size: 1.3rem;
   font-weight: bold;
   margin-left: 1.5rem;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    font-size: 1.2rem;
+    margin-left: 0;
+  }
 `;
 
 export { Container, Name };

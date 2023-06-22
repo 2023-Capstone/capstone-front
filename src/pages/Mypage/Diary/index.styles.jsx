@@ -7,6 +7,10 @@ const Container = styled.div`
 
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.xl}px) {
+    width: 90vw;
+  }
 `;
 
 const Wrapper = styled.div`

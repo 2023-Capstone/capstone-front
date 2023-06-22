@@ -11,7 +11,7 @@ const Button = styled.button`
   background-color: transparent;
   font-size: 1.1rem;
   font-weight: 500;
-  padding: 1rem 5rem;
+  padding: 1rem 5vw;
 
   &:hover {
     background-color: ${({ theme: { colors } }) => colors.INPUT_BACKGROUND};
@@ -21,6 +21,25 @@ const Button = styled.button`
   &.selected {
     border-bottom: 3px solid ${({ theme: { colors } }) => colors.RED_500};
     margin-bottom: -1px;
+  }
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.lg}px) {
+    font-size: 1rem;
+    padding: 1rem 4vw;
+  }
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.md}px) {
+    padding: 1rem 3vw;
+  }
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    font-size: 0.9rem;
+    padding: 1rem 2vw;
+
+    &.selected {
+      border-bottom: 2px solid ${({ theme: { colors } }) => colors.RED_500};
+      margin-bottom: -1px;
+    }
   }
 `;
 
@@ -45,6 +64,13 @@ const WrapperDisplay = styled.div`
 
   button:first-of-type {
     border-right: none;
+  }
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    button {
+      font-size: 1rem;
+      padding: 0.1rem;
+    }
   }
 `;
 export { Container, WrapperDisplay, Button };

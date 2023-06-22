@@ -23,6 +23,10 @@ const Title = styled.h1`
   font-size: 1.3rem;
   font-weight: bold;
   margin-bottom: 3rem;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    font-size: 1.2rem;
+  }
 `;
 
 export { Container, Wrapper, Title };
