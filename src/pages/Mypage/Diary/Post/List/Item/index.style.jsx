@@ -59,7 +59,7 @@ const Title = styled.h1`
   padding: 0.5rem;
 
   ${props => {
-    if (props.grid) return `margin-bottom: 0.3rem; padding: 0;`;
+    if (props.grid) return `margin-bottom: 0.3rem; padding: 0.2rem;`;
   }}
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
