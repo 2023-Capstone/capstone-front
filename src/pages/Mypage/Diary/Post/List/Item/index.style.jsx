@@ -42,6 +42,11 @@ const WrapperImg = styled.div`
     height: 100%;
     object-fit: cover;
   }
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    width: 110px;
+    height: 140px;
+  }
 `;
 
 const Title = styled.h1`

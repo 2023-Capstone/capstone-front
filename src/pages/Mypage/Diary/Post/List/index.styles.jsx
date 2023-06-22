@@ -17,7 +17,8 @@ const Container = styled.ul`
       justify-content: start;
     }
     @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
-      grid-template-columns: repeat(2, 11rem);
+      justify-content: center;
+      grid-template-columns: repeat(2, 9rem);
       column-gap: 1rem;
       row-gap: 1rem;
     }
