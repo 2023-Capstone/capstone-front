@@ -7,7 +7,7 @@ const Container = styled.div`
   align-items: center;
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
-    padding: 1rem 0;
+    padding: 0.7rem 0;
     justify-content: center;
   }
 `;
