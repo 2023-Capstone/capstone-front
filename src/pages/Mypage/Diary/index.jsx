@@ -12,7 +12,7 @@ import { useSearchParams } from 'react-router-dom';
 import { LIMIT } from '@/constants/diary';
 import { BROWSER_PATH } from '@/constants/path';
 import { useQuery } from 'react-query';
-import useDidMountEffect from '@/hooks/useDidMount';
+import useMount from '@/hooks/useMount';
 
 const Diary = ({ toTop }) => {
   const [list, setList] = useState([]);
@@ -68,7 +68,7 @@ const Diary = ({ toTop }) => {
     setList(listQuery.data);
   }, []);
 
-  useDidMountEffect(() => {
+  useMount(() => {
     if (searchParams.get('t') !== BROWSER_PATH.MYPAGE.DIARY) return;
 
     setMood(searchParams.get('mood'));
@@ -76,14 +76,14 @@ const Diary = ({ toTop }) => {
     setParams(searchParams.get('mood'), 0);
   }, [searchParams.get('mood')]);
 
-  useDidMountEffect(() => {
+  useMount(() => {
     if (searchParams.get('t') !== BROWSER_PATH.MYPAGE.DIARY) return;
 
     setPage(Number(searchParams.get('page')));
     toTop();
   }, [searchParams.get('page')]);
 
-  useDidMountEffect(() => {
+  useMount(() => {
     if (searchParams.get('t') !== BROWSER_PATH.MYPAGE.DIARY) return;
 
     setList(listQuery.data);
