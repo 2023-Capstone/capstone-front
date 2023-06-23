@@ -30,10 +30,11 @@ const diaryHandlers = [
       ctx.set('location', images[Math.floor(Math.random() * images.length)]),
     );
   }),
-<<<<<<< HEAD
+
   rest.post(`${baseURL}${API_PATH.DIARY}`, (req, res, ctx) => {
-    return res(ctx.status(201), ctx.set('id', 1));
-=======
+    const diary = req.json();
+    return res(ctx.status(201), ctx.set('id', 1), ctx.json(diary));
+  }),
 
   rest.get(`${baseURL}${API_PATH.DIARY_BY_MOOD}`, (req, res, ctx) => {
     const mood = req.url.searchParams.get('mood');
@@ -59,7 +60,6 @@ const diaryHandlers = [
   }),
   rest.get(`${baseURL}${API_PATH.DIARY_NUM_BY_MOOD}`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(diaryCount));
->>>>>>> 307e1f1304fb36ad80b847ac66797dea778fac81
   }),
 ];
 

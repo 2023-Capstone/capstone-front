@@ -8,7 +8,7 @@ import HashtagBox from './HashtagBox';
 import * as S from './index.styles';
 import Title from './Title';
 
-import { postNewDiary } from '@/apis/request/diary';
+import { requestUploadDiary } from '@/apis/request/diary';
 import { CLIENT_MESSAGE } from '@/constants/message';
 import useError from '@/hooks/useError';
 import useInput from '@/hooks/useInput';
@@ -61,7 +61,7 @@ const Edit = () => {
         blocks: [...blocks],
       };
       try {
-        const request = await postNewDiary(diary);
+        const request = await requestUploadDiary(diary);
         console.log(request);
         showSnackbar('일기 작성이 완료되었습니다. ');
       } catch (err) {
