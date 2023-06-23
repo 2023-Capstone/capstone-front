@@ -5,4 +5,8 @@ const requestUploadImg = formData => {
   return axios.post(API_PATH.IMAGE, formData);
 };
 
-export { requestUploadImg };
+const postNewDiary = diary => {
+  return axios.post(API_PATH.DIARY, diary);
+};
+
+export { requestUploadImg, postNewDiary };

@@ -18,6 +18,9 @@ const diaryHandlers = [
       ctx.set('location', images[Math.floor(Math.random() * images.length)]),
     );
   }),
+  rest.post(`${baseURL}${API_PATH.DIARY}`, (req, res, ctx) => {
+    return res(ctx.status(201), ctx.set('id', 1));
+  }),
 ];
 
 export default diaryHandlers;
