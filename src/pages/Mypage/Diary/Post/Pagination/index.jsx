@@ -15,7 +15,7 @@ const Pagination = ({ totalPage, mood, page, setParams }) => {
   }, [totalPage]);
 
   useEffect(() => {
-    setCurrentButtonIndex(Math.floor(Number(page) / LIMIT.BUTTON));
+    setCurrentButtonIndex(Math.floor(page / LIMIT.BUTTON));
   }, [page]);
 
   const handlePrev = () => {
@@ -50,9 +50,7 @@ const Pagination = ({ totalPage, mood, page, setParams }) => {
             <LinkTo mood={mood} page={getBtnIdx(idx, currentButtonIndex)}>
               <S.Button
                 className={
-                  Number(page) === getBtnIdx(idx, currentButtonIndex)
-                    ? 'selected'
-                    : ''
+                  page === getBtnIdx(idx, currentButtonIndex) ? 'selected' : ''
                 }
               >
                 {getBtnIdx(idx, currentButtonIndex) + 1}
@@ -74,7 +72,6 @@ const getButtonCountPerPage = (
   currentButtonIndex,
   totalPage,
 ) => {
-  if (totalButtonIndex < 1) return totalPage;
   if (currentButtonIndex < totalButtonIndex) return LIMIT.BUTTON;
   return totalPage % LIMIT.BUTTON === 0
     ? LIMIT.BUTTON

@@ -1,23 +1,21 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import {
   requestDiaryByMood,
   requestDiaryNumByMood,
 } from '@/apis/request/diary';
+import useMount from '@/hooks/useMount';
 import { MOOD } from '@/constants/diary';
-import useError from '@/hooks/useError';
+import { LIMIT } from '@/constants/diary';
+import { BROWSER_PATH } from '@/constants/path';
 import FilterDiary from './FilterDiary';
 import Post from './Post';
 import * as S from './index.styles';
-import { useSearchParams } from 'react-router-dom';
-import { LIMIT } from '@/constants/diary';
-import { BROWSER_PATH } from '@/constants/path';
-import { useQuery } from 'react-query';
-import useMount from '@/hooks/useMount';
+import useFetchQuery from '../../../hooks/useFetchQuery';
 
 const Diary = ({ toTop }) => {
-  const [list, setList] = useState([]);
-  const [totalDiaryCount, setTotalDiaryCount] = useState({});
   const [searchParams, setSearchParams] = useSearchParams();
+
   const [mood, setMood] = useState(
     searchParams.get('mood') ? searchParams.get('mood') : MOOD.BEST,
   );
@@ -26,17 +24,15 @@ const Diary = ({ toTop }) => {
   );
   const [isThumbnail, setIsThumbnail] = useState(false);
 
-  const handleError = useError();
-
-  const diaryCountQuery = useQuery(
+  const { data: totalDiaryCount } = useFetchQuery(
+    {},
     ['diaryCount'],
-    () => requestDiaryNumByMood(),
-    {
-      staleTime: 1000 * 60 * 5,
-    },
+    requestDiaryNumByMood,
+    1000 * 60 * 5,
   );
 
-  const listQuery = useQuery(
+  const { data: list } = useFetchQuery(
+    [],
     ['list', mood, page],
     () => {
       return requestDiaryByMood({
@@ -45,49 +41,24 @@ const Diary = ({ toTop }) => {
         size: LIMIT.PAGE,
       });
     },
-    {
-      staleTime: 1000 * 60,
-    },
+    1000 * 60 * 5,
   );
 
   useEffect(() => {
-    if (diaryCountQuery.isError) handleError(diaryCountQuery.error);
-  }, [diaryCountQuery.isError]);
-
-  useEffect(() => {
-    if (listQuery.isError) handleError(listQuery.error);
-  }, [listQuery.isError]);
-
-  useEffect(() => {
-    if (searchParams.get('t') !== BROWSER_PATH.MYPAGE.DIARY) return;
-
     if (!searchParams.get('mood') || !searchParams.get('page'))
       setParams(mood, page);
-
-    setTotalDiaryCount(diaryCountQuery.data);
-    setList(listQuery.data);
   }, []);
 
   useMount(() => {
-    if (searchParams.get('t') !== BROWSER_PATH.MYPAGE.DIARY) return;
-
     setMood(searchParams.get('mood'));
     setPage(0);
     setParams(searchParams.get('mood'), 0);
   }, [searchParams.get('mood')]);
 
   useMount(() => {
-    if (searchParams.get('t') !== BROWSER_PATH.MYPAGE.DIARY) return;
-
     setPage(Number(searchParams.get('page')));
     toTop();
   }, [searchParams.get('page')]);
-
-  useMount(() => {
-    if (searchParams.get('t') !== BROWSER_PATH.MYPAGE.DIARY) return;
-
-    setList(listQuery.data);
-  }, [mood, page]);
 
   const handleThumbnail = isThumbnail => {
     setIsThumbnail(isThumbnail);
@@ -116,7 +87,7 @@ const Diary = ({ toTop }) => {
           totalPage={Math.ceil(totalDiaryCount[mood] / LIMIT.PAGE)}
           isThumbnail={isThumbnail}
           mood={mood}
-          page={page}
+          page={Number(page)}
           setParams={setParams}
         />
       </S.Wrapper>
