@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
-import * as S from './index.styles';
-import LinkTo from '@/pages/Mypage/Diary/LinkTo';
+import { useState } from 'react';
+import LinkToDiary from '@/pages/Mypage/LinkToDiary';
+import useMount from '@/hooks/useMount';
 import { LIMIT } from '@/constants/diary';
+import * as S from './index.styles';
 
 const Pagination = ({ totalPage, mood, page, setParams }) => {
   const [totalButtonIndex, setTotalButtonIndex] = useState(
@@ -9,12 +10,12 @@ const Pagination = ({ totalPage, mood, page, setParams }) => {
   );
   const [currentButtonIndex, setCurrentButtonIndex] = useState(0);
 
-  useEffect(() => {
+  useMount(() => {
     setTotalButtonIndex(Math.ceil(totalPage / LIMIT.BUTTON) - 1);
     setCurrentButtonIndex(0);
   }, [totalPage]);
 
-  useEffect(() => {
+  useMount(() => {
     setCurrentButtonIndex(Math.floor(page / LIMIT.BUTTON));
   }, [page]);
 
@@ -47,7 +48,7 @@ const Pagination = ({ totalPage, mood, page, setParams }) => {
         .fill()
         .map((_, idx) => (
           <li key={idx}>
-            <LinkTo mood={mood} page={getBtnIdx(idx, currentButtonIndex)}>
+            <LinkToDiary mood={mood} page={getBtnIdx(idx, currentButtonIndex)}>
               <S.Button
                 className={
                   page === getBtnIdx(idx, currentButtonIndex) ? 'selected' : ''
@@ -55,7 +56,7 @@ const Pagination = ({ totalPage, mood, page, setParams }) => {
               >
                 {getBtnIdx(idx, currentButtonIndex) + 1}
               </S.Button>
-            </LinkTo>
+            </LinkToDiary>
           </li>
         ))}
       <li>

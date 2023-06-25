@@ -2,7 +2,7 @@ import List from './List';
 import Pagination from './Pagination';
 import * as S from './index.style';
 
-const Post = ({ list, totalPage, isThumbnail, mood, page, setParams }) => {
+const Post = ({ list, isThumbnail, totalPage, mood, page, setParams }) => {
   return (
     <S.Container>
       <List list={list} isThumbnail={isThumbnail} />

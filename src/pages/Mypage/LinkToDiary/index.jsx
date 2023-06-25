@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { LIMIT } from '@/constants/diary';
 
-const LinkTo = ({ children, mood, page }) => {
+const LinkToDiary = ({ children, mood, page }) => {
   return (
     <Link to={`?t=diary&mood=${mood}&page=${page}&size=${LIMIT.PAGE}`}>
       {children}
@@ -9,4 +9,4 @@ const LinkTo = ({ children, mood, page }) => {
   );
 };
 
-export default LinkTo;
+export default LinkToDiary;
