@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 const Container = styled.ul`
   &.grid {
     width: 100%;
+    padding: 1rem 0;
+
     overflow-x: auto;
 
     display: grid;
@@ -10,7 +12,6 @@ const Container = styled.ul`
     justify-content: center;
     column-gap: 3rem;
     row-gap: 2rem;
-    padding: 1rem 0;
 
     &::-webkit-scrollbar {
       background-color: ${({ theme: { colors } }) => colors.GREEN_50};
@@ -24,8 +25,8 @@ const Container = styled.ul`
       justify-content: start;
     }
     @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
-      justify-content: center;
       grid-template-columns: repeat(2, 9rem);
+      justify-content: center;
       column-gap: 1rem;
       row-gap: 1rem;
     }

@@ -15,7 +15,7 @@ const Item = ({ item }) => {
           <S.WrapperImg>
             <img src={item.thumbnail} alt="썸네일" />
           </S.WrapperImg>
-          <S.Title grid={true}>{item.title}</S.Title>
+          <S.Title className={display}>{item.title}</S.Title>
           <S.Date>{item.createAt}</S.Date>
         </S.WrapperGrid>
       )}
