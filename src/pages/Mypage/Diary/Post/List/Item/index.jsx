@@ -1,9 +1,11 @@
+import useDisplay from '@/hooks/useDisplay';
 import * as S from './index.style';
 
-const Item = ({ item, isThumbnail }) => {
+const Item = ({ item }) => {
+  const [display] = useDisplay();
   return (
     <S.Container>
-      {!isThumbnail ? (
+      {display === 'list' ? (
         <S.WrapperList>
           <S.Title>{item.title}</S.Title>
           <S.Date>{item.createAt}</S.Date>

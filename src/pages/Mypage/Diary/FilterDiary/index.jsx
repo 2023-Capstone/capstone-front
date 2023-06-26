@@ -3,10 +3,13 @@ import { IoGrid } from 'react-icons/io5';
 import { FaList } from 'react-icons/fa';
 import LinkToDiary from '@/pages/Mypage/LinkToDiary';
 import * as S from './index.styles';
+import useDisplay from '@/hooks/useDisplay';
 
-const FilterDiary = ({ isThumbnail, handleThumbnail, mood, page }) => {
-  const showThumbnail = isThumbnail => () => {
-    handleThumbnail(isThumbnail);
+const FilterDiary = ({ mood }) => {
+  const [display, setDisplay] = useDisplay();
+
+  const handleDisplay = () => {
+    setDisplay(display === 'list' ? 'grid' : 'list');
   };
 
   return (
@@ -56,15 +59,15 @@ const FilterDiary = ({ isThumbnail, handleThumbnail, mood, page }) => {
       <S.WrapperDisplay>
         <button
           type="button"
-          className={isThumbnail ? 'selected' : ''}
-          onClick={showThumbnail(true)}
+          className={display === 'grid' ? 'selected' : ''}
+          onClick={handleDisplay}
         >
           <IoGrid />
         </button>
         <button
           type="button"
-          className={isThumbnail ? '' : 'selected'}
-          onClick={showThumbnail(false)}
+          className={display === 'grid' ? '' : 'selected'}
+          onClick={handleDisplay}
         >
           <FaList />
         </button>

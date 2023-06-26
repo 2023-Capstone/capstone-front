@@ -1,18 +1,20 @@
+import useDisplay from '@/hooks/useDisplay';
 import * as S from './index.styles';
 import { LIMIT } from '@/constants/diary';
 
 const Skeleton = () => {
+  const [display] = useDisplay();
   return (
     <S.Container>
       <S.WrapperFilter>
         <S.FilterMood />
         <S.FilterDisplay />
       </S.WrapperFilter>
-      <S.Post>
+      <S.Post className={display}>
         {Array(LIMIT.PAGE)
           .fill()
           .map(_ => (
-            <S.Item></S.Item>
+            <S.Item className={display}></S.Item>
           ))}
       </S.Post>
       <S.Pagination>

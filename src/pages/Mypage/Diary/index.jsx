@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import {
   requestDiaryByMood,
@@ -16,8 +15,6 @@ const Diary = ({ toTop }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const mood = searchParams.get('mood');
   const page = searchParams.get('page');
-
-  const [isThumbnail, setIsThumbnail] = useState(false);
 
   const { data: totalDiaryCount } = useFetchQuery(
     {},
@@ -43,10 +40,6 @@ const Diary = ({ toTop }) => {
     toTop();
   }, [searchParams.get('page')]);
 
-  const handleThumbnail = isThumbnail => {
-    setIsThumbnail(isThumbnail);
-  };
-
   const setParams = (mood, page) => {
     setSearchParams({
       t: BROWSER_PATH.MYPAGE.DIARY,
@@ -58,17 +51,11 @@ const Diary = ({ toTop }) => {
 
   return (
     <S.Container>
-      <FilterDiary
-        handleThumbnail={handleThumbnail}
-        isThumbnail={isThumbnail}
-        mood={mood}
-        page={page}
-      />
+      <FilterDiary mood={mood} page={page} />
       <S.Wrapper>
         <Post
           list={list}
           totalPage={Math.ceil(totalDiaryCount[mood] / LIMIT.PAGE)}
-          isThumbnail={isThumbnail}
           mood={mood}
           page={Number(page)}
           setParams={setParams}
