@@ -5,6 +5,7 @@ import Filter from './Filter';
 import Info from './Info';
 import Diary from './Diary';
 import * as S from './index.styles';
+import Skeleton from './Skeleton';
 
 const Mypage = props => {
   const [searchParams] = useSearchParams();
@@ -21,7 +22,7 @@ const Mypage = props => {
       <Filter isDiary={searchParams.get('t')} />
       <S.Wrapper>
         {searchParams.get('t') ? (
-          <Suspense fallback={<>loading...</>}>
+          <Suspense fallback={<Skeleton />}>
             <Diary toTop={toTop} />
           </Suspense>
         ) : (

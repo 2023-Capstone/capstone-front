@@ -74,9 +74,7 @@ const getButtonCountPerPage = (
   totalPage,
 ) => {
   if (currentButtonIndex < totalButtonIndex) return LIMIT.BUTTON;
-  return totalPage % LIMIT.BUTTON === 0
-    ? LIMIT.BUTTON
-    : totalPage % LIMIT.BUTTON;
+  return totalPage % LIMIT.BUTTON ? totalPage % LIMIT.BUTTON : LIMIT.BUTTON;
 };
 
 const getBtnIdx = (idx, currentButtonIndex) => {
