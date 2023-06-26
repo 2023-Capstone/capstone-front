@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import * as S from './index.styles';
 import { MOOD } from '@/constants/diary';
 import LinkToDiary from '@/pages/Mypage/LinkToDiary';
+import * as S from './index.styles';
 
 const Filter = ({ isDiary }) => {
   return (

@@ -7,7 +7,7 @@ import Diary from './Diary';
 import * as S from './index.styles';
 import Skeleton from './Skeleton';
 
-const Mypage = props => {
+const Mypage = () => {
   const [searchParams] = useSearchParams();
   const topRef = useRef();
 

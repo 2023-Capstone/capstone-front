@@ -58,7 +58,6 @@ const Post = styled.div`
     justify-content: center;
     column-gap: 3rem;
     row-gap: 2rem;
-    margin: auto;
     padding: 1rem 0;
 
     @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {

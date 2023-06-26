@@ -10,7 +10,6 @@ const Container = styled.ul`
     justify-content: center;
     column-gap: 3rem;
     row-gap: 2rem;
-    margin: auto;
     padding: 1rem 0;
 
     &::-webkit-scrollbar {

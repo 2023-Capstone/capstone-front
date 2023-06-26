@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import LinkToDiary from '@/pages/Mypage/LinkToDiary';
-import useMount from '@/hooks/useMount';
 import { LIMIT } from '@/constants/diary';
+import useMount from '@/hooks/useMount';
 import * as S from './index.styles';
 
 const Pagination = ({ totalPage, mood, page, setParams }) => {

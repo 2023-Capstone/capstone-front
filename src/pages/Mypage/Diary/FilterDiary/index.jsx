@@ -59,14 +59,14 @@ const FilterDiary = ({ mood }) => {
       <S.WrapperDisplay>
         <button
           type="button"
-          className={display === 'grid' ? 'selected' : ''}
+          className={display === 'list' ? '' : 'selected'}
           onClick={handleDisplay}
         >
           <IoGrid />
         </button>
         <button
           type="button"
-          className={display === 'grid' ? '' : 'selected'}
+          className={display === 'list' ? 'selected' : ''}
           onClick={handleDisplay}
         >
           <FaList />

@@ -12,7 +12,6 @@ import useError from '@/hooks/useError';
 import useInput from '@/hooks/useInput';
 import useSnackbar from '@/hooks/useSnackbar';
 import useUser from '@/hooks/useUser';
-
 import Inputs from './Inputs';
 import WithdrawalModal from './WithdrawalModal';
 import * as S from './index.styles';
