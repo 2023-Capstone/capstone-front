@@ -100,8 +100,12 @@ const Pagination = styled.div`
 const Button = styled.div`
   background-color: ${({ theme: { colors } }) => colors.SKELETON};
   padding: 0.8rem;
-  margin-right: 0.5rem;
+  margin-right: 1rem;
   border-radius: 5px;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    margin-right: 0.5rem;
+  }
 `;
 
 export {
