@@ -6,7 +6,6 @@ const BROWSER_PATH = {
   EDIT: '/edit',
   MYPAGE: {
     BASE: '/me',
-    INFO: 'info',
     DIARY: 'diary',
   },
 };
