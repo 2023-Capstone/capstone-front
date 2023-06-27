@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
+import useError from '@/hooks/useError';
 
 const useFetchQuery = (initValue, deps, fetchFunc, staleTime) => {
   const [data, setData] = useState(initValue);
@@ -7,6 +8,7 @@ const useFetchQuery = (initValue, deps, fetchFunc, staleTime) => {
   const dataQuery = useQuery(deps, () => fetchFunc(), {
     staleTime,
   });
+  const handleError = useError();
 
   useEffect(() => {
     if (dataQuery.isError) handleError(dataQuery.error.code);

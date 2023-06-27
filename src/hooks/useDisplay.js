@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai';
-import { displayAtom } from '../store/diary';
+import { displayAtom } from '@/store/diary';
 
 const useDisplay = () => {
   const [display, setDisplay] = useAtom(displayAtom);

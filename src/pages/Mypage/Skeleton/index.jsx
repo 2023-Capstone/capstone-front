@@ -14,14 +14,14 @@ const Skeleton = () => {
         {Array(LIMIT.PAGE)
           .fill()
           .map(_ => (
-            <S.Item className={display}></S.Item>
+            <S.Item className={display} />
           ))}
       </S.Post>
       <S.Pagination>
         {Array(LIMIT.BUTTON)
           .fill()
           .map(_ => (
-            <S.Button></S.Button>
+            <S.Button />
           ))}
       </S.Pagination>
     </S.Container>
