@@ -52,14 +52,20 @@ const Edit = () => {
     // TODO: 일기 작성 API 요청 및 처리
     e.preventDefault();
     if (window.confirm('일기를 등록 하시겠습니까?')) {
+      const blockForSave = blocks.map(block => {
+        delete block.contentRef;
+        delete block.id;
+        return block;
+      });
       const diary = {
         title: title,
         weather: weather,
         hashtag: hashtagList,
         mood: mood,
         font: font,
-        blocks: [...blocks],
+        blocks: [...blockForSave],
       };
+      console.log(diary);
       try {
         const request = await requestUploadDiary(diary);
         console.log(request);
