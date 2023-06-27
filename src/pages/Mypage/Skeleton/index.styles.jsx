@@ -28,22 +28,21 @@ const Container = styled.div`
 const WrapperFilter = styled.div`
   display: flex;
   justify-content: space-between;
+
+  * {
+    background-color: ${({ theme: { colors } }) => colors.SKELETON};
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1.5rem 1rem 1rem 1rem;
+  }
 `;
 
 const FilterMood = styled.div`
-  background-color: ${({ theme: { colors } }) => colors.SKELETON};
-  border-radius: 10px;
   width: 60vw;
-  padding: 1rem;
-  margin: 1.5rem 1rem 1rem 1rem;
 `;
 
 const FilterDisplay = styled.div`
-  background-color: ${({ theme: { colors } }) => colors.SKELETON};
-  border-radius: 10px;
   width: 3vw;
-  padding: 1rem;
-  margin: 1.5rem 1rem 1rem 1rem;
 `;
 
 const Post = styled.div`
@@ -70,6 +69,7 @@ const Post = styled.div`
 
 const Item = styled.div`
   background-color: ${({ theme: { colors } }) => colors.SKELETON};
+
   &.list {
     padding: 1.5rem 5vw;
     margin-top: 1rem;
