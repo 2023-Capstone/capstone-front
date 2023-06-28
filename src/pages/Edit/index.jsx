@@ -49,8 +49,11 @@ const Edit = () => {
   };
 
   const makeNewDiary = async e => {
-    // TODO: 일기 작성 API 요청 및 처리
     e.preventDefault();
+    if (blocks.length === 1 && blocks[0].data.text === '') {
+      showSnackbar('내용을 입력해주세요. ');
+      return;
+    }
     if (window.confirm('일기를 등록 하시겠습니까?')) {
       const blockForSave = blocks.map(block => {
         delete block.contentRef;
@@ -65,7 +68,6 @@ const Edit = () => {
         font: font,
         blocks: [...blockForSave],
       };
-      console.log(diary);
       try {
         const request = await requestUploadDiary(diary);
         console.log(request);
