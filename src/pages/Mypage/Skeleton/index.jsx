@@ -13,15 +13,15 @@ const Skeleton = () => {
       <S.Post className={display}>
         {Array(LIMIT.PAGE)
           .fill()
-          .map(_ => (
-            <S.Item className={display} />
+          .map((_, idx) => (
+            <S.Item key={idx} className={display} />
           ))}
       </S.Post>
       <S.Pagination>
         {Array(LIMIT.BUTTON)
           .fill()
-          .map(_ => (
-            <S.Button />
+          .map((_, idx) => (
+            <S.Button key={idx} />
           ))}
       </S.Pagination>
     </S.Container>
