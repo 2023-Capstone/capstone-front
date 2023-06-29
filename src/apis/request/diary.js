@@ -15,7 +15,7 @@ const requestDiaryByMood = params => {
 
 const requestDiaryNumByMood = () => {
   return axiosWithAccessToken
-    .get(`${API_PATH.DIARY_NUM_BY_MOOD}`)
+    .get(`${API_PATH.DIARY_COUNT_BY_MOOD}`)
     .then(response => response.data);
 };
 

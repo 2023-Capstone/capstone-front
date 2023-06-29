@@ -53,7 +53,7 @@ const diaryHandlers = [
       ),
     );
   }),
-  rest.get(`${baseURL}${API_PATH.DIARY_NUM_BY_MOOD}`, (req, res, ctx) => {
+  rest.get(`${baseURL}${API_PATH.DIARY_COUNT_BY_MOOD}`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(diaryCount));
   }),
 ];
