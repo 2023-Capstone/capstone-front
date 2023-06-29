@@ -48,38 +48,42 @@ const Edit = () => {
     navigate(-1);
   };
 
-  const makeNewDiary = async e => {
+  const makeNewDiary = e => {
     e.preventDefault();
     if (blocks.length === 1 && blocks[0].data.text === '') {
-      showSnackbar('내용을 입력해주세요. ');
+      showSnackbar(CLIENT_MESSAGE.ERROR.EMPTY_DIARY);
       return;
     }
-    if (window.confirm('일기를 등록 하시겠습니까?')) {
-      const blockForSave = blocks.map(block => {
-        delete block.contentRef;
-        delete block.id;
-        return block;
-      });
-      const diary = {
-        title: title,
-        weather: weather,
-        hashtag: hashtagList,
-        mood: mood,
-        font: font,
-        blocks: [...blockForSave],
-      };
-      try {
-        const request = await requestUploadDiary(diary);
-        console.log(request);
-        showSnackbar('일기 작성이 완료되었습니다. ');
-      } catch (err) {
+    if (!window.confirm(CLIENT_MESSAGE.GUIDE.CONFIRM_POST_DIARY)) return;
+
+    const blockForSave = blocks.map(block => ({
+      type: block.type,
+      data: { ...block.data },
+    }));
+    requestUploadDiary({
+      title: title,
+      weather: weather,
+      hashtag: hashtagList,
+      mood: mood,
+      font: font,
+      blocks: [...blockForSave],
+    })
+      .then(() => {
+        showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_POST_DIARY);
+      })
+      .catch(err => {
         handleError(err.code);
-      }
+      });
+  };
+
+  const preventEnter = e => {
+    if (e.code === 'Enter') {
+      e.preventDefault();
     }
   };
 
   return (
-    <S.Container>
+    <S.Container onSubmit={makeNewDiary} onKeyDown={preventEnter}>
       <Title
         title={title}
         setTitle={onChangeTitle}
@@ -95,7 +99,7 @@ const Edit = () => {
         hashtagList={hashtagList}
       />
       <S.BtnBox>
-        <button onClick={makeNewDiary}>작성</button>
+        <button>작성</button>
         <button type="button" onClick={goToPrevPage}>
           취소
         </button>
