@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import {
   requestDiaryByMood,
@@ -38,7 +38,7 @@ const Diary = ({ toTop }) => {
     1000 * 60 * 5,
   );
 
-  useMount(() => {
+  useEffect(() => {
     setList(listQuery.data);
     setTotalDiaryCount(totalDiaryCountQuery.data);
   }, [listQuery, totalDiaryCountQuery]);
