@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import {
   requestDiaryByMood,
-  requestDiaryNumByMood,
+  requestDiaryCountByMood,
 } from '@/apis/request/diary';
 import { LIMIT } from '@/constants/diary';
 import { BROWSER_PATH } from '@/constants/path';
@@ -22,7 +22,7 @@ const Diary = ({ toTop }) => {
 
   const { dataQuery: totalDiaryCountQuery } = useFetchQuery(
     ['diaryCount'],
-    requestDiaryNumByMood,
+    requestDiaryCountByMood,
     1000 * 60 * 5,
   );
 
