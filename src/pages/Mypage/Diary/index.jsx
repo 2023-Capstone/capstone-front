@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import {
   requestDiaryByMood,
@@ -16,15 +17,16 @@ const Diary = ({ toTop }) => {
   const mood = searchParams.get('mood');
   const page = searchParams.get('page');
 
-  const { data: totalDiaryCount } = useFetchQuery(
-    {},
+  const [totalDiaryCount, setTotalDiaryCount] = useState({});
+  const [list, setList] = useState([]);
+
+  const { dataQuery: totalDiaryCountQuery } = useFetchQuery(
     ['diaryCount'],
     requestDiaryNumByMood,
     1000 * 60 * 5,
   );
 
-  const { data: list } = useFetchQuery(
-    [],
+  const { dataQuery: listQuery } = useFetchQuery(
     ['list', mood, page],
     () => {
       return requestDiaryByMood({
@@ -35,6 +37,11 @@ const Diary = ({ toTop }) => {
     },
     1000 * 60 * 5,
   );
+
+  useMount(() => {
+    setList(listQuery.data);
+    setTotalDiaryCount(totalDiaryCountQuery.data);
+  }, [listQuery, totalDiaryCountQuery]);
 
   useMount(() => {
     toTop();

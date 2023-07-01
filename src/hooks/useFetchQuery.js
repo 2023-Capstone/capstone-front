@@ -1,10 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import useError from '@/hooks/useError';
 
-const useFetchQuery = (initValue, deps, fetchFunc, staleTime) => {
-  const [data, setData] = useState(initValue);
-
+const useFetchQuery = (deps, fetchFunc, staleTime) => {
   const dataQuery = useQuery(deps, () => fetchFunc(), {
     staleTime,
   });
@@ -14,11 +12,7 @@ const useFetchQuery = (initValue, deps, fetchFunc, staleTime) => {
     if (dataQuery.isError) handleError(dataQuery.error.code);
   }, [dataQuery.isError]);
 
-  useEffect(() => {
-    setData(dataQuery.data);
-  }, [dataQuery]);
-
-  return { data };
+  return { dataQuery };
 };
 
 export default useFetchQuery;

@@ -1,8 +1,8 @@
-import useDisplay from '@/hooks/useDisplay';
+import useDisplayLayout from '@/hooks/useDisplayLayout';
 import * as S from './index.style';
 
 const Item = ({ item }) => {
-  const [display] = useDisplay();
+  const [display] = useDisplayLayout();
   return (
     <S.Container>
       {display === 'list' ? (

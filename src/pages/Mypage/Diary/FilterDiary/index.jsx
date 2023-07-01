@@ -3,13 +3,13 @@ import { IoGrid } from 'react-icons/io5';
 import { FaList } from 'react-icons/fa';
 import LinkToDiary from '@/pages/Mypage/LinkToDiary';
 import * as S from './index.styles';
-import useDisplay from '@/hooks/useDisplay';
+import useDisplayLayout from '@/hooks/useDisplayLayout';
 
 const FilterDiary = ({ mood }) => {
-  const [display, setDisplay] = useDisplay();
+  const [display, setDisplay] = useDisplayLayout();
 
-  const handleDisplay = () => {
-    setDisplay(display === 'list' ? 'grid' : 'list');
+  const handleDisplay = display => () => {
+    setDisplay(display);
   };
 
   return (
@@ -60,14 +60,14 @@ const FilterDiary = ({ mood }) => {
         <button
           type="button"
           className={display === 'list' ? '' : 'selected'}
-          onClick={handleDisplay}
+          onClick={handleDisplay('grid')}
         >
           <IoGrid />
         </button>
         <button
           type="button"
           className={display === 'list' ? 'selected' : ''}
-          onClick={handleDisplay}
+          onClick={handleDisplay('list')}
         >
           <FaList />
         </button>

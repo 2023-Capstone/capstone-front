@@ -1,9 +1,9 @@
-import useDisplay from '@/hooks/useDisplay';
+import useDisplayLayout from '@/hooks/useDisplayLayout';
 import * as S from './index.styles';
 import { LIMIT } from '@/constants/diary';
 
 const Skeleton = () => {
-  const [display] = useDisplay();
+  const [display] = useDisplayLayout();
   return (
     <S.Container>
       <S.WrapperFilter>

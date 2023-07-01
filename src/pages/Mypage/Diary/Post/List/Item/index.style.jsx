@@ -3,17 +3,17 @@ import styled from '@emotion/styled';
 const Container = styled.li`
   list-style: none;
 
-  > * {
+  div {
     background-color: ${({ theme: { colors } }) => colors.INPUT_BACKGROUND};
     border: 1px solid ${({ theme: { colors } }) => colors.GREEN_500};
     border-radius: 5px;
 
     display: flex;
     align-items: center;
-  }
 
-  > *:hover {
-    cursor: pointer;
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 

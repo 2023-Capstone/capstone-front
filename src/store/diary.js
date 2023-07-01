@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
 
-const displayAtom = atom('list');
+const displayLayoutAtom = atom('list');
 
-export { displayAtom };
+export { displayLayoutAtom };

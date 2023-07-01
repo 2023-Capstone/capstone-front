@@ -1,9 +1,9 @@
-import useDisplay from '@/hooks/useDisplay';
+import useDisplayLayout from '@/hooks/useDisplayLayout';
 import Item from './Item';
 import * as S from './index.styles';
 
 const List = ({ list }) => {
-  const [display] = useDisplay();
+  const [display] = useDisplayLayout();
   return (
     <S.Container className={display}>
       {list.map(item => (
