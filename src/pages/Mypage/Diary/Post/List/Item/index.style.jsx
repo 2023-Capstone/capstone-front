@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 const Container = styled.li`
   list-style: none;
-
+  
   div {
     background-color: ${({ theme: { colors } }) => colors.INPUT_BACKGROUND};
     border: 1px solid ${({ theme: { colors } }) => colors.GREEN_500};
@@ -19,7 +19,7 @@ const Container = styled.li`
 
 const WrapperList = styled.div`
   justify-content: space-between;
-
+  
   margin-top: 1rem;
   padding: 0.5rem;
 `;
@@ -27,7 +27,7 @@ const WrapperList = styled.div`
 const WrapperGrid = styled.div`
   flex-direction: column;
   justify-content: center;
-
+  
   padding: 1rem;
 `;
 

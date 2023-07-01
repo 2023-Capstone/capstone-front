@@ -9,7 +9,7 @@ const Pagination = ({ totalPage, mood, page, setParams }) => {
     Math.ceil(totalPage / LIMIT.BUTTON) - 1,
   );
   const [currentButtonIndex, setCurrentButtonIndex] = useState(0);
-
+  
   useMount(() => {
     setTotalButtonIndex(Math.ceil(totalPage / LIMIT.BUTTON) - 1);
     setCurrentButtonIndex(0);

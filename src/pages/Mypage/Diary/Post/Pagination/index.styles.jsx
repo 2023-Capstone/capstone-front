@@ -4,6 +4,7 @@ const Container = styled.div`
   li {
     list-style: none;
   }
+  
   background-color: ${({ theme: { colors } }) => colors.GREEN_100};
 
   display: flex;

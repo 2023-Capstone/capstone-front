@@ -5,6 +5,10 @@ const requestUploadImg = formData => {
   return axios.post(API_PATH.IMAGE, formData);
 };
 
+const requestUploadDiary = diary => {
+  return axios.post(API_PATH.DIARY, diary);
+};
+
 const requestDiaryByMood = params => {
   return axiosWithAccessToken
     .get(
@@ -19,4 +23,9 @@ const requestDiaryCountByMood = () => {
     .then(response => response.data);
 };
 
-export { requestUploadImg, requestDiaryByMood, requestDiaryCountByMood };
+export {
+  requestUploadImg,
+  requestUploadDiary,
+  requestDiaryByMood,
+  requestDiaryCountByMood,
+};

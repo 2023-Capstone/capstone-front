@@ -6,7 +6,7 @@ const Container = styled.div`
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-
+  
   &::-webkit-scrollbar {
     background-color: ${({ theme: { colors } }) => colors.GREEN_50};
     width: 0.5rem;

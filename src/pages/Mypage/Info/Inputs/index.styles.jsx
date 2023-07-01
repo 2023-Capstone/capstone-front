@@ -30,7 +30,7 @@ const Input = styled.input`
   &.invalid {
     border: 1px solid ${({ theme: { colors } }) => colors.RED_500};
   }
-
+  
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.md}px) {
     grid-column: 2 / span 3;
   }

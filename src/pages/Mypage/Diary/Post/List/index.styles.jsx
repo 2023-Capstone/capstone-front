@@ -24,6 +24,7 @@ const Container = styled.ul`
     @media screen and (max-width: 1284px) {
       justify-content: start;
     }
+    
     @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
       grid-template-columns: repeat(2, 9rem);
       justify-content: center;

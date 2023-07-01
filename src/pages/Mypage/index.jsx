@@ -10,7 +10,7 @@ import Skeleton from './Skeleton';
 const Mypage = () => {
   const [searchParams] = useSearchParams();
   const topRef = useRef();
-
+  
   const toTop = () => {
     topRef.current.scrollIntoView();
   };
