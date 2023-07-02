@@ -21,6 +21,7 @@ const API_PATH = {
   DIARY: '/diary',
   DIARY_BY_MOOD: '/diary/mood',
   DIARY_COUNT_BY_MOOD: '/diary/mood/count',
+  DIARY_RANDOM: '/diary/random',
   IMAGE: '/upload',
 };
 

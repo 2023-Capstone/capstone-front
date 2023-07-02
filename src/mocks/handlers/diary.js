@@ -19,6 +19,15 @@ const diaryCount = {
   worst: 5,
 };
 
+const randomDiary = {
+  title: '롯데월드 갔다 옴...',
+  mood: 'best',
+  date: '2023-03-15',
+  weather: 'Haze',
+  content:
+    '롯데월드 갔는데 사람이 너무 많았다.  롯데월드 갔는데 사람이 너무 많았다.  롯데월드 갔는데 사람이 너무 많았다.  롯데월드 갔는데 사람이 너무 많았다.  롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다.',
+};
+
 const getLastPageCount = count => {
   return count % 10 > 0 ? count % 10 : 10;
 };
@@ -58,9 +67,13 @@ const diaryHandlers = [
       ),
     );
   }),
-  
+
   rest.get(`${baseURL}${API_PATH.DIARY_COUNT_BY_MOOD}`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(diaryCount));
+  }),
+
+  rest.post(`${baseURL}${API_PATH.DIARY_RANDOM}`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(randomDiary));
   }),
 ];
 
