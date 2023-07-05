@@ -27,9 +27,5 @@ export {
   requestUploadImg,
   requestUploadDiary,
   requestDiaryByMood,
-<<<<<<< HEAD
-  requestDiaryNumByMood,
-=======
   requestDiaryCountByMood,
->>>>>>> 49f2137497ca48735e9ccdc1972cdfc3dc52bb69
 };
