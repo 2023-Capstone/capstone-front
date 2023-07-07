@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 
 const Container = styled.div`
+  position: relative;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,16 +33,54 @@ const SelectContainer = styled.div`
 
 const SelecedValue = styled.button`
   background-color: inherit;
-  border: 2px solid ${({ theme }) => theme.colors.GREEN_700};
   padding: 0.25rem 0.75rem;
   font-size: 1.25rem;
   font-weight: 600;
   color: ${({ theme }) => theme.colors.GREEN_500};
 `;
 
-const SelectBox = styled.ul``;
+const SelectBox = styled.ul`
+  display: ${({ open }) => (open ? 'block' : 'none')};
+  position: absolute;
+  width: 100%;
+  top: 3rem;
 
-const SelectOption = styled.li``;
+  border: 1px solid ${({ theme }) => theme.colors.GREEN_500};
+  border-radius: 10px;
+  color: ${({ theme }) => theme.colors.GREEN_500};
+  background-color: ${({ theme }) => theme.colors.INPUT_BACKGROUND};
+  font-weight: 600;
+  font-size: 1.25rem;
+  overflow: hidden;
+
+  height: 10rem;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const SelectOption = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${({ selected, theme }) =>
+    selected ? theme.colors.GREEN_500 : 'none'};
+  color: ${({ selected }) => (selected ? '#fff' : 'none')};
+  padding: 0.625rem;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.GREEN_500};
+    color: #fff;
+  }
+`;
+
+const CountBox = styled.div`
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-weight: 600;
+`;
 export {
   Container,
   MoveBtn,
@@ -48,4 +88,5 @@ export {
   SelecedValue,
   SelectBox,
   SelectOption,
+  CountBox,
 };

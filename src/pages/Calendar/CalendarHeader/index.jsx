@@ -7,6 +7,10 @@ const CalendarHeader = ({
   currentYear,
   moveNextMonth,
   movePrevMonth,
+  yearSelect,
+  monthSelect,
+  toggleSelect,
+  changeDate,
 }) => {
   return (
     <S.Container>
@@ -14,16 +18,43 @@ const CalendarHeader = ({
         <AiOutlineLeft onClick={movePrevMonth} />
       </S.MoveBtn>
       <S.SelectContainer>
-        <S.SelecedValue>{currentYear} 년</S.SelecedValue>
-        <S.SelectBox></S.SelectBox>
+        <S.SelecedValue type="button" onClick={toggleSelect('year')}>
+          {currentYear} 년
+        </S.SelecedValue>
+        <S.SelectBox open={yearSelect}>
+          {Array.from(Array(4).keys()).map(i => (
+            <S.SelectOption
+              selected={i + 2020 === currentYear}
+              onClick={changeDate('year')}
+              value={i + 2020}
+            >
+              {i + 2020}
+            </S.SelectOption>
+          ))}
+        </S.SelectBox>
       </S.SelectContainer>
       <S.SelectContainer>
-        <S.SelecedValue>{currentMonth} 월</S.SelecedValue>
-        <S.SelectBox></S.SelectBox>
+        <S.SelecedValue type="button" onClick={toggleSelect('month')}>
+          {currentMonth} 월
+        </S.SelecedValue>
+        <S.SelectBox open={monthSelect}>
+          {Array.from(Array(12).keys()).map(i => (
+            <S.SelectOption
+              selected={i + 1 === currentMonth}
+              onClick={changeDate('month')}
+              value={i + 1}
+            >
+              {i + 1}
+            </S.SelectOption>
+          ))}
+        </S.SelectBox>
       </S.SelectContainer>
       <S.MoveBtn>
         <AiOutlineRight onClick={moveNextMonth} />
       </S.MoveBtn>
+      <S.CountBox>
+        0/{new Date(currentYear, currentMonth - 1, 0).getDate()}
+      </S.CountBox>
     </S.Container>
   );
 };

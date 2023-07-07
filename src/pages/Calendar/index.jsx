@@ -21,7 +21,10 @@ const data = [
 
 const Calendar = () => {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
+  const [yearSelect, setYearSelect] = useState(false);
+  const [monthSelect, setMonthSelect] = useState(false);
+
   const moveNextMonth = () => {
     if (currentMonth === 12) {
       setCurrentMonth(1);
@@ -38,13 +41,50 @@ const Calendar = () => {
     }
     setCurrentMonth(currentMonth - 1);
   };
+
+  const changeDate = type => e => {
+    switch (type) {
+      case 'year':
+        setCurrentYear(e.target.value);
+        setYearSelect(false);
+        return;
+      case 'month':
+        setCurrentMonth(e.target.value);
+        setMonthSelect(false);
+        return;
+      default:
+        return;
+    }
+  };
+
+  const toggleSelect = type => e => {
+    e.stopPropagation();
+    switch (type) {
+      case 'year':
+        setYearSelect(!yearSelect);
+        setMonthSelect(false);
+        return;
+      case 'month':
+        setMonthSelect(!monthSelect);
+        setYearSelect(false);
+        return;
+      default:
+        setMonthSelect(false);
+        setYearSelect(false);
+        return;
+    }
+  };
   return (
-    <S.Container>
+    <S.Container onClick={toggleSelect()}>
       <CalendarHeader
         currentMonth={currentMonth}
         currentYear={currentYear}
         moveNextMonth={moveNextMonth}
         movePrevMonth={movePrevMonth}
+        yearSelect={yearSelect}
+        monthSelect={monthSelect}
+        toggleSelect={toggleSelect}
+        changeDate={changeDate}
       />
       <CalendarMain />
     </S.Container>

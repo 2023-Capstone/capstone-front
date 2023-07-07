@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 
-const Container = styled.div``;
+const Container = styled.div`
+  height: 100vh;
+`;
 
 /** 이제 해야 하는 부분
  *  캘린더 헤더 부분
