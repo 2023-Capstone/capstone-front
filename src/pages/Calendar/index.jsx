@@ -6,16 +6,25 @@ import * as S from './index.style';
 
 const data = [
   {
-    d: 1,
+    id: 'id',
+    date: '2023-07-01',
+    mood: 'best',
+    desc: '오늘은 공부하려다가 진격거 정주행 해버림 ㅋㅋ',
+    desc_type: 'title',
   },
   {
-    d: 1,
+    id: 'id',
+    date: '2023-07-04',
+    mood: 'good',
+    desc: '아 코테 내일인데 어떡하냐 ㅋㅋ',
+    desc_type: 'title',
   },
   {
-    d: 1,
-  },
-  {
-    d: 1,
+    id: 'id',
+    date: '2023-07-12',
+    mood: 'bad',
+    desc: '나는 진짜 뭐해먹고 살지..?',
+    desc_type: 'title',
   },
 ];
 

@@ -5,7 +5,7 @@ import { DAYS } from '@/constants/calendar';
 const CalendarMain = ({ currentYear, currentMonth }) => {
   const totalDate = new Date(currentYear, currentMonth, 0).getDate();
   const startDate = new Date(currentYear, currentMonth - 1, 1).getDay() + 1;
-  console.log(totalDate);
+  console.log(startDate);
   return (
     <S.Container>
       <S.DayBox>
@@ -15,9 +15,9 @@ const CalendarMain = ({ currentYear, currentMonth }) => {
       </S.DayBox>
       <S.DayBox>
         {Array.from(Array(totalDate).keys()).map(i => (
-          <S.Day day={i + 1} startDate={startDate}>
+          <S.Date date={i} startDate={startDate}>
             {i + 1}
-          </S.Day>
+          </S.Date>
         ))}
       </S.DayBox>
     </S.Container>
