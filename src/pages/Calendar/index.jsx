@@ -86,7 +86,7 @@ const Calendar = () => {
         toggleSelect={toggleSelect}
         changeDate={changeDate}
       />
-      <CalendarMain />
+      <CalendarMain currentMonth={currentMonth} currentYear={currentYear} />
     </S.Container>
   );
 };

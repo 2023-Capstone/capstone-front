@@ -53,7 +53,7 @@ const CalendarHeader = ({
         <AiOutlineRight onClick={moveNextMonth} />
       </S.MoveBtn>
       <S.CountBox>
-        0/{new Date(currentYear, currentMonth - 1, 0).getDate()}
+        0/{new Date(currentYear, currentMonth, 0).getDate()}
       </S.CountBox>
     </S.Container>
   );
