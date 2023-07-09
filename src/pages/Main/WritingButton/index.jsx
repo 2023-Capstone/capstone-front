@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import * as S from './index.styles';
 
 const WritingButton = () => {
   const navigate = useNavigate();
@@ -7,9 +8,9 @@ const WritingButton = () => {
     navigate('/edit');
   };
   return (
-    <button type="button" onClick={goToEdit}>
+    <S.Button type="button" onClick={goToEdit}>
       일기 작성하기
-    </button>
+    </S.Button>
   );
 };
 

@@ -29,10 +29,17 @@ const requestRandomDiary = () => {
     .then(response => response.data);
 };
 
+const requestDiaryCount = () => {
+  return axiosWithAccessToken
+    .get(`${API_PATH.DIARY_COUNT}`)
+    .then(response => response.data);
+};
+
 export {
   requestUploadImg,
   requestUploadDiary,
   requestDiaryByMood,
   requestDiaryCountByMood,
   requestRandomDiary,
+  requestDiaryCount,
 };

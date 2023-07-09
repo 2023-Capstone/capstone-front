@@ -5,6 +5,7 @@ const Container = styled.div`
 
   display: flex;
   flex-direction: column;
+  overflow-y: hidden;
 `;
 
 const Nickname = styled.p`
@@ -15,19 +16,23 @@ const Nickname = styled.p`
 
 const WrapperContent = styled.div`
   flex: 1 1 auto;
+  width: 90%;
+
+  margin: auto;
 
   display: grid;
-  grid-template-columns: 2fr 1fr;
-
-  width: 90%;
-  margin: auto;
-  background-color: aliceblue;
+  grid-template-columns: 5fr 2fr;
 `;
 
 const WrapperSide = styled.div`
   display: flex;
   flex-direction: column;
 
-  margin-left: 3rem;
+  margin: 2rem 0 2rem 3rem;
+
+  > * {
+    margin-bottom: 2rem;
+  }
 `;
+
 export { Container, Nickname, WrapperContent, WrapperSide };
