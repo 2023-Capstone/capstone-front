@@ -23,11 +23,11 @@ const Main = () => {
   const [randomDiary, setRandomDiary] = useState();
   const [diaryCount, setDiaryCount] = useState();
 
-  useEffect(() => {
-    if (!isLogin) {
-      navigate(BROWSER_PATH.LANDING);
-    }
-  }, [isLogin, navigate]);
+  // useEffect(() => {
+  //   if (!isLogin) {
+  //     navigate(BROWSER_PATH.LANDING);
+  //   }
+  // }, [isLogin, navigate]);
 
   useEffect(() => {
     requestRandomDiary()
