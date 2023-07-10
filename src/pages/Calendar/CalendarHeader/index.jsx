@@ -11,6 +11,7 @@ const CalendarHeader = ({
   monthSelect,
   toggleSelect,
   changeDate,
+  diaryCount,
 }) => {
   return (
     <S.Container>
@@ -24,6 +25,7 @@ const CalendarHeader = ({
         <S.SelectBox open={yearSelect}>
           {Array.from(Array(4).keys()).map(i => (
             <S.SelectOption
+              key={`${i}-year`}
               selected={i + 2020 === currentYear}
               onClick={changeDate('year')}
               value={i + 2020}
@@ -40,6 +42,7 @@ const CalendarHeader = ({
         <S.SelectBox open={monthSelect}>
           {Array.from(Array(12).keys()).map(i => (
             <S.SelectOption
+              key={`${i}-month`}
               selected={i + 1 === currentMonth}
               onClick={changeDate('month')}
               value={i + 1}
@@ -53,7 +56,7 @@ const CalendarHeader = ({
         <AiOutlineRight onClick={moveNextMonth} />
       </S.MoveBtn>
       <S.CountBox>
-        0/{new Date(currentYear, currentMonth, 0).getDate()}
+        {diaryCount}/{new Date(currentYear, currentMonth, 0).getDate()}
       </S.CountBox>
     </S.Container>
   );

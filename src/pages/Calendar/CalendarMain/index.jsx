@@ -1,22 +1,38 @@
+import { RxDotFilled } from 'react-icons/rx';
+
 import * as S from './index.style';
 
 import { DAYS } from '@/constants/calendar';
 
-const CalendarMain = ({ currentYear, currentMonth }) => {
+const CalendarMain = ({ currentYear, currentMonth, currentData }) => {
   const totalDate = new Date(currentYear, currentMonth, 0).getDate();
   const startDate = new Date(currentYear, currentMonth - 1, 1).getDay() + 1;
-  console.log(startDate);
+
+  console.log(currentData);
   return (
     <S.Container>
       <S.DayBox>
         {DAYS.map(day => (
-          <S.Day day={day}>{day}</S.Day>
+          <S.Day key={day} day={day}>
+            {day}
+          </S.Day>
         ))}
       </S.DayBox>
       <S.DayBox>
         {Array.from(Array(totalDate).keys()).map(i => (
-          <S.Date date={i} startDate={startDate}>
-            {i + 1}
+          <S.Date key={`${i}-day`} date={i} startDate={startDate}>
+            <S.DateTitle>
+              <S.DateInfo date={i} startDate={startDate}>
+                {i + 1}
+              </S.DateInfo>
+              <span>
+                {currentData[i + 1] && <RxDotFilled color="#404F40" />}
+              </span>
+            </S.DateTitle>
+            <S.Mood>{currentData[i + 1]?.mood}</S.Mood>
+            {currentData[i + 1] && (
+              <S.DescBox className="desc">{currentData[i + 1].desc}</S.DescBox>
+            )}
           </S.Date>
         ))}
       </S.DayBox>
