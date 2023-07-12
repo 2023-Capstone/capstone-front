@@ -38,8 +38,8 @@ const Date = styled(Link)`
   font-size: 1.25rem;
   padding: 1rem 1rem;
   min-height: 3.25rem;
-  grid-column-start: ${({ date, startDate }) =>
-    date === 0 ? startDate : 'auto'};
+  grid-column-start: ${({ date, startdate }) =>
+    date === 0 ? startdate : 'auto'};
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.GREEN_100};
@@ -70,10 +70,10 @@ const DateTitle = styled.div`
 
 const DateInfo = styled.span`
   flex-grow: 2;
-  color: ${({ date, startDate, theme }) =>
-    (date + startDate) % 7 === 0
+  color: ${({ date, startdate, theme }) =>
+    (date + startdate) % 7 === 0
       ? theme.colors.RED_500
-      : (date + startDate) % 7 === 1
+      : (date + startdate) % 7 === 1
       ? theme.colors.BLUE_500
       : theme.colors.GREEN_700};
 `;
