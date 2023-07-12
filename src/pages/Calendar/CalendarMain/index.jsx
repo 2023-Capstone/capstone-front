@@ -1,5 +1,4 @@
 import { RxDotFilled } from 'react-icons/rx';
-import { Link } from 'react-router-dom';
 
 import * as S from './index.style';
 
@@ -7,7 +6,7 @@ import { DAYS } from '@/constants/calendar';
 
 const CalendarMain = ({ currentYear, currentMonth, currentData }) => {
   const totalDate = new Date(currentYear, currentMonth, 0).getDate();
-  const startDate = new Date(currentYear, currentMonth - 1, 1).getDay() + 1;
+  const startdate = new Date(currentYear, currentMonth - 1, 1).getDay() + 1;
 
   console.log(currentData);
   return (
@@ -25,10 +24,10 @@ const CalendarMain = ({ currentYear, currentMonth, currentData }) => {
             to={`/detail/${currentData[i + 1]?.id}`}
             key={`${i}-day`}
             date={i}
-            startDate={startDate}
+            startDate={startdate}
           >
             <S.DateTitle>
-              <S.DateInfo date={i} startDate={startDate}>
+              <S.DateInfo date={i} startDate={startdate}>
                 {i + 1}
               </S.DateInfo>
               <span>
