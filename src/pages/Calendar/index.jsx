@@ -4,28 +4,8 @@ import CalendarHeader from './CalendarHeader';
 import CalendarMain from './CalendarMain';
 import * as S from './index.style';
 
+import { getdiaryLisyByCalendar } from '@/apis/request/diary';
 import { MOOD_ICON } from '@/constants/diary';
-
-const data = [
-  {
-    id: '1',
-    date: '2023-07-01',
-    mood: 'best',
-    desc: '오늘은 공부하려다가 진격거 정주행 해버림 ㅋㅋ',
-  },
-  {
-    id: '2',
-    date: '2023-07-04',
-    mood: 'good',
-    desc: '아 코테 내일인데 어떡하냐 ㅋㅋ',
-  },
-  {
-    id: '3',
-    date: '2023-07-12',
-    mood: 'bad',
-    desc: '나는 진짜 뭐해먹고 살지..?',
-  },
-];
 
 const Calendar = () => {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
@@ -37,19 +17,21 @@ const Calendar = () => {
 
   useEffect(() => {
     const newData = {};
-    let count = 0;
-    data.forEach(diary => {
-      const [y, m, d] = diary.date.split('-').map(n => Number(n));
-      if (currentYear !== y || currentMonth !== m) return;
-      newData[d] = {
-        id: diary.id,
-        mood: MOOD_ICON[diary.mood],
-        desc: diary.desc,
-      };
-      count += 1;
+    getdiaryLisyByCalendar(currentYear, currentMonth).then(diaries => {
+      let count = 0;
+      diaries.forEach(diary => {
+        const [y, m, d] = diary.date.split('-').map(n => Number(n));
+        if (currentYear !== y || currentMonth !== m) return;
+        newData[d] = {
+          id: diary.id,
+          mood: MOOD_ICON[diary.mood],
+          desc: diary.desc,
+        };
+        count += 1;
+      });
+      setDiaryCount(count);
+      setCurrentData(newData);
     });
-    setDiaryCount(count);
-    setCurrentData(newData);
   }, [currentMonth, currentYear]);
 
   const moveNextMonth = () => {

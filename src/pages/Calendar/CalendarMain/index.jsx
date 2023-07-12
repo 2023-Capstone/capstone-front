@@ -20,7 +20,7 @@ const CalendarMain = ({ currentYear, currentMonth, currentData }) => {
       <S.DayBox>
         {Array.from(Array(totalDate).keys()).map(i => (
           <S.Date
-            to={`/detail/${currentData[i + 1]?.id}`}
+            to={currentData[i + 1] ? `/detail/${currentData[i + 1].id}` : null}
             key={`${i}-day`}
             date={i}
             startdate={startDate}
