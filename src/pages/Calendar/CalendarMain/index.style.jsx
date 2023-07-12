@@ -26,9 +26,9 @@ const Day = styled.div`
   font-size: 1.25rem;
   min-height: 3.25rem;
   color: ${({ day, theme }) =>
-    day === '일'
+    day === 0
       ? theme.colors.RED_500
-      : day === '토'
+      : day === 6
       ? theme.colors.BLUE_500
       : theme.colors.GREEN_700};
   ${({ theme: { breakpoints } }) => css`
@@ -105,10 +105,10 @@ const DateTitle = styled.div`
 
 const DateInfo = styled.span`
   flex-grow: 2;
-  color: ${({ date, startdate, theme }) =>
-    (date + startdate) % 7 === 0
+  color: ${({ date, startDate, theme }) =>
+    (date + startDate) % 7 === 1
       ? theme.colors.RED_500
-      : (date + startdate) % 7 === 1
+      : (date + startDate) % 7 === 0
       ? theme.colors.BLUE_500
       : theme.colors.GREEN_700};
 `;

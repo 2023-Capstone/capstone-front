@@ -30,7 +30,7 @@ const Calendar = () => {
         setCurrentData(convertedDiaries);
       })
       .catch(err => handleError(err.code));
-  }, [currentMonth, currentYear, handleError]);
+  }, [currentMonth, currentYear]);
 
   const moveNextMonth = () => {
     if (currentMonth === 12) {

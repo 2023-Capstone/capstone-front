@@ -2,7 +2,7 @@ import { RxDotFilled } from 'react-icons/rx';
 
 import * as S from './index.style';
 
-import { DAYS } from '@/constants/calendar';
+import { getDayKorean } from '@/utils/date';
 
 const CalendarMain = ({ currentYear, currentMonth, currentData }) => {
   const totalDate = new Date(currentYear, currentMonth, 0).getDate();
@@ -11,9 +11,9 @@ const CalendarMain = ({ currentYear, currentMonth, currentData }) => {
   return (
     <S.Container>
       <S.DayBox>
-        {DAYS.map(day => (
+        {Array.from(Array(7).keys()).map(day => (
           <S.Day key={day} day={day}>
-            {day}
+            {getDayKorean(day)}
           </S.Day>
         ))}
       </S.DayBox>
