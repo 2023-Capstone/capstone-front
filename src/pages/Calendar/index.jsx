@@ -8,19 +8,19 @@ import { MOOD_ICON } from '@/constants/diary';
 
 const data = [
   {
-    id: 'id',
+    id: '1',
     date: '2023-07-01',
     mood: 'best',
     desc: '오늘은 공부하려다가 진격거 정주행 해버림 ㅋㅋ',
   },
   {
-    id: 'id',
+    id: '2',
     date: '2023-07-04',
     mood: 'good',
     desc: '아 코테 내일인데 어떡하냐 ㅋㅋ',
   },
   {
-    id: 'id',
+    id: '3',
     date: '2023-07-12',
     mood: 'bad',
     desc: '나는 진짜 뭐해먹고 살지..?',

@@ -1,10 +1,16 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   box-sizing: border-box;
   width: 100%;
-  padding: 2rem 2rem;
+  padding: 2rem;
+  ${({ theme: { breakpoints } }) => css`
+    @media screen and (max-width: ${breakpoints.md}px) {
+      padding: 1rem;
+    }
+  `}
 `;
 
 const DayBox = styled.div`
@@ -25,6 +31,12 @@ const Day = styled.div`
       : day === '토'
       ? theme.colors.BLUE_500
       : theme.colors.GREEN_700};
+  ${({ theme: { breakpoints } }) => css`
+    @media screen and (max-width: ${breakpoints.md}px) {
+      font-size: 1rem;
+      min-height: 2.25rem;
+    }
+  `}
 `;
 
 const Date = styled(Link)`
@@ -36,7 +48,7 @@ const Date = styled(Link)`
   border-radius: 5px;
   font-weight: 600;
   font-size: 1.25rem;
-  padding: 1rem 1rem;
+  padding: 1rem;
   min-height: 3.25rem;
   grid-column-start: ${({ date, startdate }) =>
     date === 0 ? startdate : 'auto'};
@@ -47,15 +59,38 @@ const Date = styled(Link)`
 
   &:hover .desc {
     display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
+
+  ${({ theme: { breakpoints } }) => css`
+    @media screen and (min-width: ${breakpoints.sm +
+      1}px) and (max-width: ${breakpoints.md}px) {
+      gap: 1rem;
+      padding: 0.725rem;
+    }
+
+    @media screen and (max-width: ${breakpoints.sm}px) {
+      gap: 0.75rem;
+      padding: 0.5rem;
+      font-size: 0.825rem;
+      min-width: 1.25rem;
+    }
+  `}
 `;
 
 const DescBox = styled.div`
+  box-sizing: border-box;
+  width: 100%;
+
   display: none;
   position: absolute;
-  bottom: 0rem;
+  bottom: 0;
+  left: 0;
   background-color: #d9d9d9;
-  padding: 0.725rem 2rem;
+  padding: 0.725rem 0;
+  text-align: center;
   border-radius: 10px;
 
   transition: all 0.4s ease-in-out;

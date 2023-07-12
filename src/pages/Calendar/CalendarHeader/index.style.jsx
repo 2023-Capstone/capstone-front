@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 const Container = styled.div`
@@ -6,12 +7,29 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 5rem;
 
   padding: 1.725rem 0;
   width: 100%;
   background-color: ${({ theme }) => theme.colors.GREEN_50};
   font-size: 1.25rem;
+  ${({ theme: { breakpoints } }) => css`
+    @media screen and (min-width: ${breakpoints.md +
+      1}px) and (max-width: ${breakpoints.lg}px) {
+      gap: 3rem;
+    }
+
+    @media screen and (min-width: ${breakpoints.sm +
+      1}px) and (max-width: ${breakpoints.md}px) {
+      gap: 1rem;
+      font-size: 1rem;
+    }
+
+    @media screen and (max-width: ${breakpoints.sm}px) {
+      gap: 1.25rem;
+      font-size: 0.725rem;
+    }
+  `}
 `;
 
 const MoveBtn = styled.div`
@@ -23,6 +41,19 @@ const MoveBtn = styled.div`
   border: 2px solid ${({ theme }) => theme.colors.GREEN_700};
   border-radius: 5px;
   color: ${({ theme }) => theme.colors.GREEN_700};
+
+  ${({ theme: { breakpoints } }) => css`
+    @media screen and (min-width: ${breakpoints.sm +
+      1}px) and (max-width: ${breakpoints.md}px) {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    @media screen and (max-width: ${breakpoints.sm}px) {
+      width: 1rem;
+      height: 1rem;
+    }
+  `}
 `;
 
 const SelectContainer = styled.div`
@@ -37,6 +68,11 @@ const SelecedValue = styled.button`
   font-size: 1.25rem;
   font-weight: 600;
   color: ${({ theme }) => theme.colors.GREEN_500};
+  ${({ theme: { breakpoints } }) => css`
+    @media screen and (max-width: ${breakpoints.md}px) {
+      font-size: 1rem;
+    }
+  `}
 `;
 
 const SelectBox = styled.ul`
@@ -59,6 +95,12 @@ const SelectBox = styled.ul`
   &::-webkit-scrollbar {
     display: none;
   }
+  ${({ theme: { breakpoints } }) => css`
+    @media screen and (max-width: ${breakpoints.md}px) {
+      font-size: 1rem;
+      height: 9rem;
+    }
+  `}
 `;
 
 const SelectOption = styled.li`
