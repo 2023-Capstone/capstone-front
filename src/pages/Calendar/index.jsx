@@ -5,8 +5,8 @@ import CalendarMain from './CalendarMain';
 import * as S from './index.style';
 
 import { getdiaryLisyByCalendar } from '@/apis/request/diary';
-import { MOOD_ICON } from '@/constants/diary';
 import useError from '@/hooks/useError';
+import { convertDiaryData } from '@/utils/diaries';
 
 const Calendar = () => {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
@@ -19,24 +19,17 @@ const Calendar = () => {
   const handleError = useError();
 
   useEffect(() => {
-    const newData = {};
-    getdiaryLisyByCalendar(currentYear, currentMonth).then(diaries => {
-      let count = 0;
-      diaries
-        .forEach(diary => {
-          const [y, m, d] = diary.date.split('-').map(n => Number(n));
-          if (currentYear !== y || currentMonth !== m) return;
-          newData[d] = {
-            id: diary.id,
-            mood: MOOD_ICON[diary.mood],
-            desc: diary.desc,
-          };
-          count += 1;
-        })
-        .catch(err => handleError(err.code));
-      setDiaryCount(count);
-      setCurrentData(newData);
-    });
+    getdiaryLisyByCalendar(currentYear, currentMonth)
+      .then(diaries => {
+        const [convertedDiaries, count] = convertDiaryData(
+          diaries,
+          currentYear,
+          currentMonth,
+        );
+        setDiaryCount(count);
+        setCurrentData(convertedDiaries);
+      })
+      .catch(err => handleError(err.code));
   }, [currentMonth, currentYear, handleError]);
 
   const moveNextMonth = () => {
