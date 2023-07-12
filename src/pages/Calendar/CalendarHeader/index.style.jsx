@@ -40,6 +40,7 @@ const SelecedValue = styled.button`
 `;
 
 const SelectBox = styled.ul`
+  z-index: 1;
   display: ${({ open }) => (open ? 'block' : 'none')};
   position: absolute;
   width: 100%;

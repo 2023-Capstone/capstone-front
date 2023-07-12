@@ -1,4 +1,5 @@
 import { RxDotFilled } from 'react-icons/rx';
+import { Link } from 'react-router-dom';
 
 import * as S from './index.style';
 
@@ -20,7 +21,12 @@ const CalendarMain = ({ currentYear, currentMonth, currentData }) => {
       </S.DayBox>
       <S.DayBox>
         {Array.from(Array(totalDate).keys()).map(i => (
-          <S.Date key={`${i}-day`} date={i} startDate={startDate}>
+          <S.Date
+            to={`/detail/${currentData[i + 1]?.id}`}
+            key={`${i}-day`}
+            date={i}
+            startDate={startDate}
+          >
             <S.DateTitle>
               <S.DateInfo date={i} startDate={startDate}>
                 {i + 1}

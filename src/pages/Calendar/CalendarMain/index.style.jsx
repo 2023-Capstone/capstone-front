@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -22,7 +23,7 @@ const Day = styled.div`
     day === '일' ? 'red' : day === '토' ? 'blue' : theme.colors.GREEN_700};
 `;
 
-const Date = styled.div`
+const Date = styled(Link)`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -53,6 +54,7 @@ const DescBox = styled.div`
   padding: 0.725rem 2rem;
   border-radius: 10px;
 
+  transition: all 0.4s ease-in-out;
   font-size: 0.725rem;
   font-weight: 400;
 `;

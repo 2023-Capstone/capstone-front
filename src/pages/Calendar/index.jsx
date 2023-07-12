@@ -37,6 +37,7 @@ const Calendar = () => {
 
   useEffect(() => {
     const newData = {};
+    let count = 0;
     data.forEach(diary => {
       const [y, m, d] = diary.date.split('-').map(n => Number(n));
       if (currentYear !== y || currentMonth !== m) return;
@@ -45,8 +46,9 @@ const Calendar = () => {
         mood: MOOD_ICON[diary.mood],
         desc: diary.desc,
       };
+      count += 1;
     });
-    setDiaryCount(data.length);
+    setDiaryCount(count);
     setCurrentData(newData);
   }, [currentMonth, currentYear]);
 
