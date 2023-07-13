@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 
+import { useQuery } from 'react-query';
+
 import CalendarHeader from './CalendarHeader';
 import CalendarMain from './CalendarMain';
 import * as S from './index.style';
 
 import { getdiaryLisyByCalendar } from '@/apis/request/diary';
-import useError from '@/hooks/useError';
 import { convertDiaryData } from '@/utils/diaries';
 
 const Calendar = () => {
@@ -16,21 +17,20 @@ const Calendar = () => {
   const [yearSelect, setYearSelect] = useState(false);
   const [monthSelect, setMonthSelect] = useState(false);
 
-  const handleError = useError();
+  const { data } = useQuery({
+    queryKey: ['diaryList', currentYear, currentMonth],
+    queryFn: () => getdiaryLisyByCalendar(currentYear, currentMonth),
+  });
 
   useEffect(() => {
-    getdiaryLisyByCalendar(currentYear, currentMonth)
-      .then(diaries => {
-        const [convertedDiaries, count] = convertDiaryData(
-          diaries,
-          currentYear,
-          currentMonth,
-        );
-        setDiaryCount(count);
-        setCurrentData(convertedDiaries);
-      })
-      .catch(err => handleError(err.code));
-  }, [currentMonth, currentYear]);
+    const [convertedDiaries, count] = convertDiaryData(
+      data,
+      currentYear,
+      currentMonth,
+    );
+    setDiaryCount(count);
+    setCurrentData(convertedDiaries);
+  }, [data, currentYear, currentMonth]);
 
   const moveNextMonth = () => {
     if (currentMonth === 12) {
