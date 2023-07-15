@@ -21,17 +21,9 @@ const MOOD = {
   },
 };
 
-const MOOD_ICON = {
-  best: '😀',
-  good: '🙂',
-  normal: '😐',
-  bad: '🙁',
-  worst: '😞',
-};
-
 const LIMIT = {
   PAGE: 10,
   BUTTON: 10,
 };
 
-export { MOOD, MOOD_ICON, LIMIT };
+export { MOOD, LIMIT };

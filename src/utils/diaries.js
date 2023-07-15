@@ -1,5 +1,4 @@
-// 이름 추천 받아요
-import { MOOD_ICON } from '@/constants/diary';
+import { MOOD } from '@/constants/diary';
 
 const convertDiaryData = (diaries, year, month) => {
   const convertedDiaries = {};
@@ -9,7 +8,7 @@ const convertDiaryData = (diaries, year, month) => {
     if (year !== y || month !== m) return;
     convertedDiaries[d] = {
       id: diary.id,
-      mood: MOOD_ICON[diary.mood],
+      mood: MOOD[diary.mood.toUpperCase()].emoji,
       desc: diary.desc,
     };
     count += 1;
