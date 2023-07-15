@@ -7,15 +7,15 @@ import CalendarMain from './CalendarMain';
 import * as S from './index.style';
 
 import { getdiaryLisyByCalendar } from '@/apis/request/diary';
-import { convertDiaryData } from '@/utils/diaries';
+import { simplifyDiaryForCalendar } from '@/utils/diaries';
 
 const Calendar = () => {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
   const [diaryCount, setDiaryCount] = useState(0);
   const [currentData, setCurrentData] = useState({});
-  const [yearSelect, setYearSelect] = useState(false);
-  const [monthSelect, setMonthSelect] = useState(false);
+  const [selectedyear, setSelectedYear] = useState(false);
+  const [selectedmonth, setSelectedMonth] = useState(false);
 
   const { data } = useQuery({
     queryKey: ['diaryList', currentYear, currentMonth],
@@ -23,13 +23,13 @@ const Calendar = () => {
   });
 
   useEffect(() => {
-    const [convertedDiaries, count] = convertDiaryData(
+    const simplifiedDiaries = simplifyDiaryForCalendar(
       data,
       currentYear,
       currentMonth,
     );
-    setDiaryCount(count);
-    setCurrentData(convertedDiaries);
+    setDiaryCount(Object.keys(simplifiedDiaries).length);
+    setCurrentData(simplifiedDiaries);
   }, [data, currentYear, currentMonth]);
 
   const moveNextMonth = () => {
@@ -55,12 +55,12 @@ const Calendar = () => {
     switch (type) {
       case 'year':
         setCurrentYear(e.target.value);
-        setYearSelect(false);
+        setSelectedYear(false);
 
         return;
       case 'month':
         setCurrentMonth(e.target.value);
-        setMonthSelect(false);
+        setSelectedMonth(false);
 
         return;
       default:
@@ -72,18 +72,18 @@ const Calendar = () => {
     e.stopPropagation();
     switch (type) {
       case 'year':
-        setYearSelect(!yearSelect);
-        setMonthSelect(false);
+        setSelectedYear(!selectedyear);
+        setSelectedMonth(false);
 
         return;
       case 'month':
-        setMonthSelect(!monthSelect);
-        setYearSelect(false);
+        setSelectedMonth(!selectedmonth);
+        setSelectedYear(false);
 
         return;
       default:
-        setMonthSelect(false);
-        setYearSelect(false);
+        setSelectedMonth(false);
+        setSelectedYear(false);
 
         return;
     }
@@ -96,8 +96,8 @@ const Calendar = () => {
         currentYear={currentYear}
         moveNextMonth={moveNextMonth}
         movePrevMonth={movePrevMonth}
-        yearSelect={yearSelect}
-        monthSelect={monthSelect}
+        selectedYear={selectedyear}
+        selectedMonth={selectedmonth}
         toggleSelect={toggleSelect}
         changeDate={changeDate}
         diaryCount={diaryCount}

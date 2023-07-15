@@ -33,7 +33,7 @@ const CalendarMain = ({ currentYear, currentMonth, currentData }) => {
                 {currentData[i + 1] && <RxDotFilled color="#404F40" />}
               </span>
             </S.DateTitle>
-            <S.Mood>{currentData[i + 1]?.mood}</S.Mood>
+            <div>{currentData[i + 1]?.mood}</div>
             {currentData[i + 1] && (
               <S.DescBox className="desc">{currentData[i + 1].desc}</S.DescBox>
             )}

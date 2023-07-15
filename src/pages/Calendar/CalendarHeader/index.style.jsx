@@ -90,7 +90,7 @@ const SelectBox = styled.ul`
   font-size: 1.25rem;
   overflow: hidden;
 
-  height: 10rem;
+  height: 12rem;
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
@@ -98,7 +98,7 @@ const SelectBox = styled.ul`
   ${({ theme: { breakpoints } }) => css`
     @media screen and (max-width: ${breakpoints.md}px) {
       font-size: 1rem;
-      height: 9rem;
+      height: 11rem;
     }
   `}
 `;

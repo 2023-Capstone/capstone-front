@@ -1,8 +1,7 @@
 import { MOOD } from '@/constants/diary';
 
-const convertDiaryData = (diaries, year, month) => {
+const simplifyDiaryForCalendar = (diaries, year, month) => {
   const convertedDiaries = {};
-  let count = 0;
   diaries.forEach(diary => {
     const [y, m, d] = diary.date.split('-').map(n => Number(n));
     if (year !== y || month !== m) return;
@@ -11,9 +10,8 @@ const convertDiaryData = (diaries, year, month) => {
       mood: MOOD[diary.mood.toUpperCase()].emoji,
       desc: diary.desc,
     };
-    count += 1;
   });
-  return [convertedDiaries, count];
+  return convertedDiaries;
 };
 
-export { convertDiaryData };
+export { simplifyDiaryForCalendar };

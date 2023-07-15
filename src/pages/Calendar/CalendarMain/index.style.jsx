@@ -25,12 +25,16 @@ const Day = styled.div`
   font-weight: 600;
   font-size: 1.25rem;
   min-height: 3.25rem;
-  color: ${({ day, theme }) =>
-    day === 0
-      ? theme.colors.RED_500
-      : day === 6
-      ? theme.colors.BLUE_500
-      : theme.colors.GREEN_700};
+  color: ${({ day, theme }) => {
+    switch (day) {
+      case 0:
+        return theme.colors.RED_500;
+      case 6:
+        return theme.colors.BLUE_500;
+      default:
+        return theme.colors.GREEN_700;
+    }
+  }};
   ${({ theme: { breakpoints } }) => css`
     @media screen and (max-width: ${breakpoints.md}px) {
       font-size: 1rem;
@@ -93,7 +97,6 @@ const DescBox = styled.div`
   text-align: center;
   border-radius: 10px;
 
-  transition: all 0.4s ease-in-out;
   font-size: 0.725rem;
   font-weight: 400;
 `;
@@ -105,14 +108,16 @@ const DateTitle = styled.div`
 
 const DateInfo = styled.span`
   flex-grow: 2;
-  color: ${({ date, startDate, theme }) =>
-    (date + startDate) % 7 === 1
-      ? theme.colors.RED_500
-      : (date + startDate) % 7 === 0
-      ? theme.colors.BLUE_500
-      : theme.colors.GREEN_700};
+  color: ${({ date, startDate, theme }) => {
+    switch ((date + startDate) % 7) {
+      case 1:
+        return theme.colors.RED_500;
+      case 0:
+        return theme.colors.BLUE_500;
+      default:
+        return theme.colors.GREEN_700;
+    }
+  }};
 `;
 
-const Mood = styled.div``;
-
-export { Container, DayBox, Day, Date, DescBox, DateTitle, DateInfo, Mood };
+export { Container, DayBox, Day, Date, DescBox, DateTitle, DateInfo };

@@ -7,8 +7,8 @@ const CalendarHeader = ({
   currentYear,
   moveNextMonth,
   movePrevMonth,
-  yearSelect,
-  monthSelect,
+  selectedYear,
+  selectedMonth,
   toggleSelect,
   changeDate,
   diaryCount,
@@ -22,15 +22,15 @@ const CalendarHeader = ({
         <S.SelecedValue type="button" onClick={toggleSelect('year')}>
           {currentYear} 년
         </S.SelecedValue>
-        <S.SelectBox open={yearSelect}>
-          {Array.from(Array(4).keys()).map(i => (
+        <S.SelectBox open={selectedYear}>
+          {Array.from(Array(5).keys()).map(i => (
             <S.SelectOption
               key={`${i}-year`}
-              selected={i + 2020 === currentYear}
+              selected={i - 2 + currentYear === currentYear}
               onClick={changeDate('year')}
-              value={i + 2020}
+              value={i - 2 + currentYear}
             >
-              {i + 2020}
+              {i - 2 + currentYear}
             </S.SelectOption>
           ))}
         </S.SelectBox>
@@ -39,7 +39,7 @@ const CalendarHeader = ({
         <S.SelecedValue type="button" onClick={toggleSelect('month')}>
           {currentMonth} 월
         </S.SelecedValue>
-        <S.SelectBox open={monthSelect}>
+        <S.SelectBox open={selectedMonth}>
           {Array.from(Array(12).keys()).map(i => (
             <S.SelectOption
               key={`${i}-month`}
