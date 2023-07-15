@@ -8,7 +8,7 @@ const BROWSER_PATH = {
     BASE: '/me',
     DIARY: 'diary',
   },
-  CALENDAR: 'calendar',
+  CALENDAR: '/calendar',
   DETAIL: '/detail',
 };
 
