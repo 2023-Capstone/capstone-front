@@ -40,8 +40,11 @@ const Diary = ({ toTop }) => {
 
   useEffect(() => {
     setList(listQuery.data);
+  }, [listQuery]);
+
+  useEffect(() => {
     setTotalDiaryCount(totalDiaryCountQuery.data);
-  }, [listQuery, totalDiaryCountQuery]);
+  }, [totalDiaryCountQuery]);
 
   useMount(() => {
     toTop();

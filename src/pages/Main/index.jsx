@@ -1,52 +1,57 @@
-import { Suspense, useEffect, useState } from 'react';
-
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { BROWSER_PATH } from '@/constants/path';
-import { requestRandomDiary } from '@/apis/request/diary';
+import { requestRandomDiary, requestDiaryCount } from '@/apis/request/diary';
 import useUser from '@/hooks/useUser';
-import useError from '@/hooks/useError';
 import Title from '@/components/Title';
 import RandomDiary from './RandomDiary';
 import WritingButton from './WritingButton';
 import SmallCalendar from './SmallCalendar';
 import DiaryCount from './DiaryCount';
-import * as S from './index.styles';
-import { requestDiaryCount } from '../../apis/request/diary';
 import Skeleton from './Skeleton';
+import useFetchQuery from '@/hooks/useFetchQuery';
+import * as S from './index.styles';
 
 const Main = () => {
-  const { isLogin } = useUser();
+  const { isLogin, info } = useUser();
   const navigate = useNavigate();
-  const handleError = useError();
 
   const [randomDiary, setRandomDiary] = useState();
   const [diaryCount, setDiaryCount] = useState();
 
-  // useEffect(() => {
-  //   if (!isLogin) {
-  //     navigate(BROWSER_PATH.LANDING);
-  //   }
-  // }, [isLogin, navigate]);
+  useEffect(() => {
+    if (!isLogin) {
+      navigate(BROWSER_PATH.LANDING);
+    }
+  }, [isLogin, navigate]);
+
+  const { dataQuery: randomDiaryQuery } = useFetchQuery(
+    ['randomDiary'],
+    requestRandomDiary,
+    1000 * 60 * 60,
+  );
+
+  const { dataQuery: diaryCountQuery } = useFetchQuery(
+    ['diaryCount'],
+    requestDiaryCount,
+    1000 * 60 * 5,
+  );
 
   useEffect(() => {
-    requestRandomDiary()
-      .then(data => setRandomDiary(data))
-      .catch(err => handleError(err.code));
+    setRandomDiary(randomDiaryQuery.data);
+  }, [randomDiaryQuery]);
 
-    requestDiaryCount()
-      .then(data => setDiaryCount(data))
-      .catch(err => handleError(err.code));
-  }, []);
+  useEffect(() => {
+    setDiaryCount(diaryCountQuery.data);
+  }, [diaryCountQuery]);
 
   return (
     <>
-      {randomDiary && diaryCount ? (
+      {randomDiary && diaryCount && info.nickname ? (
         <S.Container>
           <section>
             <Title name="리마이어리" />
-            {/* 유저 닉네임으로 변환 필요함 */}
-            <S.Nickname>반가워요 rewrite 님!</S.Nickname>
+            <S.Nickname>반가워요 {info.nickname} 님!</S.Nickname>
           </section>
           <S.WrapperContent>
             <RandomDiary content={randomDiary} />

@@ -16,17 +16,18 @@ import Inputs from './Inputs';
 import WithdrawalModal from './WithdrawalModal';
 import * as S from './index.styles';
 
-const Info = props => {
+const Info = () => {
+  const { info } = useUser();
   const {
     value: email,
     onChangeValue: changeEmail,
     dangerouslySetValue: dangerouslySetEmail,
-  } = useInput('');
+  } = useInput(info.email);
   const {
     value: nickname,
     onChangeValue: changeNickname,
     dangerouslySetValue: dangerouslySetNickname,
-  } = useInput('');
+  } = useInput(info.nickname);
 
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [isValidNickname, setIsValidNickname] = useState(false);

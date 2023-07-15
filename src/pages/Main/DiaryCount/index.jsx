@@ -6,6 +6,7 @@ const DiaryCount = ({ count }) => {
   const now = new Date();
   const thisYear = now.getFullYear();
   const thisMonth = now.getMonth() + 1;
+
   const daysOfMonth = useMemo(
     () => getDaysOfMonth(thisYear, thisMonth),
     [thisYear, thisMonth],

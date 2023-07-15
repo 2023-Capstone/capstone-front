@@ -6,25 +6,33 @@ import {
   refreshTokenProvider,
   kakaoAccessTokenProvider,
 } from '@/utils/token';
+import { requestInfo } from '@/apis/request/auth';
+import { infoProvider } from '@/utils/user';
 
 const useUser = () => {
-  const [{ isLogin }, setUser] = useAtom(userAtom);
+  const [{ isLogin, info }, setUser] = useAtom(userAtom);
 
   const login = (accessToken, refreshToken) => {
     accessTokenProvider.set(accessToken);
     refreshTokenProvider.set(refreshToken);
     kakaoAccessTokenProvider.remove();
-    setUser({ isLogin: true });
+
+    requestInfo().then(info => {
+      infoProvider.set(info);
+      setUser({ isLogin: true, info: info });
+    });
   };
 
   const logout = () => {
     accessTokenProvider.remove();
     refreshTokenProvider.remove();
     kakaoAccessTokenProvider.remove();
-    setUser({ isLogin: false });
+
+    infoProvider.remove();
+    setUser({ isLogin: false, info: {} });
   };
 
-  return { isLogin, login, logout };
+  return { isLogin, info, login, logout };
 };
 
 export default useUser;

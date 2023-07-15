@@ -2,9 +2,14 @@ import styled from '@emotion/styled';
 
 const Container = styled.div`
   background-color: ${({ theme: { colors } }) => colors.INPUT_BACKGROUND};
-  margin: 2rem;
+  margin-top: 2rem;
   padding: 2rem;
   border-radius: 10px;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    margin-top: 5rem;
+    padding: 1.5rem;
+  }
 `;
 
 const WrapperDateInfo = styled.div`
@@ -15,12 +20,20 @@ const TextBlack = styled.span`
   color: ${({ theme: { colors } }) => colors.GREEN_900};
   font-size: 1.2rem;
   font-weight: bold;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    font-size: 1rem;
+  }
 `;
 
 const TextGreen = styled.span`
   color: ${({ theme: { colors } }) => colors.GREEN_600};
   font-size: 1.2rem;
   font-weight: bold;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    font-size: 1rem;
+  }
 `;
 
 const WrapperTitle = styled.div`
@@ -35,6 +48,10 @@ const Title = styled.h1`
   color: ${({ theme: { colors } }) => colors.GREEN_700};
   font-size: 1.2rem;
   font-weight: 500;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    font-size: 1rem;
+  }
 `;
 
 const WrapperIcon = styled.div`
@@ -59,14 +76,24 @@ const Icon = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0 0.5rem;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    font-size: 1rem;
+  }
 `;
 
 const WrapperContent = styled.div`
-  height: 24rem;
+  height: 23rem;
   background-color: ${({ theme: { colors } }) => colors.GREEN_100};
   border-radius: 10px;
 
   padding: 1.5rem;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    height: 18rem;
+
+    padding: 1rem;
+  }
 `;
 
 const Content = styled.p`
@@ -77,6 +104,13 @@ const Content = styled.p`
   overflow: hidden;
   line-height: 1.8rem;
   text-overflow: ellipsis;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    font-size: 0.8rem;
+    font-weight: 500;
+
+    line-height: 1.4rem;
+  }
 `;
 
 export {

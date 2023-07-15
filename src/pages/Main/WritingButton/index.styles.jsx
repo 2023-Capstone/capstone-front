@@ -8,6 +8,19 @@ const Button = styled.button`
 
   border: 3px solid ${({ theme: { colors } }) => colors.GREEN_400};
   border-radius: 5px;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    background-color: transparent;
+    color: ${({ theme: { colors } }) => colors.GREEN_700};
+    font-size: 1rem;
+
+    border: none;
+    border-radius: none;
+
+    &:hover {
+      font-weight: bold;
+    }
+  }
 `;
 
 export { Button };
