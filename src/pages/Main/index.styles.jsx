@@ -9,6 +9,19 @@ const Container = styled.div`
   position: relative;
 `;
 
+const WrapperTitle = styled.div`
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    &::after {
+      content: '';
+      display: block;
+      width: 90vw;
+      margin: auto;
+      margin-top: 3.5rem;
+      border-bottom: 2px solid ${({ theme: { colors } }) => colors.GREEN_100};
+    }
+  }
+`;
+
 const Nickname = styled.p`
   color: ${({ theme: { colors } }) => colors.GREEN_500};
 
@@ -17,7 +30,8 @@ const Nickname = styled.p`
   right: 2rem;
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
-    top: 3rem;
+    top: 4.2rem;
+    font-size: 0.9rem;
   }
 `;
 
@@ -45,11 +59,15 @@ const WrapperSide = styled.div`
   display: flex;
   flex-direction: column;
 
-  margin: 2rem 0 0 0;
+  margin-top: 2rem;
 
   > * {
     margin-bottom: 2rem;
   }
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    margin-top: 0rem;
+  }
 `;
 
-export { Container, Nickname, WrapperContent, WrapperSide };
+export { Container, WrapperTitle, Nickname, WrapperContent, WrapperSide };

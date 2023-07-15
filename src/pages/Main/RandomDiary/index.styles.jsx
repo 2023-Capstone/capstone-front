@@ -2,12 +2,12 @@ import styled from '@emotion/styled';
 
 const Container = styled.div`
   background-color: ${({ theme: { colors } }) => colors.INPUT_BACKGROUND};
-  margin-top: 2rem;
+  margin: 2rem 0;
   padding: 2rem;
   border-radius: 10px;
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
-    margin-top: 5rem;
+    margin-bottom: 0;
     padding: 1.5rem;
   }
 `;

@@ -49,10 +49,10 @@ const Main = () => {
     <>
       {randomDiary && diaryCount && info.nickname ? (
         <S.Container>
-          <section>
+          <S.WrapperTitle>
             <Title name="리마이어리" />
             <S.Nickname>반가워요 {info.nickname} 님!</S.Nickname>
-          </section>
+          </S.WrapperTitle>
           <S.WrapperContent>
             <RandomDiary content={randomDiary} />
             <S.WrapperSide>

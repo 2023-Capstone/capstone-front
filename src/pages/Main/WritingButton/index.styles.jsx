@@ -13,13 +13,15 @@ const Button = styled.button`
     background-color: transparent;
     color: ${({ theme: { colors } }) => colors.GREEN_700};
     font-size: 1rem;
+    padding: 0;
 
     border: none;
-    border-radius: none;
+    border-radius: 0;
 
-    &:hover {
-      font-weight: bold;
-    }
+    position: absolute;
+    top: 4rem;
+    margin-left: 1rem;
+    font-weight: bold;
   }
 `;
 
