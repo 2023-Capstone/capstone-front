@@ -7,27 +7,27 @@ const DiaryCount = ({ count }) => {
   const thisYear = now.getFullYear();
   const thisMonth = now.getMonth() + 1;
 
-  const daysOfMonth = useMemo(
-    () => getDaysOfMonth(thisYear, thisMonth),
+  const countOfMonth = useMemo(
+    () => getCountOfMonth(thisYear, thisMonth),
     [thisYear, thisMonth],
   );
-  const daysOfYear = useMemo(() => getDaysOfYear(thisYear), [thisYear]);
+  const countOfYear = useMemo(() => getCountOfYear(thisYear), [thisYear]);
 
   return (
     <S.Container>
-      <CountGraph name="올해" value={count.year} total={daysOfYear} />
-      <CountGraph name="이번달" value={count.month} total={daysOfMonth} />
+      <CountGraph name="올해" value={count.year} total={countOfYear} />
+      <CountGraph name="이번달" value={count.month} total={countOfMonth} />
     </S.Container>
   );
 };
 
-const getDaysOfMonth = (year, month) => {
+const getCountOfMonth = (year, month) => {
   return new Date(year, month, 0).getDate();
 };
 
-const getDaysOfYear = year => {
+const getCountOfYear = year => {
   let sum = 0;
-  for (let i = 1; i <= 12; i++) sum += getDaysOfMonth(year, i);
+  for (let i = 1; i <= 12; i++) sum += getCountOfMonth(year, i);
   return sum;
 };
 

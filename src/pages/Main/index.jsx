@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BROWSER_PATH } from '@/constants/path';
 import { requestRandomDiary, requestDiaryCount } from '@/apis/request/diary';
