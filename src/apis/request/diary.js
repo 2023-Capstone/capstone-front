@@ -6,7 +6,9 @@ const requestUploadImg = formData => {
 };
 
 const requestUploadDiary = diary => {
-  return axios.post(API_PATH.DIARY, diary);
+  return axiosWithAccessToken
+    .post(API_PATH.DIARY, diary)
+    .then(response => response.data.id);
 };
 
 const requestDiaryByMood = params => {
@@ -23,13 +25,23 @@ const requestDiaryCountByMood = () => {
     .then(response => response.data);
 };
 
+const getDiary = id => {
+  return axiosWithAccessToken
+    .get(`${API_PATH.DIARY}/${id}`)
+    .then(response => response.data);
+};
+
+const getdiaryLisyByCalendar = (year, month) => {
+  return axiosWithAccessToken
+    .get(`${API_PATH.CALENDAR}?year=${year}&month=${month}`)
+    .then(response => response.data);
+};
+
 export {
   requestUploadImg,
   requestUploadDiary,
   requestDiaryByMood,
-<<<<<<< HEAD
-  requestDiaryNumByMood,
-=======
   requestDiaryCountByMood,
->>>>>>> 49f2137497ca48735e9ccdc1972cdfc3dc52bb69
+  getDiary,
+  getdiaryLisyByCalendar,
 };
