@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import CountGraph from './CountGraph';
 import * as S from './index.styles';
 
@@ -7,11 +6,8 @@ const DiaryCount = ({ count }) => {
   const thisYear = now.getFullYear();
   const thisMonth = now.getMonth() + 1;
 
-  const countOfMonth = useMemo(
-    () => getCountOfMonth(thisYear, thisMonth),
-    [thisYear, thisMonth],
-  );
-  const countOfYear = useMemo(() => getCountOfYear(thisYear), [thisYear]);
+  const countOfMonth = getCountOfMonth(thisYear, thisMonth);
+  const countOfYear = getCountOfYear(thisYear);
 
   return (
     <S.Container>

@@ -113,6 +113,15 @@ const Content = styled.p`
   }
 `;
 
+const WrapperNoDiary = styled.div`
+  border-radius: 10px;
+
+  p {
+    color: ${({ theme: { colors } }) => colors.GREEN_900};
+    margin-top: 2rem;
+  }
+`;
+
 export {
   Container,
   WrapperDateInfo,
@@ -125,4 +134,5 @@ export {
   Icon,
   WrapperContent,
   Content,
+  WrapperNoDiary,
 };

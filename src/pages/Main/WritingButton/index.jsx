@@ -1,15 +1,11 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { BROWSER_PATH } from '@/constants/path';
 import * as S from './index.styles';
 
 const WritingButton = () => {
-  const navigate = useNavigate();
-
-  const goToEdit = () => {
-    navigate('/edit');
-  };
   return (
-    <S.Button type="button" onClick={goToEdit}>
-      일기 작성하기
+    <S.Button type="button">
+      <Link to={BROWSER_PATH.EDIT}>일기 작성하기</Link>
     </S.Button>
   );
 };
