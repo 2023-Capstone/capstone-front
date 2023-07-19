@@ -36,9 +36,13 @@ const Detail = () => {
             </S.Status>
           </S.StatusWrapper>
         </S.Description>
-        <Link to={`${BROWSER_PATH.EDIT}/${id}`}>
-          <S.Btn type="button">수정</S.Btn>
-        </Link>
+        {new Date(data?.date).getFullYear() === new Date().getFullYear() &&
+        new Date(data?.date).getMonth() === new Date().getMonth() &&
+        new Date(data?.date).getDate() === new Date().getDate() ? (
+          <Link to={`${BROWSER_PATH.EDIT}/${id}`}>
+            <S.Btn type="button">수정</S.Btn>
+          </Link>
+        ) : null}
       </S.DescriptionBox>
       <S.Title>{data.title}</S.Title>
 
