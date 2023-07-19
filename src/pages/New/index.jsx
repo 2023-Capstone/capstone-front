@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import { useAtom, useAtomValue } from 'jotai';
-import { useQuery } from 'react-query';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useAtomValue } from 'jotai';
+import { useNavigate } from 'react-router-dom';
 
 import * as S from './index.styles';
 
-import { requestEditDiary, getDiary } from '@/apis/request/diary';
+import { requestUploadDiary } from '@/apis/request/diary';
 import EditorBox from '@/components/EditorBox';
 import HashtagBox from '@/components/HashtagBox';
 import Title from '@/components/Title';
@@ -17,42 +16,18 @@ import useInput from '@/hooks/useInput';
 import useSnackbar from '@/hooks/useSnackbar';
 import { blocksAtom } from '@/store/blocks';
 
-const Edit = () => {
-  const { id } = useParams();
-  const { data } = useQuery({
-    queryKey: ['detail', id],
-    queryFn: () => getDiary(id),
-  });
-
-  const [date, setDate] = useState(null);
+const New = () => {
+  const date = new Date();
   const [hashtagList, setHashtagList] = useState([]);
   const [weather, setWeather] = useState(null);
-  const {
-    value: mood,
-    onChangeValue: onChangeMood,
-    dangerouslySetValue: setMood,
-  } = useInput('');
-  const {
-    value: title,
-    onChangeValue: onChangeTitle,
-    dangerouslySetValue: setTitle,
-  } = useInput('');
+  const { value: mood, onChangeValue: onChangeMood } = useInput('');
+  const { value: title, onChangeValue: onChangeTitle } = useInput('');
   const [font, setFont] = useState('basic');
-  const [blocks, setBlocks] = useAtom(blocksAtom);
+  const blocks = useAtomValue(blocksAtom);
   const handleError = useError();
 
   const navigate = useNavigate();
   const { showSnackbar } = useSnackbar();
-
-  useEffect(() => {
-    setTitle(data.title);
-    setWeather(data.weather);
-    setDate(new Date(data.date));
-    setHashtagList(data.hashtag);
-    setBlocks(data.blocks);
-    setMood(data.mood);
-    setFont(data.font);
-  }, [data]);
 
   const addHashtag = newHashtag => {
     setHashtagList(prev => [...prev, newHashtag]);
@@ -80,19 +55,19 @@ const Edit = () => {
       showSnackbar(CLIENT_MESSAGE.ERROR.EMPTY_DIARY);
       return;
     }
-    if (!window.confirm(CLIENT_MESSAGE.GUIDE.CONFIRM_EDIT_DIARY)) return;
+    if (!window.confirm(CLIENT_MESSAGE.GUIDE.CONFIRM_POST_DIARY)) return;
 
-    const blockForEdit = blocks.map(block => ({
+    const blockForSave = blocks.map(block => ({
       type: block.type,
       data: { ...block.data },
     }));
-    requestEditDiary(id, {
+    requestUploadDiary({
       title: title,
       weather: weather,
       hashtag: hashtagList,
       mood: mood,
       font: font,
-      blocks: [...blockForEdit],
+      blocks: [...blockForSave],
     })
       .then(id => {
         showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_POST_DIARY);
@@ -126,7 +101,7 @@ const Edit = () => {
         hashtagList={hashtagList}
       />
       <S.BtnBox>
-        <button>수정</button>
+        <button>작성</button>
         <button type="button" onClick={goToPrevPage}>
           취소
         </button>
@@ -135,4 +110,4 @@ const Edit = () => {
   );
 };
 
-export default Edit;
+export default New;

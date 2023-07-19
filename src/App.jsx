@@ -46,7 +46,8 @@ const App = () => {
                 <Route path={BROWSER_PATH.LANDING} element={<Landing />} />
                 <Route path={BROWSER_PATH.SIGNUP} element={<Signup />} />
                 <Route path={BROWSER_PATH.OAUTH} element={<OAuth />} />
-                <Route path={BROWSER_PATH.EDIT} element={<Edit />} />
+                <Route path={BROWSER_PATH.NEW} element={<Edit />} />
+                <Route path={`${BROWSER_PATH.EDIT}/:id`} element={<Edit />} />
                 <Route path={BROWSER_PATH.MYPAGE.BASE} element={<Mypage />} />
                 <Route path={BROWSER_PATH.CALENDAR} element={<Calendar />} />
                 <Route

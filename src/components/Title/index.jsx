@@ -12,9 +12,9 @@ const Title = ({ title, setTitle, date, setWeather, mood, setMood }) => {
       <S.Description>
         <label>date</label>
         <span>
-          {`${date.getFullYear()}/ ${
-            date.getMonth() + 1
-          }/ ${date.getDate()} (${getDay(date.getDay())})`}
+          {`${date?.getFullYear()}/ ${
+            date?.getMonth() + 1
+          }/ ${date?.getDate()} (${getDay(date?.getDay())})`}
         </span>
         <label>weather</label>
         <ErrorBoundary fallback="🤷">
