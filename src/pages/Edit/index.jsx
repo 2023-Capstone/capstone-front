@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
 import { useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 
