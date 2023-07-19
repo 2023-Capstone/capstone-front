@@ -37,6 +37,12 @@ const getdiaryLisyByCalendar = (year, month) => {
     .then(response => response.data);
 };
 
+const requestEditDiary = (id, diary) => {
+  return axiosWithAccessToken
+    .patch(`${API_PATH.CALENDAR}/${id}`, diary)
+    .then(response => response.data.id);
+};
+
 export {
   requestUploadImg,
   requestUploadDiary,
@@ -44,4 +50,5 @@ export {
   requestDiaryCountByMood,
   getDiary,
   getdiaryLisyByCalendar,
+  requestEditDiary,
 };
