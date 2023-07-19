@@ -16,6 +16,7 @@ import useError from '@/hooks/useError';
 import useInput from '@/hooks/useInput';
 import useSnackbar from '@/hooks/useSnackbar';
 import { blocksAtom } from '@/store/blocks';
+import { isToday } from '@/utils/date';
 
 const Edit = () => {
   const { id } = useParams();
@@ -45,6 +46,7 @@ const Edit = () => {
   const { showSnackbar } = useSnackbar();
 
   useEffect(() => {
+    if (!isToday(data.date)) navigate(`${BROWSER_PATH.DETAIL}/${id}`);
     setTitle(data.title);
     setWeather(data.weather);
     setDate(new Date(data.date));

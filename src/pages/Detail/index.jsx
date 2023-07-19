@@ -6,7 +6,7 @@ import * as S from './index.styles';
 import { getDiary } from '@/apis/request/diary';
 import { MOOD } from '@/constants/diary';
 import { BROWSER_PATH } from '@/constants/path';
-import { convertDate } from '@/utils/date';
+import { convertDate, isToday } from '@/utils/date';
 import { weatherToIcon } from '@/utils/weather';
 
 const Detail = () => {
@@ -36,9 +36,7 @@ const Detail = () => {
             </S.Status>
           </S.StatusWrapper>
         </S.Description>
-        {new Date(data?.date).getFullYear() === new Date().getFullYear() &&
-        new Date(data?.date).getMonth() === new Date().getMonth() &&
-        new Date(data?.date).getDate() === new Date().getDate() ? (
+        {isToday(data.date) ? (
           <Link to={`${BROWSER_PATH.EDIT}/${id}`}>
             <S.Btn type="button">수정</S.Btn>
           </Link>

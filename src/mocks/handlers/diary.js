@@ -42,7 +42,7 @@ const diaryHandlers = [
   rest.get(`${baseURL}${API_PATH.DIARY}/:id`, (req, res, ctx) => {
     const diary = {
       title: '글 제목',
-      date: '2023-07-11',
+      date: '2023-07-19',
       weather: 'rain',
       hashtag: [
         '해시태그1',
