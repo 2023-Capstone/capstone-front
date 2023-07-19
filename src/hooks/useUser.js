@@ -7,7 +7,6 @@ import {
   refreshTokenProvider,
   kakaoAccessTokenProvider,
 } from '@/utils/token';
-import { infoProvider } from '@/utils/user';
 
 const useUser = () => {
   const [{ isLogin, info }, setUser] = useAtom(userAtom);
