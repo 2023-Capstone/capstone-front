@@ -1,19 +1,22 @@
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+
 import { useNavigate } from 'react-router-dom';
-import { BROWSER_PATH } from '@/constants/path';
-import { requestRandomDiary, requestDiaryCount } from '@/apis/request/diary';
-import useUser from '@/hooks/useUser';
-import Title from '@/components/Title';
-import RandomDiary from './RandomDiary';
-import WritingButton from './WritingButton';
-import SmallCalendar from './SmallCalendar';
+
 import DiaryCount from './DiaryCount';
-import Skeleton from './Skeleton';
-import useFetchQuery from '@/hooks/useFetchQuery';
 import * as S from './index.styles';
+import RandomDiary from './RandomDiary';
+import Skeleton from './Skeleton';
+import SmallCalendar from './SmallCalendar';
+import WritingButton from './WritingButton';
+
+import { requestRandomDiary, requestDiaryCount } from '@/apis/request/diary';
+import Title from '@/components/Title';
+import { BROWSER_PATH } from '@/constants/path';
+import useFetchQuery from '@/hooks/useFetchQuery';
+import useUser from '@/hooks/useUser';
 
 const Main = () => {
-  const { isLogin, info } = useUser();
+  const { isLogin, info, requestAndSetUserInfo } = useUser();
   const navigate = useNavigate();
 
   const [randomDiary, setRandomDiary] = useState();
@@ -23,7 +26,9 @@ const Main = () => {
     if (!isLogin) {
       navigate(BROWSER_PATH.LANDING);
     }
-  }, [isLogin, navigate]);
+    if (info) return;
+    requestAndSetUserInfo();
+  }, [isLogin, navigate, info, requestAndSetUserInfo]);
 
   const { dataQuery: randomDiaryQuery } = useFetchQuery(
     ['randomDiary'],

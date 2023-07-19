@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
+
 import { useNavigate } from 'react-router-dom';
+
+import * as S from './index.styles';
+import Inputs from './Inputs';
+import WithdrawalModal from './WithdrawalModal';
+
 import {
   requestUpdateEmail,
   requestUpdateNickname,
@@ -12,12 +18,9 @@ import useError from '@/hooks/useError';
 import useInput from '@/hooks/useInput';
 import useSnackbar from '@/hooks/useSnackbar';
 import useUser from '@/hooks/useUser';
-import Inputs from './Inputs';
-import WithdrawalModal from './WithdrawalModal';
-import * as S from './index.styles';
 
 const Info = () => {
-  const { info } = useUser();
+  const { info, requestAndSetUserInfo } = useUser();
   const {
     value: email,
     onChangeValue: changeEmail,
@@ -59,6 +62,7 @@ const Info = () => {
 
     requestUpdateEmail({ email })
       .then(({ email }) => {
+        requestAndSetUserInfo();
         showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_UPDATE_EMAIL);
         dangerouslySetEmail(email);
       })
@@ -77,6 +81,7 @@ const Info = () => {
 
     requestUpdateNickname({ nickname })
       .then(({ nickname }) => {
+        requestAndSetUserInfo();
         showSnackbar(CLIENT_MESSAGE.GUIDE.SUCCESS_UPDATE_NICKNAME);
         dangerouslySetNickname(nickname);
       })

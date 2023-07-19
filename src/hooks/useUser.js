@@ -1,11 +1,12 @@
 import { useAtom } from 'jotai';
+
+import { requestInfo } from '@/apis/request/auth';
 import { userAtom } from '@/store';
 import {
   accessTokenProvider,
   refreshTokenProvider,
   kakaoAccessTokenProvider,
 } from '@/utils/token';
-import { requestInfo } from '@/apis/request/auth';
 import { infoProvider } from '@/utils/user';
 
 const useUser = () => {
@@ -15,11 +16,7 @@ const useUser = () => {
     accessTokenProvider.set(accessToken);
     refreshTokenProvider.set(refreshToken);
     kakaoAccessTokenProvider.remove();
-
-    requestInfo().then(info => {
-      infoProvider.set(info);
-      setUser({ isLogin: true, info });
-    });
+    requestAndSetUserInfo();
   };
 
   const logout = () => {
@@ -30,7 +27,15 @@ const useUser = () => {
     setUser({ isLogin: false, info: null });
   };
 
-  return { isLogin, login, logout, info };
+  const requestAndSetUserInfo = () => {
+    if (!isLogin) return;
+
+    requestInfo().then(info => {
+      setUser({ isLogin: true, info });
+    });
+  };
+
+  return { isLogin, login, logout, info, requestAndSetUserInfo };
 };
 
 export default useUser;
