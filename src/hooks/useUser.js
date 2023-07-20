@@ -22,7 +22,6 @@ const useUser = () => {
     accessTokenProvider.remove();
     refreshTokenProvider.remove();
     kakaoAccessTokenProvider.remove();
-    infoProvider.remove();
     setUser({ isLogin: false, info: null });
   };
 
