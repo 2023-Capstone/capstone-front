@@ -1,43 +1,26 @@
 import styled from '@emotion/styled';
 
 const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 1.5rem;
-  width: 100%;
+  background-color: ${({ theme: { colors } }) => colors.GREEN_100};
+  padding: 1.3rem 0;
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
-    flex-direction: column;
-    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 0.7rem 0;
   }
 `;
 
-const Input = styled.input`
-  width: 80%;
-  font-size: 1.15rem;
-  padding: 0.5rem;
-  box-sizing: border-box;
+const Name = styled.h1`
+  color: ${({ theme: { colors } }) => colors.GREEN_500};
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-left: 1.5rem;
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
-    width: 100%;
-    font-size: 1rem;
+    font-size: 1.2rem;
+    margin-left: 0;
   }
 `;
 
-const Description = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  place-items: center;
-  row-gap: 1rem;
-
-  select {
-    outline: none;
-  }
-
-  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
-    font-size: 0.9rem;
-  }
-`;
-
-export { Container, Input, Description };
+export { Container, Name };

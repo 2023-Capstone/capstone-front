@@ -7,8 +7,8 @@ import * as S from './index.styles';
 
 import { requestUploadDiary } from '@/apis/request/diary';
 import EditorBox from '@/components/EditorBox';
+import EditorTitle from '@/components/EditorTitle';
 import HashtagBox from '@/components/HashtagBox';
-import Title from '@/components/Title';
 import { CLIENT_MESSAGE } from '@/constants/message';
 import { BROWSER_PATH } from '@/constants/path';
 import useError from '@/hooks/useError';
@@ -86,7 +86,7 @@ const New = () => {
 
   return (
     <S.Container onSubmit={makeNewDiary} onKeyDown={preventEnter}>
-      <Title
+      <EditorTitle
         title={title}
         setTitle={onChangeTitle}
         date={date}
