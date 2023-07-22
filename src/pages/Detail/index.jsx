@@ -36,11 +36,11 @@ const Detail = () => {
             </S.Status>
           </S.StatusWrapper>
         </S.Description>
-        {isToday(data.date) ? (
+        {isToday(data.date) && (
           <Link to={`${BROWSER_PATH.EDIT}/${id}`}>
             <S.Btn type="button">수정</S.Btn>
           </Link>
-        ) : null}
+        )}
       </S.DescriptionBox>
       <S.Title>{data.title}</S.Title>
 

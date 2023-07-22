@@ -50,13 +50,13 @@ const diaryHandlers = [
   }),
 
   rest.patch(`${baseURL}${API_PATH.DIARY}/:id`, (req, res, ctx) => {
-    return res(ctx.status(201), ctx.json({ id: 1 }));
+    return res(ctx.status(200), ctx.json({ id: 1 }));
   }),
 
   rest.get(`${baseURL}${API_PATH.DIARY}/:id`, (req, res, ctx) => {
     const diary = {
       title: '글 제목',
-      date: '2023-07-20',
+      date: '2023-07-22',
       weather: 'rain',
       hashtag: [
         '해시태그1',
