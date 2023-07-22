@@ -11,12 +11,26 @@ const images = [
   'https://github.com/2023-Capstone/capstone-front/assets/57928612/444bd3ce-b30b-4c9b-bdfa-3eead9b174d7',
 ];
 
-const diaryCount = {
+const diaryCountByMood = {
   best: 299,
   good: 30,
   normal: 19,
   bad: 102,
   worst: 5,
+};
+
+const diaryCount = {
+  year: 123,
+  month: 24,
+};
+
+const randomDiary = {
+  title: '롯데월드 갔다 옴...',
+  mood: 'best',
+  date: '2023-03-15',
+  weather: 'Haze',
+  content:
+    '롯데월드 갔는데 사람이 너무 많았다.  롯데월드 갔는데 사람이 너무 많았다.  롯데월드 갔는데 사람이 너무 많았다.  롯데월드 갔는데 사람이 너무 많았다.  롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다.롯데월드 갔는데 사람이 너무 많았다.  롯데월드 갔는데 사람이 너무 많았다.  롯데월드 갔는데 사람이 너무 많았다.  롯데월드 갔는데 사람이 너무 많았다.  롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다.롯데월드 갔는데 사람이 너무 많았다.  롯데월드 갔는데 사람이 너무 많았다.  롯데월드 갔는데 사람이 너무 많았다.  롯데월드 갔는데 사람이 너무 많았다.  롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다. 롯데월드 갔는데 사람이 너무 많았다.',
 };
 
 const getLastPageCount = count => {
@@ -35,10 +49,14 @@ const diaryHandlers = [
     return res(ctx.status(201), ctx.json({ id: 1 }));
   }),
 
+  rest.patch(`${baseURL}${API_PATH.DIARY}/:id`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json({ id: 1 }));
+  }),
+
   rest.get(`${baseURL}${API_PATH.DIARY}/:id`, (req, res, ctx) => {
     const diary = {
       title: '글 제목',
-      date: '2023-07-11',
+      date: '2023-07-22',
       weather: 'rain',
       hashtag: [
         '해시태그1',
@@ -138,8 +156,8 @@ const diaryHandlers = [
       ctx.status(200),
       ctx.json(
         Array(
-          Math.ceil(diaryCount[mood] / 10) === Number(page) + 1
-            ? getLastPageCount(diaryCount[mood])
+          Math.ceil(diaryCountByMood[mood] / 10) === Number(page) + 1
+            ? getLastPageCount(diaryCountByMood[mood])
             : 10,
         )
           .fill()
@@ -153,8 +171,13 @@ const diaryHandlers = [
       ),
     );
   }),
-
   rest.get(`${baseURL}${API_PATH.DIARY_COUNT_BY_MOOD}`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(diaryCountByMood));
+  }),
+  rest.get(`${baseURL}${API_PATH.DIARY_RANDOM}`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(randomDiary));
+  }),
+  rest.get(`${baseURL}${API_PATH.DIARY_COUNT}`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(diaryCount));
   }),
 

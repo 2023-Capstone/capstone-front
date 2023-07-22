@@ -37,6 +37,24 @@ const getdiaryLisyByCalendar = (year, month) => {
     .then(response => response.data);
 };
 
+const requestEditDiary = (id, diary) => {
+  return axiosWithAccessToken
+    .patch(`${API_PATH.DIARY}/${id}`, diary)
+    .then(response => response.data.id);
+};
+
+const requestRandomDiary = () => {
+  return axiosWithAccessToken
+    .get(`${API_PATH.DIARY_RANDOM}`)
+    .then(response => response.data);
+};
+
+const requestDiaryCount = () => {
+  return axiosWithAccessToken
+    .get(`${API_PATH.DIARY_COUNT}`)
+    .then(response => response.data);
+};
+
 export {
   requestUploadImg,
   requestUploadDiary,
@@ -44,4 +62,7 @@ export {
   requestDiaryCountByMood,
   getDiary,
   getdiaryLisyByCalendar,
+  requestEditDiary,
+  requestRandomDiary,
+  requestDiaryCount,
 };
