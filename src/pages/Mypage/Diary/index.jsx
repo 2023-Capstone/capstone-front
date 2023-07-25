@@ -68,8 +68,7 @@ const Diary = ({ toTop }) => {
     setSearchParams({
       t: BROWSER_PATH.MYPAGE.DIARY,
       mood,
-      page,
-      size: LIMIT.PAGE,
+      page
     });
   };
 
@@ -101,8 +100,7 @@ const validMood = mood => {
 };
 
 const validPage = page => {
-  if (!page || page < 0) return false;
-  return true;
+  return page && Number(page) >= 0;
 };
 
 export default Diary;
