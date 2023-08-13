@@ -26,8 +26,6 @@ const useUser = () => {
   };
 
   const requestAndSetUserInfo = () => {
-    if (!isLogin) return;
-
     requestInfo().then(info => {
       setUser({ isLogin: true, info });
     });
