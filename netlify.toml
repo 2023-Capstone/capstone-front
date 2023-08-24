@@ -1,9 +1,10 @@
 [[redirects]]
-  from = "/*"
-  to = "/"
-  status = 200
-[[redirects]]
   from = "/api/*"
   to = "http://remiary.link/api/:splat"  
   status = 200
   force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/"
+  status = 200
