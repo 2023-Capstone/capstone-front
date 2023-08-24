@@ -2,7 +2,7 @@ import Axios from 'axios';
 
 import { accessTokenProvider, refreshTokenProvider } from '@/utils/token';
 
-const baseURL = process.env.SERVER_URL;
+const baseURL = window.location.hostname === 'localhost' ? process.env.SERVER_URL : '/api';
 
 const axios = Axios.create({
   baseURL,
