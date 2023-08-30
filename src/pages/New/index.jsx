@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useAtomValue } from 'jotai';
 import { useNavigate } from 'react-router-dom';
@@ -29,6 +29,11 @@ const New = () => {
 
   const navigate = useNavigate();
   const { showSnackbar } = useSnackbar();
+
+  useEffect(() => {
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth() + 1;
+  }, []);
 
   const addHashtag = newHashtag => {
     setHashtagList(prev => [...prev, newHashtag]);
