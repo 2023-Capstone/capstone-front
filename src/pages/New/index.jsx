@@ -39,7 +39,7 @@ const New = () => {
     getdiaryListByCalendar(currentYear, currentMonth).then(diaries => {
       if (checkTodayDiary(diaries)) {
         alert(CLIENT_MESSAGE.ERROR.ALREADY_ADD_DIARY);
-        navigate('/');
+        navigate(-1);
       }
     });
   }, []);
