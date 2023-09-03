@@ -1,6 +1,9 @@
+import { Link } from 'react-router-dom';
+
 import * as S from './index.styles';
 
 import { MOOD } from '@/constants/diary';
+import { BROWSER_PATH } from '@/constants/path';
 import { weatherToText } from '@/utils/weather';
 
 const RandomDiary = ({ content }) => {
@@ -11,7 +14,7 @@ const RandomDiary = ({ content }) => {
   return (
     <S.Container>
       {hasDiary && (
-        <>
+        <Link to={`${BROWSER_PATH.EDIT}/${content.id}`}>
           <S.WrapperDateInfo>
             <S.TextBlack>{weatherToText(content.weather)}</S.TextBlack>
             <S.TextGreen>{` ${date[0]}년 ${date[1]}월 ${date[2]}일`}</S.TextGreen>
@@ -27,7 +30,7 @@ const RandomDiary = ({ content }) => {
           <S.WrapperContent>
             <S.Content>{content.content}</S.Content>
           </S.WrapperContent>
-        </>
+        </Link>
       )}
       {!hasDiary && (
         <S.WrapperNoDiary>

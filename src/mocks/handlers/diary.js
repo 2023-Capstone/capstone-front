@@ -25,6 +25,7 @@ const diaryCount = {
 };
 
 const randomDiary = {
+  id: '1',
   title: '롯데월드 갔다 옴...',
   mood: 'best',
   date: '2023-03-15',
