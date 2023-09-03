@@ -14,7 +14,7 @@ const RandomDiary = ({ content }) => {
   return (
     <S.Container>
       {hasDiary && (
-        <Link to={`${BROWSER_PATH.EDIT}/${content.id}`}>
+        <Link to={`${BROWSER_PATH.DETAIL}/${content.id}`}>
           <S.WrapperDateInfo>
             <S.TextBlack>{weatherToText(content.weather)}</S.TextBlack>
             <S.TextGreen>{` ${date[0]}년 ${date[1]}월 ${date[2]}일`}</S.TextGreen>
